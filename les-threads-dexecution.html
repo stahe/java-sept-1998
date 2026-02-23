@@ -1069,21 +1069,21 @@
 </code></pre></div>
 <h2 id="73-interet-des-threads">7.3. <a id="toc9054089"></a><a id="toc9394430"></a><a id="toc11990045"></a><a id="toc12157555"></a><a id="toc12361102"></a><a id="toc12362930"></a><a id="toc12502418"></a><a id="toc491677636"></a><span>Intérêt des threads</span></h2>
 <p><span>Maintenant que nous avons mis en évidence l&#x27;existence d&#x27;un thread par défaut, celui qui exécute la méthode </span><i>Main</i><span>, et que nous savons comment en créer d&#x27;autres, arrêtons-nous sur l&#x27;intérêt pour nous des threads et sur la raison pour laquelle nous les présentons ici. Il y a un type d&#x27;applications qui se prêtent bien à l&#x27;utilisation des threads, ce sont les applications client-serveur de l&#x27;internet. Dans une telle application, un serveur situé sur une machine S1 répond aux demandes de clients situés sur des machines distantes C1, C2, ..., Cn.</span></p>
-<p><img src="images/image195.png" class="docx-zoomable" style="width:445px;height:146px;" alt="Image" /></p>
+<p><img src="images/image195.png" class="docx-zoomable" style="width:445px;height:147px;" alt="Image" /></p>
 <p><span>Nous utilisons tous les jours des applications de l&#x27;internet correspondant à ce schéma : services Web, messagerie électronique, consultation de forums, transfert de fichiers... Dans le schéma ci-dessus, le serveur S1 doit servir les clients Ci de façon simultanée. Si nous prenons l&#x27;exemple d&#x27;un serveur FTP (File Transfer Protocol) qui délivre des fichiers à ses clients, nous savons qu&#x27;un transfert de fichier peut prendre parfois plusieurs heures. Il est bien sûr hors de question qu&#x27;un client monopolise tout seul le serveur une telle durée. Ce qui est fait habituellement, c&#x27;est que le serveur crée autant de threads d&#x27;exécution qu&#x27;il y a de clients. Chaque thread est alors chargé de s&#x27;occuper d&#x27;un client particulier. Le processeur étant partagé cycliquement entre tous les threads actifs de la machine, le serveur passe alors un peu de temps avec chaque client assurant ainsi la simultanéité du service.</span></p>
-<p><img src="images/image196.png" class="docx-zoomable" style="width:434px;height:217px;" alt="Image" /></p>
+<p><img src="images/image196.png" class="docx-zoomable" style="width:435px;height:218px;" alt="Image" /></p>
 <h2 id="74-une-horloge-graphique">7.4. <a id="toc11990046"></a><a id="toc12157556"></a><a id="toc12361103"></a><a id="toc12362931"></a><a id="toc12502419"></a><span>Une </span><span>horloge graphique</span></h2>
 <p><span>Considérons l&#x27;application suivante qui affiche une fenêtre avec une horloge et un bouton pour arrêter ou redémarrer l&#x27;horloge :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-<img src="images/image197.png" class="docx-zoomable" style="width:141px;height:121px;" alt="Image" />
+<img src="images/image197.png" class="docx-zoomable" style="width:142px;height:122px;" alt="Image" />
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-<img src="images/image198.png" class="docx-zoomable" style="width:141px;height:121px;" alt="Image" />
+<img src="images/image198.png" class="docx-zoomable" style="width:142px;height:122px;" alt="Image" />
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-<img src="images/image199.png" class="docx-zoomable" style="width:141px;height:121px;" alt="Image" />
+<img src="images/image199.png" class="docx-zoomable" style="width:142px;height:122px;" alt="Image" />
 </td>
 </tr>
 </table>
@@ -1292,7 +1292,7 @@
 <a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </code></pre></div>
 <p><span>Lorsque nous chargeons directement ce document dans IE en double-cliquant dessus, nous obtenons l&#x27;affichage suivant :</span></p>
-<p><img src="images/image201.png" class="docx-zoomable" style="width:334px;height:232px;" alt="Image" /></p>
+<p><img src="images/image201.png" class="docx-zoomable" style="width:334px;height:233px;" alt="Image" /></p>
 <p><span>Tous les éléments nécessaires à l&#x27;applet sont dans cet exemple dans le même dossier :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nx">E</span><span class="o">:</span><span class="err">\</span><span class="nx">data</span><span class="err">\</span><span class="nx">serge</span><span class="err">\</span><span class="nx">Jbuilder</span><span class="err">\</span><span class="nx">horloge</span><span class="err">\</span><span class="mf">1</span><span class="o">&gt;</span><span class="nx">dir</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="mf">13</span><span class="o">/</span><span class="mo">06</span><span class="o">/</span><span class="mf">2002</span><span class="w">  </span><span class="mf">12</span><span class="o">:</span><span class="mf">17</span><span class="w">                </span><span class="mf">3</span><span class="w"> </span><span class="mf">174</span><span class="w"> </span><span class="nx">appletHorloge</span><span class="p">.</span><span class="kd">class</span>
@@ -1454,7 +1454,7 @@
 <li><span>les threads lisent la valeur du champ 2, l&#x27;incrémentent et affichent la nouvelle valeur. Au départ ce champ contient la valeur 0.</span></li>
 </ol>
 <p><span>Les threads générés se partagent une ressource : la valeur du champ 2. Nous cherchons à montrer ici les problèmes que l&#x27;on rencontre dans une telle situation. Voici un exemple d&#x27;exécution :</span></p>
-<p><img src="images/image203.png" class="docx-zoomable" style="width:273px;height:212px;" alt="Image" /></p>
+<p><img src="images/image203.png" class="docx-zoomable" style="width:273px;height:213px;" alt="Image" /></p>
 <p><span>On voit qu&#x27;on a demandé la génération de 1000 threads et qu&#x27;il en a été compté que 7. Le code utile de l&#x27;application est le suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.*</span><span class="p">;</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.event.*</span><span class="p">;</span>
@@ -1593,7 +1593,7 @@
 <li><span>deux threads T1 et T2 créés par F</span></li>
 </ol>
 <p><span>Les deux threads sont créés par F puis lancés. Ils vont donc tous deux exécuter la méthode F</span><i>.run</i><span>. Supposons que T1 arrive le premier. Il exécute F</span><i>.run</i><span> puis F</span><i>.incremente</i><span> qui est une méthode synchronisée. Il lit la valeur 0 du compteur, l&#x27;incrémente puis s&#x27;arrête 100 ms. Le processeur est alors donné à T2 qui à son tour exécute F</span><i>.run</i><span> puis F</span><i>.incremente</i><span>. Et là il est bloqué car le thread T1 est en cours d&#x27;exécution de F</span><i>.incremente</i><span> et le mot clé </span><b><i>synchronized</i></b><span> assure qu&#x27;un seul thread à la fois peut exécuter F</span><i>.incremente</i><span>. T2 perd alors le processeur à son tour sans avoir pu lire la valeur du compteur. Au bout des 100 ms, T1 récupère le processeur, affiche la valeur 1 du compteur, quitte F</span><i>.incremente</i><span> puis F</span><i>.run</i><span> et se termine. T2 récupère alors le processeur et peut cette fois exécuter F</span><i>.incremente</i><span> car T1 n&#x27;est plus en cours d&#x27;exécution de cette méthode. T2 lit alors la valeur 1 du compteur, l&#x27;incrémente et s&#x27;arrête 100 ms. Au bout de 100 ms, il récupère le processeur, affiche la valeur 2 du compteur et se termine lui aussi. Cette fois, la valeur obtenue est correcte. Voici un exemple testé :</span></p>
-<p><img src="images/image204.png" class="docx-zoomable" style="width:273px;height:212px;" alt="Image" /></p>
+<p><img src="images/image204.png" class="docx-zoomable" style="width:273px;height:213px;" alt="Image" /></p>
 <h3 id="763-comptage-synchronise-par-un-objet">7.6.3. <a id="toc427837425"></a><a id="toc428596968"></a><a id="toc459263807"></a><a id="toc459264044"></a><a id="toc459349539"></a><a id="toc10974649"></a><a id="toc11990051"></a><a id="toc12157561"></a><a id="toc12361108"></a><a id="toc12362936"></a><a id="toc12502424"></a><span>Comptage synchronisé par un objet</span></h3>
 <p><span>Dans l&#x27;exemple précédent, l&#x27;accès au compteur </span><i>txtGénérés</i><span> a été synchronisé par une méthode. Si la fenêtre qui crée les threads s&#x27;appelle F, on peut aussi dire que la méthode </span><i>F</i><i>.incremente</i><span> représente une ressource qui ne devait être utilisée que par un seul thread à la fois. C&#x27;est donc une ressource critique. L&#x27;accès synchronisé à cette ressource a été garanti par le mot clé </span><i>synchronized</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">incrémente</span><span class="p">()</span>
