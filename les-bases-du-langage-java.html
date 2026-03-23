@@ -1099,10 +1099,11 @@
 <h2 id="21-introduction">2.1. <a id="toc428596796"></a><a id="toc459205111"></a><a id="toc459205317"></a><a id="toc459205459"></a><a id="toc459205601"></a><a id="toc459205798"></a><a id="toc459263573"></a><a id="toc459263810"></a><a id="toc459349305"></a><a id="toc12502281"></a><span>Introduction</span></h2>
 <p><span>Nous traitons Java d&#x27;abord comme un langage de programmation classique. Nous aborderons les objets ultérieurement.</span></p>
 <p><span>Dans un programme on trouve deux choses </span></p>
-<ol>
+<ol start="5">
 <li><span>des données</span></li>
 <li><span>les instructions qui les manipulent</span></li>
 </ol>
+
 <p><span>On s&#x27;efforce généralement de séparer les données des instructions :</span></p>
 <p><img src="images/image3.png" class="docx-zoomable" style="width:263px;height:153px;" alt="Image" /></p>
 <h2 id="22-les-donnees-de-java">2.2. <a id="toc428596797"></a><a id="toc459205112"></a><a id="toc459205318"></a><a id="toc459205460"></a><a id="toc459205602"></a><a id="toc459205799"></a><a id="toc459263574"></a><a id="toc459263811"></a><a id="toc459349306"></a><a id="toc12502282"></a><span>Les données de Java</span></h2>
@@ -1115,6 +1116,7 @@
 <li><span>les booléens</span></li>
 <li><span>les objets</span></li>
 </ul>
+
 <h3 id="221-les-types-de-donnees-predefinis">2.2.1. <a id="toc428596798"></a><a id="toc459205113"></a><a id="toc459205319"></a><a id="toc459205461"></a><a id="toc459205603"></a><a id="toc459205800"></a><a id="toc459263575"></a><a id="toc459263812"></a><a id="toc459349307"></a><a id="toc12502283"></a><span>Les types de données prédéfinis</span></h3>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
@@ -1392,10 +1394,12 @@
 <ul>
 <li><span>La lecture du programme sera plus aisée si l&#x27;on a donné à la constante un nom significatif :</span></li>
 </ul>
+
 <p><span>ex : </span><i>final float taux&#95;tva=0.186F</i><span>;</span></p>
 <ul>
 <li><span>La modification du programme sera plus aisée si la &quot;constante&quot; vient à changer. Ainsi dans le cas précédent, si le taux de tva passe à 33%, la seule modification à faire sera de modifier l&#x27;instruction définissant sa valeur :</span></li>
 </ul>
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<i>final float taux&#95;tva=0.33F</i><span>;</span></p>
 <p><span>Si l&#x27;on avait utilisé 0.186 explicitement dans le programme, ce serait alors de nombreuses instructions qu&#x27;il faudrait modifier.</span></p>
 <h4 id="2233-declaration-des-variables">2.2.3.3. <a id="toc459205608"></a><a id="toc459205805"></a><a id="toc459263580"></a><a id="toc459263817"></a><a id="toc459349312"></a><span>Déclaration des variables</span></h4>
@@ -1583,6 +1587,7 @@
 <li><span>les instructions élémentaires exécutées par l&#x27;ordinateur.</span></li>
 <li><span>les instructions de contrôle du déroulement du programme.</span></li>
 </ul>
+
 <p><span>Les instructions élémentaires apparaissent clairement lorsqu&#x27;on considère la structure d&#x27;un micro-ordinateur et de ses périphériques.</span></p>
 <p><img src="images/image4.png" class="docx-zoomable" style="width:680px;height:257px;" alt="Image" /></p>
 <p><span>1. lecture d&#x27;informations provenant du clavier</span></p>
@@ -1600,7 +1605,7 @@
 <p><b>System.out</b><span> écrit dans un fichier texte qui est par défaut l&#x27;écran. Il en est de même pour </span><b>System.err</b><span>. Ces fichiers portent un numéro (ou </span><i>descripteur</i><span>) respectivement 1 et 2. Le flux d&#x27;entrée du clavier (</span><b>System.in</b><span>) est également considéré comme un fichier texte, de descripteur 0. Dos comme Unix supportent le tubage (</span><b>pipe</b><span>) de commandes :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    commande1 | commande2
 </code></pre></div>
-<p><span>Tout ce que </span><i>commande1</i><span> écrit avec </span><i>System.out</i><span> est tubé (redirigé) vers l&#x27;entrée </span><i>System.in</i><span> de </span><i>commande2</i><span>. Dit autrement, </span><i>commande2</i><span> lit avec </span><i>System.in</i><span>, les données produites par </span><i>commande2</i><span> avec </span><i>System.out </i><span> qui ne sont donc plus affichées à l&#x27;écran. Ce système est très utilisé sous Unix. Dans ce tubage, le flux </span><i>System.err</i><span> n&#x27;est lui pas redirigé : il écrit sur l&#x27;écran. C&#x27;est pourquoi il est utilisé pour écrire les messages d&#x27;erreurs (d&#x27;où son nom </span><i>err</i><span>) : on est assuré que lors d&#x27;un tubage de commandes, les messages d&#x27;erreur continueront à </span><span>s&#x27;afficher à l&#x27;écran. On prendra donc l&#x27;habitude d&#x27;écrire les messages d&#x27;erreur à l&#x27;écran avec le flux </span><i>System.err</i><span> plutôt qu&#x27;avec le flux </span><i>System.out</i><span>.</span></p>
+<p><span>Tout ce que </span><i>commande1</i><span> écrit avec </span><i>System.out</i><span> est tubé (redirigé) vers l&#x27;entrée </span><i>System.in</i><span> de </span><i>commande2</i><span>. Dit autrement, </span><i>commande2</i><span> lit avec </span><i>System.in</i><span>, les données produites par </span><i>commande2</i><span> avec </span><i>System.out </i><span> qui ne sont donc plus affichées à l&#x27;écran. Ce système est très utilisé sous Unix. Dans ce tubage, le flux </span><i>System.err</i><span> n&#x27;est lui pas redirigé : il écrit sur l&#x27;écran. C&#x27;est pourquoi il est utilisé pour écrire les messages d&#x27;erreurs (d&#x27;où son nom </span><i>err</i><span>) : on est assuré que lors d&#x27;un tubage de commandes, les messages d&#x27;erreur continueront à s&#x27;afficher à l&#x27;écran. On prendra donc l&#x27;habitude d&#x27;écrire les messages d&#x27;erreur à l&#x27;écran avec le flux </span><i>System.err</i><span> plutôt qu&#x27;avec le flux </span><i>System.out</i><span>.</span></p>
 <h3 id="232-lecture-de-donnees-tapees-au-clavier">2.3.2. <a id="toc428596805"></a><a id="toc459205120"></a><a id="toc459205326"></a><a id="toc459205468"></a><a id="toc459205613"></a><a id="toc459205810"></a><a id="toc459263585"></a><a id="toc459263822"></a><a id="toc459349317"></a><a id="toc12502290"></a><span>Lecture de données tapées au clavier</span></h3>
 <p><span>Le flux de données provenant du clavier est désigné par l&#x27;objet </span><i>System.in</i><span> de type </span><i>InputStream</i><span>. Ce type d&#x27;objets permet de lire des données caractère par caractère. C&#x27;est au programmeur de retrouver ensuite dans ce flux de caractères les informations qui l&#x27;intéressent. Le type </span><i>InputStream</i><span> ne permet pas de lire d&#x27;un seul coup une ligne de texte. Le type </span><i>BufferedReader</i><span> le permet avec la méthode </span><i>readLine</i><span>.</span></p>
 <p><span>Afin de pouvoir lire des lignes de texte tapées au clavier, on crée à partir du flux d&#x27;entrée </span><i>System.in</i><span> de type </span><i>InputStream</i><span>, un autre flux d&#x27;entrée de type </span><i>BufferedReader</i><span> cette fois :</span></p>
@@ -1695,11 +1700,12 @@
 <p><span>L&#x27;expression peut être de type :  arithmétique, relationnelle, booléenne, caractères</span></p>
 <h4 id="2341-interpretation-de-loperation-daffectation">2.3.4.1. <a id="toc459205616"></a><a id="toc459205813"></a><a id="toc459263588"></a><a id="toc459263825"></a><a id="toc459349320"></a><span>Interprétation de l&#x27;opération d&#x27;affectation</span></h4>
 <p><span>L&#x27;opération  </span><mark style="background-color:#fff59d"><i>variable=expression;</i></mark><span> </span><span>est elle-même une </span><b>expression</b><span> dont l&#x27;évaluation se déroule de la façon suivante :</span></p>
-<ol>
+<ol start="1">
 <li><span>La partie droite de l&#x27;affectation est évaluée : le résultat est une valeur V.</span></li>
 <li><span>la valeur V est affectée à la variable</span></li>
 <li><span>la valeur V est aussi la valeur de l&#x27;affectation vue cette fois en tant qu&#x27;expression.</span></li>
 </ol>
+
 <p><span>C&#x27;est ainsi que l&#x27;opération</span>&nbsp;&nbsp;&nbsp;&nbsp;<mark style="background-color:#fff59d"><i>V1=V2=expression</i></mark><span> </span><span>est légale. A cause de la priorité, c&#x27;est l&#x27;opérateur = le plus à droite qui va être évalué.  On a donc </span><mark style="background-color:#fff59d"><i>V1=(V2=expression)</i></mark><i>.</i><span> </span><span>L&#x27;expression </span><mark style="background-color:#fff59d"><i>V2=expression</i></mark><span> est évaluée et a pour valeur </span><i>V</i><span>. L&#x27;évaluation de cette expression a provoqué l&#x27;affectation de V à V2. L&#x27;opérateur = suivant est alors évalué sous la forme </span>&nbsp;&nbsp;&nbsp;&nbsp;<mark style="background-color:#fff59d"><i>V1=V</i></mark><span>. </span><span>La valeur de cette expression est encore V. Son évaluation provoque l&#x27;affectation de V à V1. Ainsi donc, l&#x27;opération </span>&nbsp;&nbsp;&nbsp;&nbsp;<mark style="background-color:#fff59d"><i>V1=V2=expression</i></mark><span> </span><span>est une expression dont l&#x27;évaluation</span></p>
 <p><span>1</span><span> : </span><span>provoque l&#x27;affectation de la valeur de </span><i>expression</i><span> aux variables V1 et V2</span></p>
 <p><span>2</span><span> : </span><span>rend comme résultat la valeur de </span><i>expression</i><span>.</span></p>
@@ -2153,7 +2159,8 @@
 <h3 id="241-arret">2.4.1. <a id="toc428596809"></a><a id="toc459205124"></a><a id="toc459205330"></a><a id="toc459205472"></a><a id="toc459205628"></a><a id="toc459205825"></a><a id="toc459263600"></a><a id="toc459263837"></a><a id="toc459349332"></a><a id="toc12502294"></a><span>Arrêt</span></h3>
 <p><span>   </span></p>
 <p><span>La méthode </span><i>exit</i><span> définie dans la classe </span><i>System</i><span> permet d&#x27;arrêter l&#x27;exécution d&#x27;un programme.</span></p>
-<p><i><u>syntaxe</u></i>&nbsp;&nbsp;&nbsp;&nbsp;<i> : </i><i>void exit(int status)</i></p>
+<div style="background-color:#FFFFFF ; padding:0.35em 0.5em ; margin:0.75em 0"><i><u>syntaxe</u></i>&nbsp;&nbsp;&nbsp;&nbsp;<i> : </i><i>void exit(int status)</i></div>
+
 <p><u> action</u><u>  </u><span>: </span><span>arrête le processus en cours et rend la valeur status au processus père</span></p>
 <p><b>exit</b><span> provoque la fin du processus en cours et rend la main au processus appelant. La valeur de </span><i>status</i><span> peut être utilisée par celui-ci. Sous DOS, cette variable </span><i>status</i><span> est rendue à DOS dans la variable système </span><b>ERRORLEVEL</b><span> dont la valeur peut être testée dans un fichier batch. Sous Unix, c&#x27;est la variable </span><b>$?</b><span> qui récupère la valeur de </span><i>status</i><span> si l&#x27;interpréteur de commandes est le Bourne Shell (/bin/sh).</span></p>
 <p><span>Exemple :</span></p>
@@ -2167,7 +2174,7 @@
 </code></pre></div>
 
 <p><u>notes</u><span>:</span></p>
-<ol>
+<ol start="4">
 <li><span>la condition est entourée de parenthèses.</span></li>
 <li><span>chaque action est terminée par point-virgule.</span></li>
 <li><span>les accolades ne sont pas terminées par point-virgule.</span></li>
@@ -2175,6 +2182,7 @@
 <li><span>la clause else peut être absente.</span></li>
 <li><span>Il n&#x27;y a pas de then.</span></li>
 </ol>
+
 <p><span>L&#x27;équivalent algorithmique de cette structure est la structure </span><i>si .. alors … sinon</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>si condition
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  alors actions_condition_vraie
@@ -2234,13 +2242,14 @@
 <a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="p">}</span>
 </code></pre></div>
 <p><b><u>notes</u></b></p>
-<ol>
+<ol start="10">
 <li><span>La valeur de l&#x27;expression de contrôle, ne peut être qu&#x27;un entier ou un caractère.</span></li>
 <li><span>l&#x27;expression  de contrôle est entourée de parenthèses.</span></li>
 <li><span>la clause </span><i>default</i><span> peut être absente.</span></li>
 <li><span>les valeurs </span><i>v</i><i>i</i><span> sont des valeurs possibles de l&#x27;expression. Si l&#x27;expression a pour valeur </span><i>v</i><i>i </i><span>, les actions derrière la clause </span><b>case </b><b><i>v</i></b><b><i>i</i></b><span> sont exécutées.</span></li>
 <li><span>l&#x27;instruction </span><i>break</i><span> fait sortir de la structure de cas. Si elle est absente à la fin du bloc d&#x27;instructions de la valeur </span><i>v</i><i>i</i><span>, l&#x27;exécution se poursuit alors avec les instructions de la valeur </span><i>v</i><i>i+1</i><span>.</span></li>
 </ol>
+
 <p><u>exemple</u></p>
 <p><span>En  algorithmique </span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>selon la valeur de choix
@@ -2276,13 +2285,14 @@
 </code></pre></div>
 
 <p><b><u>Notes</u></b></p>
-<ol>
+<ol start="15">
 <li><span>les 3 arguments du </span><i>for</i><span> sont à l&#x27;intérieur d&#x27;une parenthèse.</span></li>
 <li><span>les 3 arguments du </span><i>for</i><span> sont séparés par des points-virgules.</span></li>
 <li><span>chaque action du </span><i>for</i><span> est terminée par un point-virgule.</span></li>
 <li><span>l&#x27;accolade n&#x27;est nécessaire que s&#x27;il y a plus d&#x27;une action.</span></li>
 <li><span>l&#x27;accolade n&#x27;est pas suivie de point-virgule.</span></li>
 </ol>
+
 <p><span>L&#x27;équivalent algorithmique est la structure </span><i>pour</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>pour i variant de id à if avec un pas de ip
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>        actions
@@ -2306,12 +2316,13 @@
 
 <p><span>On boucle tant que la condition est vérifiée. La boucle peut ne jamais être exécutée.</span></p>
 <p><u>notes</u><span>:</span></p>
-<ol>
+<ol start="20">
 <li><span>la condition est entourée de parenthèses.</span></li>
 <li><span>chaque action est terminée par point-virgule.</span></li>
 <li><span>l&#x27;accolade n&#x27;est nécessaire que s&#x27;il y a plus d&#x27;une action.</span></li>
 <li><span>l&#x27;accolade n&#x27;est pas suivie de point-virgule.</span></li>
 </ol>
+
 <p><span>La structure algorithmique correspondante est la structure tantque :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>tantque condition
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>        actions
@@ -2327,12 +2338,13 @@
 
 <p><span>On boucle jusqu&#x27;à ce que la condition devienne fausse ou tant que la condition est vraie. Ici la boucle est faite au moins une fois.</span></p>
 <p><b><u>notes</u></b></p>
-<ol>
+<ol start="24">
 <li><span>la condition est entourée de parenthèses.</span></li>
 <li><span>chaque action est terminée par point-virgule.</span></li>
 <li><span>l&#x27;accolade n&#x27;est nécessaire que s&#x27;il y a plus d&#x27;une action.</span></li>
 <li><span>l&#x27;accolade n&#x27;est pas suivie de point-virgule.</span></li>
 </ol>
+
 <p><span>La structure algorithmique correspondante est la structure </span><i>répéter … jusqu&#x27;à</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>répéter
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>    actions
@@ -2348,7 +2360,7 @@
 
 <p><span>On boucle tant que la condition est vraie (évaluée avant chaque tour de boucle). </span><i>Instructions&#95;départ</i><span> sont effectuées avant d&#x27;entrer dans la boucle pour la première fois. </span><i>Instructions&#95;fin&#95;boucle</i><span> sont exécutées après chaque tour de boucle.</span></p>
 <p><b><u>notes</u></b></p>
-<ol>
+<ol start="28">
 <li><span>les 3 arguments du </span><i>for</i><span> sont à l&#x27;intérieur de parenthèses.</span></li>
 <li><span>les 3 arguments du </span><i>for</i><span> sont séparés par des points-virgules.</span></li>
 <li><span>chaque action du for est terminée par un point-virgule.</span></li>
@@ -2356,6 +2368,7 @@
 <li><span>l&#x27;accolade n&#x27;est pas suivie de point-virgule.</span></li>
 <li><span>les différentes instructions dans </span><i>instructions&#95;depart</i><span> et </span><i>instructions&#95;fin&#95;boucle</i><span> sont séparées par des virgules.</span></li>
 </ol>
+
 <p><span>La structure algorithmique correspondante est la suivante :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>instructions_départ
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>tantque condition
@@ -2453,6 +2466,7 @@
 <li><i>out</i><span> est une propriété de cette classe de type </span><i>java.io.PrintStream</i><span>, une autre classe</span></li>
 <li><i>println</i><span> est une méthode de la classe </span><i>java.io.PrintStream</i><span>.</span></li>
 </ul>
+
 <p><span>Nous ne compliquerons pas inutilement cette explication qui vient trop tôt puisqu&#x27;elle nécessite la compréhension de la notion de classe pas encore abordée. On peut assimiler une classe à une ressource. Ici, le compilateur aura besoin d&#x27;avoir accès aux deux classes </span><i>java.lang.System</i><span> et </span><i>java.io.PrintStream</i><span>. Les centaines de classes de Java sont réparties dans des archives aussi appelées des paquetages (package). Les instruction </span><i>import</i><span> placées en début de programme servent à indiquer au compilateur de quelles classes externes le programme a besoin (celles utilisées mais non définies dans le fichier source qui sera compilé). Ainsi dans notre exemple, notre programme a besoin des classes </span><i>java.lang.System</i><span> et </span><i>java.io.PrintStream</i><span>. On le dit avec l&#x27;instruction </span><i>import</i><span>. On pourrait écrire en début de programme :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.System</span><span class="p">;</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintStream</span><span class="p">;</span>
@@ -2486,9 +2500,8 @@
 <a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>instruction suivante
 </code></pre></div>
 <p><span>Si la fonction ne génère pas d&#x27;exception, on passe alors à </span><b>instruction suivante</b><span>, sinon on passe dans le corps de la clause </span><i>catch</i><span> puis à </span><b>instruction suivante</b><span>. Notons les points suivants :</span></p>
-<ol>
-<li><b>e</b><span> est un objet dérivé du type </span><i>Exception</i><span>. On peut être plus précis en utilisant des types tels que </span><i>IOException, SecurityException, ArithmeticException</i><span>, etc… : il existe une vingtaine de types d&#x27;exceptions. En écrivant </span><i>catch (Exception e)</i><span>, on indique qu&#x27;on veut gérer toutes les types d&#x27;exceptions. Si le code de la clause </span><i>try</i><span> est susceptible de générer plusieurs types d&#x27;exceptions, on peut vouloir être plus précis en gérant l&#x27;exception avec plusieurs clauses </span><i>catch</i><span> :</span></li>
-</ol>
+<ol start="34">
+<li><b>e</b><span> est un objet dérivé du type </span><i>Exception</i><span>. On peut être plus précis en utilisant des types tels que </span><i>IOException, SecurityException, ArithmeticException</i><span>, etc… : il existe une vingtaine de types d&#x27;exceptions. En écrivant </span><i>catch (Exception e)</i><span>, on indique qu&#x27;on veut gérer toutes les types d&#x27;exceptions. Si le code de la clause </span><i>try</i><span> est susceptible de générer plusieurs types d&#x27;exceptions, on peut vouloir être plus précis en gérant l&#x27;exception avec plusieurs clauses </span><i>catch</i><span> :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>try{
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>    appel de la fonction susceptible de générer l&#39;exception
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>} catch (IOException e){
@@ -2502,9 +2515,9 @@
 <a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>}
 <a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>instruction suivante
 </code></pre></div>
-<ol>
-<li><span>On peut ajouter aux clauses </span><i>try/catch</i><span>, une clause </span><b>finally</b><span> :</span></li>
-</ol>
+
+</li>
+<li><span>On peut ajouter aux clauses </span><i>try/catch</i><span>, une clause </span><b>finally</b><span> :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>try{
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>    appel de la fonction susceptible de générer l&#39;exception
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>} catch (Exception e){
@@ -2515,23 +2528,30 @@
 <a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>}
 <a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>instruction suivante
 </code></pre></div>
+
+</li>
+</ol>
+
 <p><span>Ici, qu&#x27;il y ait exception ou pas, le code de la clause </span><i>finally</i><span> sera toujours exécuté.</span></p>
 <ul>
-<li><span>La classe </span><i>Exception</i><span> a une méthode </span><b>getMessage()</b><span> qui rend un message détaillant l&#x27;erreur qui s&#x27;est produite. Ainsi si on veut afficher celui-ci, on écrira :</span></li>
-</ul>
+<li><span>La classe </span><i>Exception</i><span> a une méthode </span><b>getMessage()</b><span> qui rend un message détaillant l&#x27;erreur qui s&#x27;est produite. Ainsi si on veut afficher celui-ci, on écrira :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>catch (Exception ex){
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>    System.err.println(&quot;L&#39;erreur suivante s&#39;est produite : &quot;+ex.getMessage());
 <a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>    ...
 <a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>}//catch
 </code></pre></div>
-<ul>
-<li><span>La classe </span><i>Exception</i><span> a une méthode </span><b>toString()</b><span> qui rend une chaîne de caractères indiquant le type de l&#x27;exception ainsi que la valeur de la propriété </span><i>Message</i><span>. On pourra ainsi écrire :</span></li>
-</ul>
+
+</li>
+<li><span>La classe </span><i>Exception</i><span> a une méthode </span><b>toString()</b><span> qui rend une chaîne de caractères indiquant le type de l&#x27;exception ainsi que la valeur de la propriété </span><i>Message</i><span>. On pourra ainsi écrire :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">){</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;L&#39;erreur suivante s&#39;est produite : &quot;</span><span class="o">+</span><span class="n">ex</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="p">...</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="p">}</span><span class="c1">//catch</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>On peut écrire aussi :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>catch (Exception ex){
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>    System.err.println (&quot;L&#39;erreur suivante s&#39;est produite : &quot;+ex);
@@ -2723,6 +2743,7 @@
 <li><i>S</i><span> est une référence d’objet c.a.d. l’adresse d’un objet en mémoire</span></li>
 <li><i>age</i><span> est une valeur entière</span></li>
 </ul>
+
 <h2 id="210-lexemple-impots">2.10. <a id="toc428596816"></a><a id="toc459205131"></a><a id="toc459205337"></a><a id="toc459205479"></a><a id="toc459205637"></a><a id="toc459205834"></a><a id="toc459263609"></a><a id="toc459263846"></a><a id="toc459349341"></a><a id="toc12502303"></a><span>L&#x27;exemple</span><span> imp</span><span>ô</span><span>ts</span></h2>
 <p><span>Nous terminerons ce chapitre par un exemple que nous reprendrons à diverses reprises dans ce document. On se propose d&#x27;écrire un programme permettant de calculer l&#x27;impôt d&#x27;un contribuable. On se place dans le cas simplifié d&#x27;un contribuable n&#x27;ayant que son seul salaire à déclarer :</span></p>
 <ul>

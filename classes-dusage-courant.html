@@ -1042,6 +1042,7 @@
 <li><span>la liste des constructeurs</span></li>
 <li><span>la liste des méthodes</span></li>
 </ul>
+
 <p><span>Par la suite, nous présentons diverses classes. Nous invitons le lecteur à systématiquement vérifier la définition complète des classes utilisées.</span></p>
 <h2 id="42-les-classes-de-test">4.2. <a id="toc12502336"></a><span>Les classes de test</span></h2>
 <p><span>Les exemples qui suivent utilisent parfois les classes </span><i>personne</i><span>, </span><i>enseignant</i><span>. Nous rappelons ici leur définition.</span></p>
@@ -1717,14 +1718,15 @@
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">amis</span><span class="p">,</span><span class="k">this</span><span class="p">);</span>
 </code></pre></div>
 <p><span>Ceci nous oblige à faire deux choses :</span></p>
-<ol>
-<li><span>indiquer que la classe </span><i>sort2</i><span> implémente l&#x27;interface </span><i>Comparator</i></li>
-</ol>
+<ol start="1">
+<li><span>indiquer que la classe </span><i>sort2</i><span> implémente l&#x27;interface </span><i>Comparator</i>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">sort2</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="p">{</span>
 </code></pre></div>
-<ol>
+
+</li>
 <li><span>écrire la fonction </span><i>compare</i><span> dans la classe </span><i>sort2</i><span>.</span></li>
 </ol>
+
 <p><span>Celle-ci est la suivante :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="w">  </span><span class="c1">// la fonction qui compare des personnes</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">o2</span><span class="p">){</span>
@@ -3447,9 +3449,7 @@
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-&nbsp;
-</td>
-</tr>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
 <p style='margin:0;'><b>\</b><i>n</i></p>
@@ -3464,6 +3464,9 @@
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
 <p style='margin:0;'><span>Correspond à </span><i>n</i><span>, où </span><i>n</i><span> est une valeur d&#x27;échappement hexadécimale. Les valeurs d&#x27;échappement hexadécimales doivent comprendre deux chiffres obligatoirement. Par exemple, &quot;\x41&quot; correspond à &quot;A&quot;. &quot;\x041&quot; équivaut à &quot;\x04&quot; &amp; &quot;1&quot;. Permet d&#x27;utiliser les codes ASCII dans des expressions régulières.</span></p>
+</td>
+</tr>
+</table>
 </td>
 </tr>
 </table>
@@ -4273,11 +4276,12 @@
 <a id="__codelineno-73-10" name="__codelineno-73-10" href="#__codelineno-73-10"></a>(0,a,b,c,d,e)
 </code></pre></div>
 <p><span>Quelques conseils :</span></p>
-<ol>
+<ol start="1">
 <li><span>Pour découper la chaîne S en champs, utiliser la méthode </span><i>split</i><span> de la classe </span><i>String</i><span>.</span></li>
 <li><span>Mettre les champs de S dans un dictionnaire D indexé par le numéro du champ</span></li>
 <li><span>Récupérer dans le dictionnaire D les seuls champs ayant leur clé (index) dans le tableau </span><i>tChampsVoulus</i><span>.</span></li>
 </ol>
+
 <h3 id="4123-exercice-3">4.12.3. <a id="toc427837312"></a><a id="toc428596856"></a><a id="toc459205171"></a><a id="toc459205377"></a><a id="toc459205519"></a><a id="toc459205691"></a><a id="toc459205888"></a><a id="toc459263663"></a><a id="toc459263900"></a><a id="toc459349395"></a><a id="toc12502365"></a><span>Exercice 3</span></h3>
 <p><span>On désire ajouter à la classe </span><b>stringtovector</b><span> le constructeur suivant :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
@@ -4333,10 +4337,11 @@
 <a id="__codelineno-74-12" name="__codelineno-74-12" href="#__codelineno-74-12"></a>(0,a,c)
 </code></pre></div>
 <p><span>Quelques conseils :</span></p>
-<ol>
+<ol start="1">
 <li><span>Il faut se ramener au cas du constructeur précédent en transférant les champs de la chaîne </span><i>sChampsVoulus</i><span> dans un tableau d&#x27;entiers. Pour cela, découper </span><i>sChampsVoulus</i><span> en champs avec un objet </span><i>StringTokenizer</i><span> dont l&#x27;attribut </span><i>countTokens</i><span> donnera le nombre de champs obtenus. On peut alors créer un tableau d&#x27;entiers de la bonne dimension et le remplir avec les champs obtenus.</span></li>
 <li><span>Pour savoir si un champ est entier, utiliser la méthode </span><b>Integer.parseInt</b><span> pour transformer le champ en entier et gérer l&#x27;exception qui sera générée lorsque cette conversion sera impossible.</span></li>
 </ol>
+
 <h3 id="4124-exercice-4">4.12.4. <a id="toc427837313"></a><a id="toc428596857"></a><a id="toc459205172"></a><a id="toc459205378"></a><a id="toc459205520"></a><a id="toc459205696"></a><a id="toc459205893"></a><a id="toc459263668"></a><a id="toc459263905"></a><a id="toc459349400"></a><a id="toc12502366"></a><span>Exercice 4</span></h3>
 <p><span>On désire créer une classe </span><b>filetovector</b><span> permettant de transférer le contenu d&#x27;un fichier texte dans un objet </span><i>Vector</i><span>. Cette classe serait dérivée de la classe </span><i>Vector</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="kd">class</span> <span class="nc">filetovector</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Vector</span>
@@ -4464,7 +4469,7 @@
 <a id="__codelineno-80-6" name="__codelineno-80-6" href="#__codelineno-80-6"></a>[0,(0,a,b,c,d,e) (0,1,2,3,4,5) (0,# commentaire) (0,azerty,1,cvf,fff,qqqq) (0,s)]
 </code></pre></div>
 <p><a id="toc459205705"></a><a id="toc459205902"></a><a id="toc459263677"></a><a id="toc459263914"></a><a id="toc459349409"></a><span>Quelques conseils</span></p>
-<ol>
+<ol start="1">
 <li><span>On transformera la chaîne </span><i>sChampsVoulus</i><span> en tableau d’entiers </span><i>tChampVoulus</i><span> pour se ramener au cas du constructeur précédent.</span></li>
 </ol>
 

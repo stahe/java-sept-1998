@@ -903,21 +903,21 @@
 <li><span>on a accès aux caractéristiques de ce thread par </span><i>Thread.currentThread()</i></li>
 <li><span>le rôle de la méthode s</span><i>leep</i><span>. Ici le thread exécutant m</span><i>ain</i><span> se met en sommeil régulièrement pendant 1 seconde entre deux affichages.</span></li>
 </ul>
+
 <h2 id="72-creation-de-threads-dexecution">7.2. <a id="toc9054088"></a><a id="toc9394429"></a><a id="toc11990044"></a><a id="toc12157554"></a><a id="toc12361101"></a><a id="toc12362929"></a><a id="toc12502417"></a><span>Création de threads d&#x27;exécution</span></h2>
 <p><span>Il est possible d&#x27;avoir des applications où des morceaux de code s&#x27;exécutent de façon &quot;simultanée&quot; dans différents threads d&#x27;exécution. Lorsqu&#x27;on dit que des </span><i>thread</i><span>s s&#x27;exécutent de façon simultanée, on commet souvent un abus de langage. Si la machine n&#x27;a qu&#x27;un processeur comme c&#x27;est encore souvent le cas, les </span><i>thread</i><span>s se partagent ce processeur : ils en disposent, chacun leur tour, pendant un court instant (quelques millisecondes). C&#x27;est ce qui donne l&#x27;illusion du parallélisme d&#x27;exécution. La portion de temps accordée à un </span><i>thread</i><span> dépend de divers facteurs dont sa priorité qui a une valeur par défaut mais qui peut être fixée également par programmation. Lorsqu&#x27;un </span><i>thread</i><span> dispose du processeur, il l&#x27;utilise normalement pendant tout le temps qui lui a été accordé. Cependant, il peut le libérer avant terme :</span></p>
-<ol>
+<ol start="1">
 <li><span>en se mettant en attente d&#x27;un événement (</span><i>wait, join</i><span>)</span></li>
-<li>
-<p><span>en se mettant en sommeil pendant un temps déterminé (</span><i>sleep</i><span>)</span></p>
-</li>
-<li>
-<p><span>Un </span><b>thread T</b><span> peut être créé de diverses façons</span></p>
+<li><span>en se mettant en sommeil pendant un temps déterminé (</span><i>sleep</i><span>)</span></li>
+</ol>
 <ul>
+<li><span>Un </span><b>thread T</b><span> peut être créé de diverses façons</span><ul>
 <li><span>en dérivant la classe </span><i>Thread</i><span> et en redéfinissant la méthode </span><i>run</i><span> de celle-ci.</span></li>
 <li><span>en implémentant l&#x27;interface </span><i>Runnable</i><span> dans une classe et en utilisant le constructeur </span><i>new Thread(Runnable)</i><span>. </span><i>Runnable </i><span>est une interface qui ne définit qu&#x27;une seule méthode : </span><i>public void run()</i><span>. L&#x27;argument du constructeur précédent est donc toute instance de classe implémentant cette méthode </span><i>run</i><span>.</span></li>
 </ul>
 </li>
-</ol>
+</ul>
+
 <p><span> Dans l&#x27;exemple qui suit, les threads sont construits à l&#x27;aide d&#x27;une classe anonyme dérivant la classe Thread :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">            </span><span class="c1">// on crée le thread i</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">            </span><span class="n">tâches</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
@@ -928,16 +928,11 @@
 </code></pre></div>
 <p><span>La méthode </span><i>run</i><span> se contente ici de renvoyer sur une méthode </span><i>affiche</i><span>.</span></p>
 <ul>
-<li>
-<p><span>L&#x27;exécution du thread T est lancé par </span><b>T.start()</b><span> : cette méthode appartient à la classe Thread et opère un certain nombre d&#x27;initialisations puis lance automatiquement la méthode </span><i>run</i><span> du Thread ou de l&#x27;interface </span><i>Runnable</i><span>. Le programme qui exécute l&#x27;instruction </span><i>T.start()</i><span> n&#x27;attend pas la fin de la tâche T : il passe aussitôt à l&#x27;instruction qui suit. On a alors deux tâches qui s&#x27;exécutent en parallèle. Elles doivent souvent pouvoir communiquer entre elles pour savoir où en est le travail commun à réaliser. C&#x27;est le problème de synchronisation des threads.</span></p>
-</li>
-<li>
-<p><span>Une fois lancé, le t</span><span>hread </span><span>s&#x27;exécute de façon autonome. Il s&#x27;arrêtera lorsque la fonction </span><i>run</i><span> qu&#x27;il exécute aura fini son travail.</span></p>
-</li>
-<li>
-<p><span>On peut attendre la fin de l&#x27;exécution du Thread T par </span><b>T.join()</b><span>. On a là une instruction bloquante : le programme qui l&#x27;exécute est bloqué jusqu&#x27;à ce que la tâche T ait terminé son travail. C&#x27;est également un moyen de synchronisation.</span></p>
-</li>
+<li><span>L&#x27;exécution du thread T est lancé par </span><b>T.start()</b><span> : cette méthode appartient à la classe Thread et opère un certain nombre d&#x27;initialisations puis lance automatiquement la méthode </span><i>run</i><span> du Thread ou de l&#x27;interface </span><i>Runnable</i><span>. Le programme qui exécute l&#x27;instruction </span><i>T.start()</i><span> n&#x27;attend pas la fin de la tâche T : il passe aussitôt à l&#x27;instruction qui suit. On a alors deux tâches qui s&#x27;exécutent en parallèle. Elles doivent souvent pouvoir communiquer entre elles pour savoir où en est le travail commun à réaliser. C&#x27;est le problème de synchronisation des threads.</span></li>
+<li><span>Une fois lancé, le t</span><span>hread </span><span>s&#x27;exécute de façon autonome. Il s&#x27;arrêtera lorsque la fonction </span><i>run</i><span> qu&#x27;il exécute aura fini son travail.</span></li>
+<li><span>On peut attendre la fin de l&#x27;exécution du Thread T par </span><b>T.join()</b><span>. On a là une instruction bloquante : le programme qui l&#x27;exécute est bloqué jusqu&#x27;à ce que la tâche T ait terminé son travail. C&#x27;est également un moyen de synchronisation.</span></li>
 </ul>
+
 <p><span>Examinons le programme suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// utilisation de threads</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -1012,16 +1007,20 @@
 </code></pre></div>
 <p><span>Ces résultats sont très instructifs :</span></p>
 <ul>
-<li><span>on voit tout d&#x27;abord que le lancement de l&#x27;exécution d&#x27;un thread n&#x27;est pas bloquante. La méthode m</span><i>ain</i><span> a lancé l&#x27;exécution de 5 threads en parallèle et a terminé son exécution avant eux. L&#x27;opération</span></li>
-</ul>
+<li><span>on voit tout d&#x27;abord que le lancement de l&#x27;exécution d&#x27;un thread n&#x27;est pas bloquante. La méthode m</span><i>ain</i><span> a lancé l&#x27;exécution de 5 threads en parallèle et a terminé son exécution avant eux. L&#x27;opération</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>            // on lance l&#39;exécution du thread i
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>            tâches[i].start();
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>lance l&#x27;exécution du thread </span><i>tâches&#91;i&#93;</i><span> mais ceci fait, l&#x27;exécution se poursuit immédiatement avec l&#x27;instruction qui suit sans attendre la fin d&#x27;exécution du thread.</span></p>
 <ul>
 <li><span>tous les threads créés doivent exécuter la méthode </span><i>affiche</i><span>. L&#x27;ordre d&#x27;exécution est imprévisible. Même si dans l&#x27;exemple, l&#x27;ordre d&#x27;exécution semble suivre l&#x27;ordre de lancement des threads, on ne peut en conclure de généralités. Le système d&#x27;exploitation a ici 6 threads et un processeur. Il va distribuer le processeur à ces 6 threads selon des règles qui lui sont propres.</span></li>
 <li><span>on voit dans les résultats une conséquence de la méthode s</span><i>leep</i><span>. Dans l&#x27;exemple, c&#x27;est le thread 0 qui exécute le premier la méthode </span><i>affiche</i><span>. Le message de début d&#x27;exécution est affiché puis il exécute la méthode s</span><i>leep</i><span> qui le suspend pendant 1 seconde. Il perd alors le processeur qui devient ainsi disponible pour un autre thread. L&#x27;exemple montre que c&#x27;est le thread 1 qui va l&#x27;obtenir. Le thread 1 va suivre le même parcours ainsi que les autres threads. Lorsque la seconde de sommeil du thread 0 va être terminée, son exécution peut reprendre. Le système lui donne le processeur et il peut terminer l&#x27;exécution de la méthode </span><i>affiche</i><span>.</span></li>
 </ul>
+
 <p><span>Modifions notre programme pour le terminer la méthode </span><i>main</i><span> par les instructions :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">        </span><span class="c1">// fin de main</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;fin du thread &quot;</span><span class="w"> </span><span class="o">+</span><span class="n">main</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
@@ -1091,10 +1090,11 @@
 <p><span>Pour que l&#x27;horloge vive, il faut qu&#x27;un processus s&#x27;occupe de changer l&#x27;heure toutes les secondes. En même temps, il faut surveiller les événements qui se produisent dans la fenêtre : lorsque l&#x27;utilisateur cliquera sur le bouton &quot;Arrêter&quot;, il faudra stopper l&#x27;horloge. On a là deux tâches parallèles et asynchrones : l&#x27;utilisateur peut cliquer n&#x27;importe quand. </span></p>
 <p><span>Considérons le moment où l&#x27;horloge n&#x27;a pas encore été lancée et où l&#x27;utilisateur clique sur le bouton &quot;Lancer&quot;. On a là un événement classique et on pourrait penser qu&#x27;une méthode du thread dans lequel s&#x27;exécute la fenêtre peut alors gérer l&#x27;horloge. Seulement lorsqu&#x27;une méthode de l&#x27;application graphique s&#x27;exécute, le thread de celle-ci n&#x27;est plus à l&#x27;écoute des événements de l&#x27;interface graphique. Ceux-ci se produisent et sont mis dans une file d&#x27;attente pour être traités par l&#x27;application lorsque la méthode </span><span>actuellement en cours d&#x27;exécution sera achevée. Dans notre exemple d&#x27;horloge, la méthode sera toujours en cours d&#x27;exécution puisque seul le clic sur le bouton &quot;Arrêter&quot; peut la stopper. Or cet événement ne sera traité que lorsque la méthode sera achevée. On tourne en rond.</span></p>
 <p><span>La solution à ce problème serait que lorsque l&#x27;utilisateur clique sur le bouton &quot;Lancer&quot;, une tâche soit lancée pour gérer l&#x27;horloge mais que l&#x27;application puisse continuer à écouter les événements qui se produisent dans la fenêtre. On aurait alors deux tâches distinctes qui s&#x27;exécuteraient en parallèle :</span></p>
-<ol>
+<ol start="1">
 <li><span>gestion de l&#x27;horloge</span></li>
 <li><span>écoute des événements de la fenêtre</span></li>
 </ol>
+
 <p><span>Revenons à notre horloge graphique :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
@@ -1102,9 +1102,7 @@
 <img src="images/image200.png" class="docx-zoomable" style="width:197px;height:172px;" alt="Image" />
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-&nbsp;
-</td>
-</tr>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
 <p style='margin:0;'><b>n°</b></p>
@@ -1145,6 +1143,9 @@
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
 <p style='margin:0;'><span>arrête ou lance l&#x27;horloge</span></p>
+</td>
+</tr>
+</table>
 </td>
 </tr>
 </table>
@@ -1269,11 +1270,12 @@
 <a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">  </span><span class="p">}</span><span class="c1">// runHorloge</span>
 </code></pre></div>
 <p><span>Le principe de la méthode est le suivant :</span></p>
-<ol>
+<ol start="1">
 <li><span>affiche l&#x27;heure courante dans la boîte de texte </span><i>txtHorloge</i></li>
 <li><span>s&#x27;arrête 1 seconde</span></li>
 <li><span>reprend l&#x27;étape 1 en ayant pris soin de tester auparavant le booléen </span><i>finHorloge</i><span> qui sera positionné à vrai lorsque l&#x27;utilisateur cliquera sur le bouton </span><i>Arrêter</i><span>.</span></li>
 </ol>
+
 <h2 id="75-applet-horloge">7.5. <a id="toc427837421"></a><a id="toc428596964"></a><a id="toc459263803"></a><a id="toc459264040"></a><a id="toc459349535"></a><a id="toc10974645"></a><a id="toc11990047"></a><a id="toc12157557"></a><a id="toc12361104"></a><a id="toc12362932"></a><a id="toc12502420"></a><span>Applet</span><span> horloge</span></h2>
 <p><span>Nous transformons l&#x27;application graphique précédente en applet par la méthode habituelle et créons le document HTML </span><i>appletHorloge.htm</i><span> suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
@@ -1366,10 +1368,11 @@
 <p><span>Avec </span><i>AppletViewer</i><span>, l&#x27;événement </span><i>start</i><span> se produit lorsque la fenêtre d&#x27;</span><i>AppletViewer</i><span> est visible et l&#x27;événement </span><i>stop</i><span> lorsqu&#x27;on la met en icône. Les résultats ci-dessus montrent que lorsque le document HTML est caché, le thread est bien arrêté s&#x27;il était actif.</span></p>
 <h2 id="76-synchronisation-de-taches">7.6. <a id="toc427837422"></a><a id="toc428596965"></a><a id="toc459263804"></a><a id="toc459264041"></a><a id="toc459349536"></a><a id="toc10974646"></a><a id="toc11990048"></a><a id="toc12157558"></a><a id="toc12361105"></a><a id="toc12362933"></a><a id="toc12502421"></a><span>Synchronisation de tâches</span></h2>
 <p><span>Dans notre exemple précédent, il y avait deux tâches :</span></p>
-<ol>
+<ol start="53">
 <li><span>la tâche principale représentée par l&#x27;application elle-même</span></li>
 <li><span>la tâche chargée de l&#x27;horloge</span></li>
 </ol>
+
 <p><span>La coordination entre les deux tâches était assurée par la tâche principale qui positionnait un booléen pour arrêter le thread de l&#x27;horloge. Nous abordons maintenant le problème de l&#x27;accès concurrent de tâches à des ressource communes, problème connu aussi sous le nom de &quot;partage de ressources&quot;. Pour l&#x27;illustrer, nous allons d&#x27;abord étudier un exemple.</span></p>
 <h3 id="761-un-comptage-non-synchronise">7.6.1. <a id="toc427837423"></a><a id="toc428596966"></a><a id="toc459263805"></a><a id="toc459264042"></a><a id="toc459349537"></a><a id="toc10974647"></a><a id="toc11990049"></a><a id="toc12157559"></a><a id="toc12361106"></a><a id="toc12362934"></a><a id="toc12502422"></a><span>Un comptage non synchronisé</span></h3>
 <p><span>Considérons l&#x27;interface graphique suivante :</span><span> </span></p>
@@ -1448,11 +1451,12 @@
 </table>
 
 <p><span>Le fonctionnement de l&#x27;application est le suivant :</span></p>
-<ol>
+<ol start="55">
 <li><span>l&#x27;utilisateur indique le nombre de threads à générer dans le champ 1</span></li>
 <li><span>il lance la génération de ces threads avec le bouton 4</span></li>
 <li><span>les threads lisent la valeur du champ 2, l&#x27;incrémentent et affichent la nouvelle valeur. Au départ ce champ contient la valeur 0.</span></li>
 </ol>
+
 <p><span>Les threads générés se partagent une ressource : la valeur du champ 2. Nous cherchons à montrer ici les problèmes que l&#x27;on rencontre dans une telle situation. Voici un exemple d&#x27;exécution :</span></p>
 <p><img src="images/image203.png" class="docx-zoomable" style="width:273px;height:213px;" alt="Image" /></p>
 <p><span>On voit qu&#x27;on a demandé la génération de 1000 threads et qu&#x27;il en a été compté que 7. Le code utile de l&#x27;application est le suivant :</span></p>
@@ -1557,15 +1561,18 @@
 <a id="__codelineno-20-99" name="__codelineno-20-99" href="#__codelineno-20-99"></a><span class="p">}</span><span class="c1">// classe</span>
 </code></pre></div>
 <p><span>Détaillons le code :</span></p>
-<ol>
-<li><span>la fenêtre déclare deux variables d&#x27;instance :</span></li>
-</ol>
+<ol start="58">
+<li><span>la fenêtre déclare deux variables d&#x27;instance :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="w">  </span><span class="c1">// variables d&#39;instance</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="n">Thread</span><span class="o">[]</span><span class="w"> </span><span class="n">tâches</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w">   </span><span class="c1">// les threads</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">compteurs</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w">   </span><span class="c1">// les compteurs</span>
 </code></pre></div>
+
+</li>
+</ol>
+
 <p><span>Le tableau </span><i>tâches</i><span> sera le tableau des threads générés. Le tableau </span><i>compteurs</i><span> sera associé au tableau </span><i>tâches</i><span>. Chaque tâche aura un compteur propre pour récupérer la valeur du champ </span><i>txtGénérés</i><span> de l&#x27;interface graphique.</span></p>
-<ol>
+<ol start="59">
 <li><span>lors d&#x27;un clic sur le bouton </span><i>Générer</i><span>, la méthode </span><i>btnGénérer</i><span>&#95;</span><i>actionPerformed</i><span> est exécutée. </span></li>
 <li><span>celle-ci commence par récupérer le nombre de threads à générer. Au besoin, une erreur est signalée si ce nombre n&#x27;est pas exploitable. Elle génère ensuite les threads demandés en prenant soin de noter leurs références dans un tableau et en donnant à chacun d&#x27;eux un numéro. La méthode </span><i>run</i><span> des threads générés renvoie sur la méthode </span><i>incrémente</i><span> de la classe. Les threads sont tous lancés (</span><i>start</i><span>). Le tableau des compteurs associés aux threads est également créé.</span></li>
 <li><span>la méthode </span><i>incrémente</i><span> :</span></li>
@@ -1573,12 +1580,14 @@
 <li><span>s&#x27;arrête 100 ms, ceci afin de perdre volontairement le processeur</span></li>
 <li><span>affiche la nouvelle valeur dans le champ </span><i>txtGénérés</i></li>
 </ol>
+
 <p><span>Expliquons maintenant pourquoi le comptage des threads est incorrect. Supposons qu&#x27;il y ait 2 threads à générer. Ils s&#x27;exécutent dans un ordre imprévisible. L&#x27;un d&#x27;entre-eux passe le premier et lit la valeur 0 du compteur. Il la passe alors à 1 mais il ne l&#x27;écrit pas </span><span>dans la fenêtre : il s&#x27;interrompt volontairement pendant 100 ms. Il perd alors le processeur qui est alors donné à un autre thread. Celui-ci opère de la même façon que le précédent : il lit le compteur de la fenêtre et récupère le 0 qui s&#x27;y trouve toujours. Il passe le compteur à 1 et comme le précédent s&#x27;interrompt 100 ms. Le processeur est alors de nouveau accordé au premier thread : celui-ci va écrire la valeur 1 dans le compteur de la fenêtre et se terminer. Le processeur est maintenant accordé au second thread qui lui aussi va écrire 1. On a un résultat incorrect.</span></p>
 <p><span>D&#x27;où vient le problème ? Le second thread a lu une mauvaise valeur du fait que le premier avait été interrompu avant d&#x27;avoir terminé son travail qui était de mettre à jour le compteur dans la fenêtre. Cela nous amène à la notion de ressource critique et de section critique d&#x27;un programme: </span></p>
-<ol>
+<ol start="4">
 <li><span>une ressource critique est une ressource qui ne peut être détenue que par un thread à la fois. Ici la ressource critique est le compteur 2 de la fenêtre. </span></li>
 <li><span>une section critique d&#x27;un programme est une séquence d&#x27;instructions dans le flux d&#x27;exécution d&#x27;un thread au cours de laquelle il accède à une ressource critique. On doit assurer qu&#x27;au cours de cette section critique, il est le seul à avoir accès à la ressource.</span></li>
 </ol>
+
 <h3 id="762-un-comptage-synchronise-par-methode">7.6.2. <a id="toc427837424"></a><a id="toc428596967"></a><a id="toc459263806"></a><a id="toc459264043"></a><a id="toc459349538"></a><a id="toc10974648"></a><a id="toc11990050"></a><a id="toc12157560"></a><a id="toc12361107"></a><a id="toc12362935"></a><a id="toc12502423"></a><span>Un comptage synchronisé par méthode</span></h3>
 <p><span>Dans l&#x27;exemple précédent, chaque thread exécutait la méthode </span><i>incrémente</i><span> de la fenêtre. La méthode </span><i>incrémente</i><span> était déclarée comme suit :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>    private void incremente()
@@ -1588,10 +1597,11 @@
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">incrémente</span><span class="p">(){</span>
 </code></pre></div>
 <p><span>Le mot clé </span><b>synchronized</b><span> signifie qu&#x27;un seul thread à la fois peut exécuter la méthode </span><i>incrémente</i><span>. Considérons les notations suivantes :</span></p>
-<ol>
+<ol start="6">
 <li><span>l&#x27;objet </span><span>fenêtre</span><i> F</i><span> qui crée les threads dans </span><i>btnGénérer&#95;</i><i>actionPerformed</i></li>
 <li><span>deux threads T1 et T2 créés par F</span></li>
 </ol>
+
 <p><span>Les deux threads sont créés par F puis lancés. Ils vont donc tous deux exécuter la méthode F</span><i>.run</i><span>. Supposons que T1 arrive le premier. Il exécute F</span><i>.run</i><span> puis F</span><i>.incremente</i><span> qui est une méthode synchronisée. Il lit la valeur 0 du compteur, l&#x27;incrémente puis s&#x27;arrête 100 ms. Le processeur est alors donné à T2 qui à son tour exécute F</span><i>.run</i><span> puis F</span><i>.incremente</i><span>. Et là il est bloqué car le thread T1 est en cours d&#x27;exécution de F</span><i>.incremente</i><span> et le mot clé </span><b><i>synchronized</i></b><span> assure qu&#x27;un seul thread à la fois peut exécuter F</span><i>.incremente</i><span>. T2 perd alors le processeur à son tour sans avoir pu lire la valeur du compteur. Au bout des 100 ms, T1 récupère le processeur, affiche la valeur 1 du compteur, quitte F</span><i>.incremente</i><span> puis F</span><i>.run</i><span> et se termine. T2 récupère alors le processeur et peut cette fois exécuter F</span><i>.incremente</i><span> car T1 n&#x27;est plus en cours d&#x27;exécution de cette méthode. T2 lit alors la valeur 1 du compteur, l&#x27;incrémente et s&#x27;arrête 100 ms. Au bout de 100 ms, il récupère le processeur, affiche la valeur 2 du compteur et se termine lui aussi. Cette fois, la valeur obtenue est correcte. Voici un exemple testé :</span></p>
 <p><img src="images/image204.png" class="docx-zoomable" style="width:273px;height:213px;" alt="Image" /></p>
 <h3 id="763-comptage-synchronise-par-un-objet">7.6.3. <a id="toc427837425"></a><a id="toc428596968"></a><a id="toc459263807"></a><a id="toc459264044"></a><a id="toc459349539"></a><a id="toc10974649"></a><a id="toc11990051"></a><a id="toc12157561"></a><a id="toc12361108"></a><a id="toc12362936"></a><a id="toc12502424"></a><span>Comptage synchronisé par un objet</span></h3>

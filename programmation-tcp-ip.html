@@ -1538,6 +1538,7 @@
 <li><span>longueur</span></li>
 <li><span>type</span></li>
 </ul>
+
 <h3 id="812-le-modele-osi">8.1.2. <a id="toc491677652"></a><a id="toc8795537"></a><a id="toc8814286"></a><a id="toc9054096"></a><a id="toc9394437"></a><a id="toc12361113"></a><a id="toc12362941"></a><a id="toc12502429"></a><span>Le modèle OSI</span></h3>
 <p><span>Les protocoles TCP/IP suivent à peu près le modèle de réseau ouvert appelé </span><b>OSI</b><span> (</span><b>O</b><span>pen </span><b>S</b><span>ystems </span><b>I</b><span>nterconnection Reference Model) défini par l&#x27;</span><b>ISO</b><span> (</span><b>I</b><span>nternational </span><b>S</b><span>tandards </span><b>O</b><span>rganisation). Ce modèle décrit un réseau idéal où la communication entre machines peut être représentée par un modèle à sept couches :</span></p>
 <p><img src="images/image205.png" class="docx-zoomable" style="width:417px;height:240px;" alt="Image" /></p>
@@ -1630,23 +1631,20 @@
 <li><span>un transmetteur (</span><i>transceiver</i><span>) qui détecte la présence de signaux sur le câble et convertit les signaux analogiques en signaux numérique et inversement.</span></li>
 <li><span>un coupleur qui reçoit les signaux numériques du transmetteur et les transmet à l&#x27;ordinateur pour traitement ou inversement.</span></li>
 </ul>
+
 <p><span>Les caractéristiques principales de la technologie Ethernet sont les suivantes :</span></p>
 <ul>
 <li><span>Capacité de 10 Mégabits/seconde.</span></li>
 <li><span>Topologie en bus : toutes les machines sont raccordées au même câble</span></li>
 </ul>
+
 <p><img src="images/image208.png" class="docx-zoomable" style="width:533px;height:123px;" alt="Image" /></p>
 <ul>
-<li>
-<p><span>Réseau diffusant - Une machine qui émet transfère des informations sur le câble avec l&#x27;adresse de la machine destinatrice. Toutes les machines raccordées reçoivent alors ces informations et seule celle à qui elles sont destinées les conserve.</span></p>
-</li>
-<li>
-<p><span>La méthode d&#x27;accès est la suivante : le transmetteur désirant émettre écoute le câble - il détecte alors la présence ou non d&#x27;une onde porteuse, présence qui signifierait qu&#x27;une transmission est en cours. C&#x27;est la technique </span><b>CSMA</b><span> (</span><i>Carrier Sense Multiple Access</i><span>). En l&#x27;absence de porteuse, un transmetteur peut décider de transmettre à son tour. Ils peuvent être plusieurs à prendre cette décision. Les signaux émis se mélangent : on dit qu&#x27;il y a </span><b>collision</b><span>. Le transmetteur détecte cette situation : en même temps qu&#x27;il émet sur le câble, il écoute ce qui passe réellement sur celui-ci. S&#x27;il détecte que l&#x27;information transitant sur le câble n&#x27;est pas celle qu&#x27;il a émise, il en déduit qu&#x27;il y a collision et il s&#x27;arrêtera d&#x27;émettre. Les autres transmetteurs qui émettaient feront de même. Chacun reprendra son émission après un temps aléatoire dépendant de chaque transmetteur. Cette technique est appelée </span><b>CD</b><span> (</span><i>Collision Detect</i><span>). La méthode d&#x27;accès est ainsi appelée </span><b>CSMA/CD</b><span>.</span></p>
-</li>
-<li>
-<p><span>un adressage sur 48 bits. Chaque machine a une adresse, appelée ici adresse physique, qui est inscrite sur la carte qui la relie au câble. On appelle cet adresse, l&#x27;adresse </span><i>Ethernet</i><span> de la machine.</span></p>
-</li>
+<li><span>Réseau diffusant - Une machine qui émet transfère des informations sur le câble avec l&#x27;adresse de la machine destinatrice. Toutes les machines raccordées reçoivent alors ces informations et seule celle à qui elles sont destinées les conserve.</span></li>
+<li><span>La méthode d&#x27;accès est la suivante : le transmetteur désirant émettre écoute le câble - il détecte alors la présence ou non d&#x27;une onde porteuse, présence qui signifierait qu&#x27;une transmission est en cours. C&#x27;est la technique </span><b>CSMA</b><span> (</span><i>Carrier Sense Multiple Access</i><span>). En l&#x27;absence de porteuse, un transmetteur peut décider de transmettre à son tour. Ils peuvent être plusieurs à prendre cette décision. Les signaux émis se mélangent : on dit qu&#x27;il y a </span><b>collision</b><span>. Le transmetteur détecte cette situation : en même temps qu&#x27;il émet sur le câble, il écoute ce qui passe réellement sur celui-ci. S&#x27;il détecte que l&#x27;information transitant sur le câble n&#x27;est pas celle qu&#x27;il a émise, il en déduit qu&#x27;il y a collision et il s&#x27;arrêtera d&#x27;émettre. Les autres transmetteurs qui émettaient feront de même. Chacun reprendra son émission après un temps aléatoire dépendant de chaque transmetteur. Cette technique est appelée </span><b>CD</b><span> (</span><i>Collision Detect</i><span>). La méthode d&#x27;accès est ainsi appelée </span><b>CSMA/CD</b><span>.</span></li>
+<li><span>un adressage sur 48 bits. Chaque machine a une adresse, appelée ici adresse physique, qui est inscrite sur la carte qui la relie au câble. On appelle cet adresse, l&#x27;adresse </span><i>Ethernet</i><span> de la machine.</span></li>
 </ul>
+
 <p><mark style="background-color:#fff59d"><b>Couche Réseau</b></mark></p>
 <p><span>Nous trouvons au niveau de cette couche, les protocoles IP, ICMP, ARP et RARP.</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
@@ -1715,7 +1713,7 @@
 </code></pre></div>
 </td>
 <td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">
-<p style='margin:0;'><span>Emulateur de terminal permettant à une machine A de se connecter à une machine B en tant </span><span>que terminal</span></p>
+<p style='margin:0;'><span>Emulateur de terminal permettant à une machine A de se connecter à une machine B en tant que terminal</span></p>
 </td>
 </tr>
 <tr>
@@ -1806,6 +1804,7 @@
 <li><span>Elle calcule également une somme de vérification pour le segment TCP. S&#x27;il est trouvé correct, la couche TCP envoie un accusé de réception à la machine source, sinon le segment TCP est refusé.</span></li>
 <li><span>Il ne reste plus à la couche TCP qu&#x27;à transmettre la partie données du segment à l&#x27;application destinatrice de celles-ci dans la couche du dessus.</span></li>
 </ul>
+
 <h3 id="815-les-problemes-dadressage-dans-linternet">8.1.5. <a id="toc491677655"></a><a id="toc8795540"></a><a id="toc8814289"></a><a id="toc9054099"></a><a id="toc9394440"></a><a id="toc12361116"></a><a id="toc12362944"></a><a id="toc12502432"></a><span>Les problèmes d&#x27;adressage dans l&#x27;Internet</span></h3>
 <p><span>Un </span><i>noeud</i><span> d&#x27;un réseau peut être un ordinateur, une imprimante intelligente, un serveur de fichiers, n&#x27;importe quoi en fait pouvant communiquer à l&#x27;aide des protocoles TCP/IP. Chaque noeud a une </span><b>adresse physique</b><span> ayant un format dépendant du type du réseau. Sur un réseau Ethernet, l&#x27;adresse physique est codée sur 6 octets. Une adresse d&#x27;un réseau X25 est un nombre à 14 chiffres.</span></p>
 <p><span>L&#x27;</span><b>adresse Internet</b><span> d&#x27;un noeud est une adresse </span><b>logique</b><span> : elle est indépendante du matériel et du réseau utilisé. C&#x27;est une adresse sur 4 octets identifiant à la fois un réseau local et un noeud de ce réseau. L&#x27;adresse Internet est habituellement représentée sous la forme de 4 nombres, valeurs des 4 octets, séparés par un point. Ainsi l&#x27;adresse de la machine Lagaffe de la faculté des Sciences d&#x27;Angers est notée 193.49.144.1 et celle de la machine Liny 193.49.144.9. On en déduira que l&#x27;adresse Internet du réseau local est 193.49.144.0. On pourra avoir jusqu&#x27;à 254 noeuds sur ce réseau.</span></p>
@@ -1817,6 +1816,7 @@
 <li><span>l&#x27;adresse du réseau</span></li>
 <li><span>l&#x27;adresse d&#x27;un noeud de ce réseau</span></li>
 </ul>
+
 <p><span>Selon la taille de ces deux champs, les adresses IP sont divisées en 3 classes : classes A, B et C.</span></p>
 <p><mark style="background-color:#fff59d"><b>Classe A</b></mark></p>
 <p><span>L&#x27;adresse IP : I1.I2.I3.I4 a la forme R1.N1.N2.N3 où</span></p>
@@ -1857,6 +1857,7 @@
 <li><span>Ceux-ci reconnaissent la nature spéciale du paquet. Le noeud qui reconnaît son adresse IP dans le paquet, répond en envoyant à l&#x27;expéditeur du paquet son adresse physique. Comment le peut-il ? Il a trouvé dans le paquet les adresses IP et physique de l&#x27;expéditeur.</span></li>
 <li><span>L&#x27;expéditeur reçoit donc l&#x27;adresse physique qu&#x27;il cherchait. Il la stocke en mémoire afin de pouvoir l&#x27;utiliser ultérieurement si d&#x27;autres paquets sont à envoyer au même destinataire.</span></li>
 </ul>
+
 <p><span>L&#x27;adresse IP d&#x27;une machine est normalement inscrite dans l&#x27;un de ses fichiers qu&#x27;elle peut donc consulter pour la connaître. Cette adresse peut être changée : il suffit d&#x27;éditer le fichier. L&#x27;adresse physique elle, est inscrite dans une mémoire de la carte réseau et ne peut être changée.</span></p>
 <p><span>Lorsqu&#x27;un administrateur désire d&#x27;organiser son réseau différemment, il peut être amené à changer les adresses IP de tous les noeuds et donc à éditer les différents fichiers de configuration des différents noeuds. Cela peut être fastidieux et une occasion d&#x27;erreurs s&#x27;il y a beaucoup de machines. Une méthode  consiste à ne pas affecter d&#x27;adresse IP aux machines : on inscrit alors un code spécial dans le fichier dans lequel la machine devrait trouver son adresse IP. Découvrant qu&#x27;elle n&#x27;a pas d&#x27;adresse IP, la machine la demande selon un protocole appelé </span><b>RARP</b><span> </span><i>(Reverse Address Resolution Protocol).</i><span> Elle envoie alors sur un réseau un paquet spécial appelé paquet RARP, analogue au paquet ARP précédent, dans lequel elle met son adresse physique. Ce paquet est envoyé à tous les noeuds qui reconnaissent alors un paquet RARP. L&#x27;un d&#x27;entre-eux, appelé </span><b>serveur RARP</b><span>, possède un fichier donnant la correspondance adresse physique &lt;--&gt; adresse IP de tous les noeuds. Il répond alors à l&#x27;expéditeur du paquet RARP, en lui renvoyant son adresse IP. Un administrateur désirant reconfigurer son réseau, n&#x27;a donc qu&#x27;à éditer le fichier de correspondances du </span><span>serveur RARP. Celui-ci doit normalement avoir une adresse IP fixe qu&#x27;il doit pouvoir connaître sans avoir à utiliser lui-même le protocole RARP.</span></p>
 <h3 id="816-la-couche-reseau-dite-couche-ip-de-linternet">8.1.6. <a id="toc491677658"></a><a id="toc8795541"></a><a id="toc8814290"></a><a id="toc9054100"></a><a id="toc9394441"></a><a id="toc12361117"></a><a id="toc12362945"></a><a id="toc12502433"></a><span>La couche réseau dite couche IP de l&#x27;internet</span></h3>
@@ -1875,6 +1876,7 @@
 <li><span>Elle obtient l&#x27;adresse physique de ce dernier par le protocole ARP ou dans ses tables, si cette adresse a déjà été obtenue.</span></li>
 <li><span>Elle envoie le paquet sur le réseau à cette adresse physique.</span></li>
 </ul>
+
 <p><b>Routage indirect</b></p>
 <p><span>Le routage indirect désigne l&#x27;acheminement d&#x27;un paquet IP à une destination se trouvant sur un autre réseau que celui auquel appartient l&#x27;expéditeur. Dans ce cas, les parties adresse réseau des adresses IP des machines source et destination sont différentes. La machine source reconnaît ce point. Elle envoie alors le paquet à un noeud spécial appelé </span><b>routeur</b><span> (</span><i>router</i><span>), noeud qui connecte un réseau local aux autres réseaux et dont elle trouve l&#x27;adresse IP dans ses tables, adresse obtenue initialement soit dans un fichier soit dans une mémoire permanente ou encore via des informations circulant sur le réseau. </span></p>
 <p><span>Un </span><b>routeur</b><span> est attaché à deux réseaux et possède une adresse IP à l&#x27;intérieur de ces deux réseaux.</span></p>
@@ -1884,6 +1886,7 @@
 <li><span>Le réseau n° 1 a l&#x27;adresse Internet 193.49.144.0 et le réseau n° 2 l&#x27;adresse 193.49.145.0.</span></li>
 <li><span>A l&#x27;intérieur du réseau n° 1, le routeur a l&#x27;adresse 193.49.144.6 et l&#x27;adresse 193.49.145.3 à l&#x27;intérieur du réseau n° 2.</span></li>
 </ul>
+
 <p><span>Le routeur a pour rôle de mettre le paquet IP qu&#x27;il reçoit et qui est contenu dans une trame physique typique du réseau n° 1, dans une trame physique pouvant circuler sur le réseau n° 2. Si l&#x27;adresse IP du destinataire du paquet est dans le réseau n° 2, le routeur lui enverra le paquet directement sinon il l&#x27;enverra à un autre routeur, connectant le réseau n° 2 à un réseau n° 3 et ainsi de suite.</span></p>
 <h4 id="8162-messages-derreur-et-de-controle">8.1.6.2. <a id="toc491677660"></a><span>Messages d&#x27;erreur et de contrôle</span></h4>
 <p><span>Toujours dans la couche réseau, au même niveau donc que le protocole IP, existe le protocole </span><b>ICMP</b><span> (</span><i>Internet Control Message Protocol</i><span>). Il sert à envoyer des messages sur le fonctionnement interne du réseau : noeuds en panne, embouteillage à un routeur, etc ... Les messages ICMP sont encapsulés dans des paquets IP et envoyés sur le réseau. Les couches IP des différents noeuds prennent les actions appropriées selon les messages ICMP qu&#x27;elles reçoivent. Ainsi, une application elle-même, ne voit jamais ces problèmes propres au réseau.</span></p>
@@ -1907,6 +1910,7 @@
 <li><span>Si au bout d&#x27;un certain temps, le protocole TCP ayant émis un segment ne reçoit pas d&#x27;accusé de réception, il retransmet le segment en question, garantissant ainsi la qualité du service d&#x27;acheminement de l&#x27;information.</span></li>
 <li><span>Le circuit virtuel établi entre les deux processus qui communiquent est </span><i>full-duplex</i><span> : cela signifie que l&#x27;information peut transiter dans les deux sens. Ainsi le processus destination peut envoyer des accusés de réception alors même que le processus source continue d&#x27;envoyer des informations. Cela permet par exemple au protocole TCP source d&#x27;envoyer plusieurs segments sans attendre d&#x27;accusé de réception. S&#x27;il réalise au bout d&#x27;un certain temps qu&#x27;il n&#x27;a pas reçu l&#x27;accusé de réception d&#x27;un certain segment n° </span><i>n</i><span>, il reprendra l&#x27;émission des segments à ce point.</span></li>
 </ul>
+
 <h3 id="818-la-couche-applications">8.1.8. <a id="toc491677664"></a><a id="toc8795543"></a><a id="toc8814292"></a><a id="toc9054102"></a><a id="toc9394443"></a><a id="toc12361119"></a><a id="toc12362947"></a><a id="toc12502435"></a><span>La couche Applications</span></h3>
 <p><span>Au-dessus des protocoles UDP et TCP, existent divers protocoles standard :</span></p>
 <p><mark style="background-color:#fff59d"><b>TELNET</b></mark></p>
@@ -1935,6 +1939,7 @@
 <li><span>si la machine B appartient au même domaine que la machine A, on trouvera probablement son adresse IP dans un fichier de la machine A.</span></li>
 <li><span>sinon, la machine A trouvera dans un autre fichier ou le même que précédemment, une liste de quelques </span><b>serveurs de noms</b><span> avec leurs adresses IP. Un </span><i>serveur de noms</i><span> est chargé de faire la correspondance entre un nom de machine et son adresse IP. La machine A va envoyer une requête spéciale au premier serveur de nom de sa liste, appelé requête DNS incluant donc le nom de la machine recherchée. Si le serveur interrogé a ce nom dans ses tablettes, il enverra à la machine A, l&#x27;adresse IP correspondante. Sinon, le serveur trouvera lui aussi dans ses fichiers, une liste de serveurs de noms qu&#x27;il peut interroger. Il le fera alors. Ainsi un certain nombre de serveurs de noms vont être interrogés, pas de façon anarchique mais d&#x27;une façon à minimiser les requêtes. Si la machine est finalement trouvée, la réponse redescendra jusqu&#x27;à la machine A.</span></li>
 </ul>
+
 <p><mark style="background-color:#fff59d"><b>XDR : (eXternal Data Representation)</b></mark></p>
 <p><span>Créé par sun MicroSystems, ce protocole spécifie une représentation standard des données, indépendante des machines.</span></p>
 <p><mark style="background-color:#fff59d"><b>RPC : (Remote Procedure Call)</b></mark></p>
@@ -2086,12 +2091,13 @@
 <h3 id="831-generalites">8.3.1. <a id="toc428596985"></a><a id="toc459349564"></a><a id="toc10974674"></a><a id="toc12361125"></a><a id="toc12362953"></a><a id="toc12502441"></a><span>Généralités</span></h3>
 <p><img src="images/image219.png" class="docx-zoomable" style="width:440px;height:285px;" alt="Image" /></p>
 <p><span>Lorsque une application </span><i>AppA</i><span> d&#x27;une machine A veut  communiquer avec une application </span><i>AppB</i><span> d&#x27;une machine B de l&#x27;Internet, elle doit connaître plusieurs choses :</span></p>
-<ol>
+<ol start="8">
 <li><span>l&#x27;adresse IP ou le nom de la machine B</span></li>
 <li><span>le numéro du port avec lequel travaille l&#x27;application </span><i>AppB</i><span>. En effet la machine B peut supporter de nombreuses applications qui travaillent sur l&#x27;Internet. Lorsqu&#x27;elle reçoit des informations provenant du réseau, elle doit savoir à quelle application sont destinées ces informations. Les applications de la machine B ont accès au réseau via des guichets appelés également des ports de communication. Cette information est contenue dans le paquet reçu par la machine B afin qu&#x27;il soit délivré à la bonne application.</span></li>
 <li><span>les protocoles de communication compris par la machine B. Dans notre étude, nous utiliserons uniquement les protocoles TCP-IP.</span></li>
 <li><span>le protocole de dialogue accepté par l&#x27;application </span><i>AppB</i><span>. En effet, les machines A et B vont se &quot;parler&quot;. Ce qu&#x27;elles vont dire va être encapsulé dans les protocoles TCP-IP. Néammoins, lorsqu&#x27;au bout de la chaîne, l&#x27;application </span><i>AppB</i><span> va recevoir l&#x27;information envoyée par l&#x27;applicaton </span><i>AppA</i><span>, il faut qu&#x27;elle soit capable de l&#x27;interpréter. Ceci est analogue à la situation où deux personnes A et B communiquent par téléphone : leur dialogue est transporté par le téléphone. La parole va être codée sous forme de signaux par le téléphone A, transportée par des lignes téléphoniques, arrivée au téléphone B pour y être décodée. La </span><span>personne B entend alors des paroles. C&#x27;est là qu&#x27;intervient la notion de protocole de dialogue : si A parle français et que B ne comprend pas cette langue, A et B ne pourront dialoguer utilement.</span></li>
 </ol>
+
 <p><span>Aussi les deux applications communicantes doivent -elles être d&#x27;accord sur le type de dialogue qu&#x27;elles vont adopter. Ainsi par exemple, le dialogue avec un service </span><i>ftp</i><span> n&#x27;est pas le même qu&#x27;avec un service </span><i>pop</i><span> : ces deux services n&#x27;acceptent pas les mêmes commandes.  Elles ont un protocole de dialogue différent.</span></p>
 <h3 id="832-les-caracteristiques-du-protocole-tcp">8.3.2. <a id="toc428596986"></a><a id="toc459349565"></a><a id="toc10974675"></a><a id="toc12361126"></a><a id="toc12362954"></a><a id="toc12502442"></a><span>Les caractéristiques du protocole TCP</span></h3>
 <p><span>Nous n&#x27;étudierons ici que des communications réseau utilisant le protocole de transport TCP. Rappelons ici, les caractéristiques de ce protocole : </span></p>
@@ -2104,6 +2110,7 @@
 <li><span>Si au bout d&#x27;un certain temps, le protocole TCP ayant émis un segment ne reçoit pas d&#x27;accusé de réception, il retransmet le segment en question, garantissant ainsi la qualité du service d&#x27;acheminement de l&#x27;information.</span></li>
 <li><span>Le circuit virtuel établi entre les deux processus qui communiquent est </span><i>full-duplex</i><span> : cela signifie que l&#x27;information peut transiter dans les deux sens. Ainsi le processus destination peut envoyer des accusés de réception alors même que le processus source continue d&#x27;envoyer des informations. Cela permet par exemple au protocole TCP source d&#x27;envoyer plusieurs segments sans attendre d&#x27;accusé de réception. S&#x27;il réalise au bout d&#x27;un certain temps qu&#x27;il n&#x27;a pas reçu l&#x27;accusé de réception d&#x27;un certain segment n° </span><i>n</i><span>, il reprendra l&#x27;émission des segments à ce point.</span></li>
 </ul>
+
 <h3 id="833-la-relation-client-serveur">8.3.3. <a id="toc428596987"></a><a id="toc459349566"></a><a id="toc10974676"></a><a id="toc12361127"></a><a id="toc12362955"></a><a id="toc12502443"></a><span>La relation client-serveur</span></h3>
 <p><span>Souvent, la communication sur Internet est dissymétrique : la machine A initie une connexion pour demander un service à la machine B : il précise qu&#x27;il veut ouvrir une connexion avec le service SB1 de la machine B. Celle-ci accepte ou refuse. Si elle accepte, la machine A peut envoyer ses demandes au service SB1. Celles-ci doivent se conformer au protocole de dialogue compris par le service SB1. Un dialogue demande-réponse s&#x27;instaure ainsi entre la machine A qu&#x27;on appelle machine </span><b>cliente</b><span> et la machine B qu&#x27;on appelle machine </span><b>serveur</b><span>. L&#x27;un des deux partenaires fermera la connexion.</span></p>
 <h3 id="834-architecture-dun-client">8.3.4. <a id="toc428596988"></a><a id="toc459349567"></a><a id="toc10974677"></a><a id="toc12361128"></a><a id="toc12362956"></a><a id="toc12502444"></a><span>Architecture d&#x27;un client</span></h3>
@@ -2256,20 +2263,22 @@
 
 <h4 id="8362-ouverture-dune-connexion-avec-une-machine-serveur">8.3.6.2. <a id="toc459349571"></a><a id="toc10974681"></a><span>Ouverture d&#x27;une connexion avec une machine Serveur</span></h4>
 <p><span>Nous avons vu que pour qu&#x27;une machine A ouvre une connexion avec un service d&#x27;une machine B, il lui fallait deux informations :</span></p>
-<ol>
+<ol start="12">
 <li><span>l&#x27;adresse IP ou le nom de la machine B</span></li>
 <li><span>le numéro de port où officie le service désiré</span></li>
 </ol>
+
 <p><span>Le constructeur </span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>    public Socket(String  host, int  port);
 </code></pre></div>
 <p><span>crée une socket et la connecte à la machine </span><i>host</i><span> sur le port </span><i>port</i><span>. Ce constructeur génère une exception dans différents cas :</span></p>
-<ol>
+<ol start="3">
 <li><span>mauvaise adresse</span></li>
 <li><span>mauvais port</span></li>
 <li><span>demande refusée</span></li>
 <li><span>…</span></li>
 </ol>
+
 <p><span>Il nous faut gérer cette exception :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
 <span class="docx-code-line">   Socket  sClient=<span style="font-weight:bold;color:#0000FF">null</span>;</span>
@@ -2936,20 +2945,23 @@
 <h3 id="843-un-client-tcp-generique">8.4.3. <a id="ici"></a><a id="toc9054119"></a><a id="toc9394460"></a><a id="toc12361135"></a><a id="toc12362963"></a><a id="toc12502451"></a><span>Un client TCP générique</span></h3>
 <p><span>Beaucoup de services créés à l&#x27;origine de l&#x27;Internet fonctionnent selon le modèle du serveur d&#x27;écho étudié précédemment : les échanges client-serveur se font pas échanges de lignes de texte. Nous allons écrire un client tcp générique qui sera lancé de la façon suivante : </span><b>java cltTCPgenerique serveur port</b></p>
 <p><span>Ce client TCP se connectera sur le port </span><i>port</i><span> du serveur </span><i>serveur</i><span>. Ceci fait, il créera deux threads :</span></p>
-<ol>
+<ol start="1">
 <li><span>un thread chargé de lire des commandes tapées au clavier et de les envoyer au serveur</span></li>
 <li><span>un thread chargé de lire les réponses du serveur et de les afficher à l&#x27;écran</span></li>
 </ol>
+
 <p><span>Pourquoi deux threads alors que dans l&#x27;application précédente ce besoin ne s&#x27;était pas fait ressentir ? Dans cette dernière, le protocole du dialogue était connu : le client envoyait une seule ligne et le serveur répondait par une seule ligne. Chaque service a son protocole particulier et on trouve également les situations suivantes :</span></p>
 <ul>
 <li><span>le client doit envoyer plusieurs lignes de texte avant d&#x27;avoir une réponse</span></li>
 <li><span>la réponse d&#x27;un serveur peut comporter plusieurs lignes de texte</span></li>
 </ul>
+
 <p><span>Aussi la boucle envoi d&#x27;une unique ligne au serveur - réception d&#x27;une unique ligne envoyée par le serveur ne convient-elle pas toujours. On va donc créer deux boucles dissociées :</span></p>
 <ul>
 <li><span>une boucle de lecture des commandes tapées au clavier pour être envoyées au serveur. L&#x27;utilisateur signalera la fin des commandes avec le mot clé </span><i>fin</i><span>.</span></li>
 <li><span>une boucle de réception et d&#x27;affichage des réponses du serveur. Celle-ci sera une boucle infinie qui ne sera interrompue que par la fermeture du flux réseau par le serveur ou par l&#x27;utilisateur au clavier qui tapera la commande </span><i>fin</i><span>.</span></li>
 </ul>
+
 <p><span>Pour avoir ces deux boucles dissociées, il nous faut deux threads indépendants. Montrons un exemple d&#x27;excécution où notre client tcp générique se connecte à un service SMTP (SendMail Transfer Protocol). Ce service est responsable de l&#x27;acheminement du courrier électronique à leurs destinataires. Il fonctionne sur le port 25 et a un protocole de dialogue de type échanges de lignes de texte.</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
 <span class="docx-code-line">Dos&gt;java clientTCPgenerique istia.univ-angers.fr 25</span>
@@ -2979,11 +2991,11 @@
 
 <p><span>Commentons ces échanges client-serveur :</span></p>
 <ul>
-<li><span>le service SMTP envoie un message de bienvenue lorsqu&#x27;un client se connecte à lui :</span></li>
-</ul>
+<li><span>le service SMTP envoie un message de bienvenue lorsqu&#x27;un client se connecte à lui :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>&lt;-- 220 istia.univ-angers.fr ESMTP Sendmail 8.11.6/8.9.3; Mon, 13 May 2002 08:37:26 +0200
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>certains services ont une commande </span><i>help</i><span> donnant des indications sur les commandes utilisables avec le service. Ici ce n&#x27;est pas le cas. Les commandes SMTP utilisées dans l&#x27;exemple sont les suivantes :</span><ul>
 <li><b>mail from:</b><span> </span><i>expéditeur</i><span>, pour indiquer l&#x27;adresse électronique de l&#x27;expéditeur du message</span></li>
 <li><b>rcpt to:</b><span> </span><i>destinataire</i><span>, pour indiquer l&#x27;adresse électronique du destinataire du message. S&#x27;il y a plusieurs destinataires, on ré-émet autant de fois que nécessaire la commande </span><b>rcpt to:</b><span> pour chacun des destinataires.</span></li>
@@ -2993,6 +3005,7 @@
 <li><span>une fois le message envoyé, on peut indiquer au serveur qu&#x27;on a terminé avec la commande </span><b>quit</b><span>. Le serveur ferme alors la connexion réseau. Le thread de lecture peut détecter cet événement et s&#x27;arrêter.</span></li>
 <li><span>l&#x27;utilisateur tape alors </span><b>fin</b><span> au clavier pour arrêter également le thread de lecture des commandes tapées au clavier.</span></li>
 </ul>
+
 <p><span>Si on vérifie le courrier reçu, nous avons la chose suivante (Outlook) :</span></p>
 <p><img src="images/image220.png" class="docx-zoomable" style="width:218px;height:127px;" alt="Image" /></p>
 <p><span>On remarquera que le service SMTP ne peut détecter si un expéditeur est valide ou non. Aussi ne peut-on jamais faire confiance au champ </span><i>from</i><span> d&#x27;un message. Ici l&#x27;expéditeur </span><i>machin@univ-angers.fr</i><span> n&#x27;existait pas.</span></p>
@@ -3045,6 +3058,7 @@
 <li><b>retr</b><span> </span><i>i</i><span>, pour lire le message n° i</span></li>
 <li><b>quit</b><span>, pour arrêter le dialogue.</span></li>
 </ul>
+
 <p><span>Découvrons maintenant le protocole de dialogue entre un client et un serveur Web qui lui travaille habituellement sur le port 80 :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-html">
 <span class="docx-code-line">Dos&gt; java clientTCPgenerique istia.univ-angers.fr 80</span>
@@ -3287,11 +3301,13 @@
 <li><span>qui affiche à l&#x27;écran les commandes envoyées par ses clients</span></li>
 <li><span>leur envoie comme réponse les lignes de texte tapées au clavier par un utilisateur. C&#x27;est donc ce dernier qui fait office de serveur.</span></li>
 </ul>
+
 <p><span>Le programme est lancé par : </span><b>java serveurTCPgenerique portEcoute</b><span>, où </span><i>portEcoute</i><span> est le port sur lequel les clients doivent se connecter. Le service au client sera assuré par deux threads :</span></p>
 <ul>
 <li><span>un thread se consacrant exclusivement à la lecture des lignes de texte envoyées par le client</span></li>
 <li><span>un thread se consacrant exclusivement à la lecture des réponses tapées au clavier par l&#x27;utilisateur. Celui-ci signalera par la commande </span><b>fin</b><span> qu&#x27;il clôt la connexion avec le client.</span></li>
 </ul>
+
 <p><span>Le serveur crée deux threads par client. S&#x27;il y a n clients, il y aura 2n threads actifs en même temps. Le serveur lui ne s&#x27;arrête jamais sauf par un Ctrl-C tapé au clavier par l&#x27;utilisateur. Voyons quelques exemples.</span></p>
 <p><span>Le serveur est lancé sur le port 100 et on utilise le client générique pour lui parler. La fenêtre du client est la suivante :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
@@ -3643,6 +3659,7 @@
 <li><span>le second quel serveur nous interrogeons</span></li>
 <li><span>le troisième que nous souhaitons que le serveur ferme la connexion après nous avoir répondu.</span></li>
 </ul>
+
 <p><span>Si ci-dessus, nous remplaçons GET par HEAD, le serveur ne nous enverra que les entêtes HTTP et pas la page HTML. </span></p>
 <p><span>Notre client web sera appelé de la façon suivante : </span><b>java</b><span> </span><b>clientweb URL cmd</b><span>, où </span><b>URL</b><span> est l&#x27;URL désirée et </span><b>cmd</b><span> l&#x27;un des deux mots clés GET ou HEAD pour indiquer si on souhaite seulement les entêtes (HEAD) ou également le contenu de la page (GET). Regardons un premier exemple. Nous lançons le serveur IIS puis le client web sur la même machine :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
@@ -3788,11 +3805,12 @@
 <p><b>uri.getProtocol()</b><i>=http</i></p>
 <h3 id="846-client-web-gerant-les-redirections">8.4.6. <a id="toc9394463"></a><a id="toc12361138"></a><a id="toc12362966"></a><a id="toc12502454"></a><span>Client Web gérant les redirections</span></h3>
 <p><span>Le client Web précédent ne gère pas une éventuelle redirection de l&#x27;URL qu&#x27;il a demandée. Le client suivant la gère.</span></p>
-<ol>
+<ol start="1">
 <li><span>il lit la première ligne des entêtes HTTP envoyés par le serveur pour vérifier si on y trouve la chaîne </span><i>302 Object moved</i><span> qui signale une redirection</span></li>
 <li><span>il lit les entêtes suivants. S&#x27;il y a redirection, il recherche la ligne </span><i>Location: url</i><span> qui donne la nouvelle URL de la page demandée et note cette URL.</span></li>
 <li><span>il affiche le reste de la réponse du serveur. S&#x27;il y a redirection, les étapes 1 à 3 sont répétées avec la nouvelle URL. Le programme n&#x27;accepte pas plus d&#x27;une redirection. Cette limite fait l&#x27;objet d&#x27;une constante qui peut être modifiée.</span></li>
 </ol>
+
 <p><span>Voici un exemple :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>Dos&gt;java clientweb2 http://localhost GET
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>HTTP/1.1 302 Object moved
@@ -3992,15 +4010,18 @@
 </code></pre></div>
 <p><span>La classe </span><b>impots</b><span> a deux constructeurs :</span></p>
 <ul>
-<li><span>un constructeur à qui on passe les trois tableaux de données nécessaires au calcul de l&#x27;impôt</span></li>
-</ul>
+<li><span>un constructeur à qui on passe les trois tableaux de données nécessaires au calcul de l&#x27;impôt</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">impots</span><span class="p">(</span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="n">LIMITES</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="n">COEFFR</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">[]</span><span class="w"> </span><span class="n">COEFFN</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">{</span>
 </code></pre></div>
-<ul>
-<li><span>un constructeur sans paramètres utilisable uniquement par des classes fille</span></li>
-</ul>
+
+</li>
+<li><span>un constructeur sans paramètres utilisable uniquement par des classes fille</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>  protected impots(){}
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>A partir de cette classe a été dérivée la classe </span><b>impotsJDBC</b><span> qui permet de remplir les trois tableaux </span><i>limites</i><span>, </span><i>coeffR</i><span>, </span><i>coeffN</i><span> à partir du contenu d&#x27;une base de données :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">impotsJDBC</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">impots</span><span class="p">{</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">  </span><span class="c1">// rajout d&#39;un constructeur permettant de construire</span>
@@ -4113,10 +4134,9 @@
 <a id="__codelineno-62-26" name="__codelineno-62-26" href="#__codelineno-62-26"></a><span class="w">    </span><span class="p">}</span><span class="c1">//thread d&#39;écoute</span>
 </code></pre></div>
 <p><span>On retrouve un serveur tcp classique écoutant sur le port </span><i>portEcoute</i><span>. Les demandes des clients sont traitées par la méthode </span><i>run</i><span> du thread traiteCientImpots au constructeur duquel on passe deux paramètres :</span></p>
-<ol>
+<ol start="1">
 <li><span>l&#x27;objet </span><i>Socket liaisonClient</i><span> qui va permettre d&#x27;atteindre le client</span></li>
-<li><span>l&#x27;objet </span><i>impotsJDBC</i><span> </span><i>this</i><span> qui va donner accès à la méthode </span><i>this.calculer</i><span> de calcul de l&#x27;impôt.</span></li>
-</ol>
+<li><span>l&#x27;objet </span><i>impotsJDBC</i><span> </span><i>this</i><span> qui va donner accès à la méthode </span><i>this.calculer</i><span> de calcul de l&#x27;impôt.</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="c1">// -------------------------------------------------------</span>
 <a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="c1">// assure le service à un client du serveur d&#39;impôts</span>
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a>
@@ -4133,11 +4153,16 @@
 <a id="__codelineno-63-14" name="__codelineno-63-14" href="#__codelineno-63-14"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">objImpots</span><span class="o">=</span><span class="n">objImpots</span><span class="p">;</span>
 <a id="__codelineno-63-15" name="__codelineno-63-15" href="#__codelineno-63-15"></a><span class="w">    </span><span class="p">}</span><span class="c1">//constructeur</span>
 </code></pre></div>
+
+</li>
+</ol>
+
 <p><span>La méthode r</span><i>un</i><span> traite les demandes des clients. Ce sont des lignes de texte qui peuvent avoir deux formes :</span></p>
-<ol>
+<ol start="1">
 <li><i>calcul marié(o/n) nbEnfants salaireAnnuel</i></li>
 <li><i>fincalculs</i></li>
 </ol>
+
 <p><span>La forme 1 permet le calcul d&#x27;un impôt, la forme 2 clôt la liaison client-serveur.</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="w">    </span><span class="c1">// méthode run</span>
 <a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
@@ -4517,7 +4542,8 @@
 </table>
 
 <h4 id="8512-fonctionnement-de-lapplication">8.5.1.2. <a id="toc459349590"></a><a id="toc10974700"></a><span>FONCTIONNEMENT DE L’APPLICATION</span></h4>
-<p><b>Initialisation de l&#x27;application</b></p>
+<div style="background-color:#FFFFFF ; padding:0.35em 0.5em ; margin:0.75em 0"><b>Initialisation de l&#x27;application</b></div>
+
 <p><span>Lorsque la feuille principale de l’application est chargée, les actions suivantes prennent place :</span></p>
 <ul>
 <li><span>la feuille est centrée sur l’écran</span></li>
@@ -4525,20 +4551,23 @@
 <li><span>le bouton </span><i>Annuler</i><span> est caché</span></li>
 <li><span>les listes </span><i>LstSuivi &amp; LstDialogue</i><span> sont vides</span></li>
 </ul>
+
 <p><b>Menu Connexion/Connecter</b></p>
 <p><span>Cette option n’est disponible que lorsque les champs </span><i>Hôte Distant</i><span> et </span><i>n° de port</i><span> sont non vides et qu&#x27;une connexion n&#x27;est pas actuellement active. Un clic sur cette option entraîne les opérations suivantes :</span></p>
-<ol>
+<ol start="62">
 <li><span>la validité du port est vérifiée : ce doit être un entier &gt;0</span></li>
 <li><span>un thread est lancé pour assurer la connexion au serveur</span></li>
 <li><span>le bouton </span><i>Annuler</i><span> apparaît afin de permettre à l’utilisateur d’interrompre la connexion en cours</span></li>
 <li><span>toutes les options de menu sont désactivées sauf </span><i>Quitter</i><span> &amp; </span><i>Auteur</i></li>
 </ol>
+
 <p><span>La connexion peut se terminer de plusieurs façons :</span></p>
-<ol>
+<ol start="1">
 <li><span>L’utilisateur a appuyé sur le bouton </span><i>Annuler</i><span> : on arrête le thread de connexion et on remet le menu dans son état de départ. On indique dans le suivi qu’il y a eu fermeture de la connexion par l’utilisateur. </span></li>
 <li><span>La connexion se termine avec une erreur : on fait la même chose que précédemment et de plus dans le suivi, on indique la cause de l’erreur.</span></li>
 <li><span> La connexion se termine correctement :  on enlève le bouton </span><i>Annuler</i><span>, indique dans le suivi que la connexion a été faite, autorise le menu </span><i>RazSuivi</i><span>, inhibe le menu </span><i>Connecter</i><span>, autorise le menu </span><i>Déconnecter</i></li>
 </ol>
+
 <p><b>Menu Connexion/Déconnecter</b></p>
 <p><span>Cette option n’est disponible que lorsqu&#x27;une connexion avec le serveur existe. Lorsqu&#x27;elle est activée elle clôt la connexion avec le serveur et remet le menu dans son état de départ. On indique dans le suivi que la connexion a été fermée par le client.</span></p>
 <p><b>Menu Connexion/Quitter</b></p>
@@ -4552,7 +4581,8 @@
 <p><span>Vident respectivement les listes </span><i>LstSuivi</i><span> et </span><i>LstDialogue</i><span>. Ces options sont inhibées lorsque les listes coorespondantes sont vides.</span></p>
 <p><b>Le bouton Annuler</b></p>
 <p><span>Ce bouton situé en bas du formulaire n’apparaît que lorsque le client est en cours de connexion au serveur. Cette connexion peut ne pas se faire parce que le serveur ne répond pas ou mal. Le bouton </span><b><i>Annuler</i></b><span> donne alors à l’utilisateur, la possibilité d’interrompre la demande de connexion.</span></p>
-<p><b>Les listes de suivi</b></p>
+<div style="background-color:#FFFFFF ; padding:0.35em 0.5em ; margin:0.75em 0"><b>Les listes de suivi</b></div>
+
 <p><span>La liste LstSuivi (</span><b><i>5</i></b><span>) fait le suivi de la connexion. Elle indique les moments clés de la connexion :</span></p>
 <p><span>- son ouverture par le client</span></p>
 <p><span>- sa fermeture par le serveur ou le client</span></p>
@@ -4565,10 +4595,11 @@
 <p><span>Les erreurs de connexion sont signalées dans la liste de suivi </span><b><i>6</i></b><span>, celles liées au dialogue client/serveur dans la liste de dialogue </span><b><i>7</i></b><span>. Lors d’une erreur de liaison, le dialogue client/serveur est fermé et le formulaire remis dans son état initial prêt pour une nouvelle connexion.</span></p>
 <h4 id="8513-travail-a-faire">8.5.1.3. <a id="toc459349591"></a><a id="toc10974701"></a><span>TRAVAIL A FAIRE</span></h4>
 <p><span>Réaliser le travail décrit précédemment sous deux formes :</span></p>
-<ol>
+<ol start="66">
 <li><span>application autonome</span></li>
 <li><span>applet</span></li>
 </ol>
+
 <h3 id="852-exercice-2-un-serveur-de-ressources">8.5.2. <a id="toc428596997"></a><a id="toc459349592"></a><a id="toc10974702"></a><a id="toc12361142"></a><a id="toc12362970"></a><a id="toc12502458"></a><span>Exercice 2 - Un serveur de ressources</span></h3>
 <h4 id="8521-introduction">8.5.2.1. <a id="toc459349593"></a><a id="toc10974703"></a><span>INTRODUCTION</span></h4>
 <p><span>Une institution possède plusieurs puissants serveurs de calcul accessibles sur Internet. Toute machine souhaitant utiliser ces services de calcul envoie un fichier de données sur le port 756 d’un des serveurs. Ce fichier comprend diverses informations : login, mot de passe, commandes indiquant le type de calcul désiré, les données sur lesquelles faire le calcul. Si le fichier de données est correct, le serveur de clacul choisi l’utilise et renvoie les résultats au client sous la forme d’un fichier texte. </span></p>
@@ -4578,6 +4609,7 @@
 <li><span>le client peut être n’importe où sur l’Internet</span></li>
 <li><span>les moyens de calcul sont optimisés : seules quelques machines puissantes sont nécessaires. Ainsi, une petite organisation sans moyens de calcul peut utiliser ce service moyennant une contribution financière calculée d’après le temps de calcul utilisé.</span></li>
 </ul>
+
 <p><span>Malgré la puissance des machines, un calcul peut parfois durer plusieurs heures : le serveur n’est alors pas disponible pour d’autres clients. Se pose alors pour un client, le problème de trouver un serveur de calcul disponible. Pour cela, on utilise alors un « gestionnaire de ressources de calcul », appelé serveur GRC par la suite. Ce service est placé sur une unique machine et travaille sur le port </span><b>864</b><span> en mode </span><b>tcp</b><span>. C’est à lui que s’adresse un client désirant un accès à un serveur de calcul.  Le serveur GRC qui détient la liste complète des serveurs de calcul lui répond en lui envoyant le nom d’un serveur actuellement inactif. Le client n’a plus alors qu’à envoyer ses données au serveur qu’on lui aura désigné.</span></p>
 <p><span>On se propose d’écrire le serveur GRC. </span></p>
 <h4 id="8522-linterface-visuelle">8.5.2.2. <a id="toc459349594"></a><a id="toc10974704"></a><span>L’INTERFACE VISUELLE</span></h4>
@@ -4588,6 +4620,7 @@
 <li><span>à gauche, la liste des serveurs inactifs donc disponibles pour des calculs</span></li>
 <li><span>à droite, la liste des serveurs occupés par les calculs d’un client.</span></li>
 </ul>
+
 <p><span>La structure du menu est la suivante :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
@@ -4692,14 +4725,61 @@
 <ul>
 <li><span>lance le service d’écoute du port 864 de la machine</span></li>
 <li><span>inhibe le menu </span><b>Lancer</b></li>
-<li><span>autorise le menu </span><b>Arrêter</b>
-                                                - <b>Option Service/Arrêter</b>
-                                                - <span>Cette option interrompt le service :</span></li>
+<li><span>autorise le menu </span><b>Arrêter</b><ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><b>Option Service/Arrêter</b></li>
+<li><span>Cette option interrompt le service :</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><span>la liste des serveurs occupés est vidée</span></li>
 <li><span>la liste des serveurs libres est remplie avec le contenu du fichier </span><b>Serveurs</b></li>
 <li><span>le menu </span><b>Lancer</b><span> est autorisé</span></li>
 <li><span>le menu </span><b>Arrêter</b><span> est inhibé</span></li>
 </ul>
+
 <p><b>Option Service/Quitter</b></p>
 <p><span>L’application se termine.</span></p>
 <p><b>Dialogue client/serveur</b></p>
@@ -4707,6 +4787,7 @@
 <ul>
 <li><b>1-getserveur</b></li>
 </ul>
+
 <p><span>Le client demande s’il y a un serveur de calcul disponible pour lui.</span></p>
 <p><span>Le serveur GRC prend alors le premier serveur trouvé dans sa liste de serveurs libres et renvoie son nom au client sous la forme :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>        100-nom du serveur
@@ -4726,6 +4807,7 @@
 <ul>
 <li><b>2</b><b>-</b><b>finservice</b></li>
 </ul>
+
 <p><span>Le client signifie qu’il n’a plus besoin du serveur de calcul qu’il utilisait. </span></p>
 <p><span>Le serveur GRC vérifie d’abord que le client est bien un client qu’il servait. Pour cela, il vérifie que l’adresse IP du client est présente parmi celles enregistrées dans la liste des serveurs occupés. Si ce n’est pas le cas, le serveur GRC répond :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>        503-Aucun serveur ne vous a été attribué
@@ -5096,6 +5178,7 @@
 <li><span>il y a un sujet</span></li>
 <li><span>il y a au moins un destinataire dans les champs 1, 3 et 4</span></li>
 </ul>
+
 <p><span>Si ces conditions sont réunies, la séquence des événements est la suivante :</span></p>
 <ul>
 <li><span>le formulaire est mis dans un état où toutes les actions pouvant interférer dans le dialogue client/serveur sont inhibées</span></li>
@@ -5112,6 +5195,7 @@
 </ul>
 </li>
 </ul>
+
 <p><b>Le bouton Annuler</b></p>
 <p><span>Ce bouton situé en bas du formulaire n’apparaît que lorsque le client est en cours de connexion au serveur </span><i>smtp</i><span>. Cette connexion peut ne pas se faire parce que le serveur </span><i>smtp</i><span> ne répond pas ou mal. Le bouton </span><b><i>Annuler</i></b><span> donne alors à l’utilisateur, la possibilité d’interrompre la demande de connexion.</span></p>
 <p><b>Les listes de suivi</b></p>
@@ -5121,6 +5205,7 @@
 <li><span>sa fermeture par le serveur ou le client</span></li>
 <li><span>toutes les erreurs de connexion</span></li>
 </ul>
+
 <p><span>La liste (</span><b><i>7</i></b><span>) fait le suivi du dialogue </span><i>smtp</i><span> qui s’instaure entre le client et le serveur.</span></p>
 <p><span>Ces deux listes sont associées à des options du menu :</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
@@ -5432,33 +5517,83 @@
 </table>
 
 <h4 id="8544-fonctionnement-de-lapplication">8.5.4.4. <a id="toc459349608"></a><a id="toc10974718"></a><span>Fonctionnement de l&#x27;application</span></h4>
-<p><b>Initialisation de l&#x27;application</b></p>
+<div style="background-color:#FFFFFF ; padding:0.35em 0.5em ; margin:0.75em 0"><b>Initialisation de l&#x27;application</b></div>
+
 <p><span>Lorsque la feuille principale de l’application est chargée, les actions suivantes prennent place :</span></p>
 <ul>
 <li><span>la feuille est centrée sur l’écran</span></li>
 <li><span>seules les options de menu </span><i>Connexion/Quitter</i><span> &amp; </span><i>Auteur</i><span> sont actives</span></li>
 <li><span>le bouton </span><i>Annuler</i><span> est caché</span></li>
-<li><span>les listes </span><i>LstSuivi &amp; LstDialogue</i><span> sont vides</span>
-                                                - <b>Menu Connexion/Connecter</b>
-                                                - <span>Cette option n’est disponible que lorsque les champs 1 à 5 ont été remplis. Un clic sur cette option entraîne les opérations suivantes :</span></li>
+<li><span>les listes </span><i>LstSuivi &amp; LstDialogue</i><span> sont vides</span><ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><b>Menu Connexion/Connecter</b></li>
+<li><span>Cette option n’est disponible que lorsque les champs 1 à 5 ont été remplis. Un clic sur cette option entraîne les opérations suivantes :</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><span>un thread est lancé pour assurer la connexion au serveur</span></li>
 <li><span>le bouton </span><i>Annuler</i><span> apparaît afin de permettre à l’utilisateur d’interrompre la connexion en cours</span></li>
 <li><span>toutes les options de menu sont désactivées sauf </span><i>Quitter</i><span> &amp; </span><i>Auteur</i></li>
 </ul>
+
 <p><span>La séquence des événements est ensuite la suivante :</span></p>
-<ol>
+<ol start="1">
 <li><span>L’utilisateur a appuyé sur le bouton </span><i>Annuler</i><span> : on arrête le thread de connexion et on remet le menu dans son état de départ. On indique dans le suivi qu’il y a eu fermeture de la connexion par l’utilisateur.</span></li>
 <li><span>La demande de connexion est acceptée par le serveur. On entame ensuite le dialogue avec le serveur pour changer le mot de passe. Les échanges de ce dialogue sont inscrits dans la liste </span><i>LstDialogue</i><span>. Une fois le dialogue terminé, la connexion avec le serveur est close et le menu du formulaire remis dans son état initial.</span></li>
 <li><span>Tant que le dialogue est actif, le bouton Annuler reste présent afin de permettre à l&#x27;utilisateur de clôre la connexion s&#x27;il le veut.</span></li>
 <li><span>Si au cours de la communication se produit une erreur quelconque, la connexion est close et la cause de l&#x27;erreur affichée dans la liste de suivi </span><i>LstSuivi</i><span>. </span></li>
 </ol>
+
 <p><b>Menu Connexion/Quitter</b></p>
 <p><span>Cette option clôt une éventuelle connexion active avec le serveur et termine l&#x27;application.</span></p>
 <p><b>Menus RazSuivi et RazDialogue</b></p>
 <p><span>Vident respectivement les listes </span><i>LstSuivi</i><span> et </span><i>LstDialogue</i><span>. Ces options sont inhibées lorsque les listes coorespondantes sont vides.</span></p>
 <p><b>Le bouton Annuler</b></p>
 <p><span>Ce bouton situé en bas du formulaire n’apparaît que lorsque le client est en cours de connexion ou connecté au serveur. Le bouton </span><b><i>Annuler</i></b><span> donne à l’utilisateur, la possibilité d’interrompre la communication avec le serveur.</span></p>
-<p><b>Les listes de suivi</b></p>
+<div style="background-color:#FFFFFF ; padding:0.35em 0.5em ; margin:0.75em 0"><b>Les listes de suivi</b></div>
+
 <p><span>La liste LstSuivi (</span><b><i>5</i></b><span>) fait le suivi de la connexion. Elle indique les moments clés de la connexion :</span></p>
 <p><span>- son ouverture par le client</span></p>
 <p><span>- sa fermeture par le serveur ou le client</span></p>

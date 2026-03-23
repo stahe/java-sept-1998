@@ -1489,6 +1489,7 @@
 <li><span>lorsqu&#x27;on ferme la fenêtre, celle-ci disparaît mais n&#x27;interrompt pas le thread dans lequel elle s&#x27;exécutait</span></li>
 <li><span>on est obligé pour l&#x27;instant d&#x27;arrêter ce thread en faisant Ctrl-C dans la fenêtre Dos d&#x27;où a été lancée l&#x27;exécution du programme.</span></li>
 </ul>
+
 <p><span>Vérifions l&#x27;existence de deux threads séparés, l&#x27;un dans lequel s&#x27;exécute la méthode </span><i>main</i><span>, l&#x27;autre dans lequel s&#x27;exécute la fenêtre graphique :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-java">
 <span class="docx-code-line">// classes importées</span>
@@ -1527,6 +1528,7 @@
 <li><i>javax.swing</i><span> pour la classe </span><i>JFrame</i></li>
 <li><i>java.awt</i><span> pour la classe </span><i>Dimension</i></li>
 </ul>
+
 <h3 id="512-gerer-un-evenement">5.1.2. <a id="toc11729523"></a><a id="toc12502371"></a><span>Gérer un événement</span></h3>
 <p><span>Dans l&#x27;exemple précédent, il nous faudrait gérer la fermeture de la fenêtre nous-mêmes pour que lorsqu&#x27;elle se produit on arrête l&#x27;application, ce qui pour l&#x27;instant n&#x27;est pas fait. Pour cela il nous faut créer un objet qui &quot;écoute&quot; les événements qui se produisent sur la fenêtre et détecte l&#x27;événement &quot;fermeture de la fenêtre&quot;. On appelle cet objet un &quot;listener&quot; ou gestionnaire d&#x27;événements. Il existe différents types de gestionnaires pour les différents événements qui peuvent se produire sur les composants d&#x27;une interface graphique. Pour le composant </span><i>JFrame</i><span>, le listener s&#x27;appelle </span><i>WindowListener</i><span> et est une interface définissant les méthodes suivantes (cf documentation Java)</span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
@@ -1674,6 +1676,7 @@
 <li><span>définition du gestionnaire d&#x27;événements</span></li>
 <li><span>association du gestionnaire à la fenêtre</span></li>
 </ul>
+
 <p><span>peut se faire de la façon suivante dans notre exemple :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
 <span class="docx-code-line"><span style="color:#000000">   </span>// création d&#x27;un gestionnaire d&#x27;événements</span>
@@ -2480,15 +2483,17 @@
 <li><span>association des composants à la fenêtre avec un gestionnaire de disposition</span>&nbsp;&nbsp;&nbsp;&nbsp;</li>
 <li><span>association de gestionnaires d&#x27;événeemnts aux composants</span></li>
 </ul>
+
 <p><span>Maintenant, plutôt que de construire des interfaces graphiques &quot;à la main&quot; comme il vient d&#x27;être fait nous allons utiliser Jbuilder, un outil de développement Java de Borland/Inprise dans sa version 4 et supérieure.Nous utiliserons les composants de la bibliothèque </span><i>java.swing</i><span> actuellement préconisée par Sun, créateur de Java.</span></p>
 <h2 id="52-construire-une-interface-graphique-avec-jbuilder">5.2. <a id="toc9759182"></a><a id="toc11729529"></a><a id="toc12502377"></a><span>Construire une interface graphique avec </span><span>JBuilder</span></h2>
 <h3 id="521-notre-premier-projet-jbuilder">5.2.1. <a id="toc523135036"></a><a id="toc11729530"></a><a id="toc12502378"></a><span>Notre premier projet Jbuilder</span></h3>
 <p><span>Afin de nous familiariser avec Jbuilder, construisons une application très simple : une fenêtre vide.</span></p>
-<ol>
+<ol start="1">
 <li><span>Lancez Jbuilder et prendre l&#x27;option </span><i>Fichier/nouveau projet</i><span>. La 1ère page d&#x27;un assistant s&#x27;affiche alors :</span></li>
 </ol>
+
 <p><img src="images/image26.png" class="docx-zoomable" style="width:604px;height:319px;" alt="Image" /></p>
-<ol>
+<ol start="2">
 <li><span>Remplir les champs suivants :</span></li>
 </ol>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
@@ -2520,29 +2525,34 @@
 
 <p><span>Les fichiers source (.java, .html, ...), les fichiers destinations (.class,..), les fichiers de sauvegarde pourraient aller dans des répertoires différents. En laissant leurs champs vides, ils seront placés dans le même répertoire que le projet.</span></p>
 <p><span>Faites &#91;suivant&#93;</span></p>
-<ol>
+<ol start="3">
 <li><span>Un écran confirme les choix de l&#x27;étape précédente</span></li>
 </ol>
+
 <p><img src="images/image27.png" class="docx-zoomable" style="width:605px;height:165px;" alt="Image" /></p>
 <p><span>Faites &#91;suivant&#93;</span></p>
-<ol>
+<ol start="4">
 <li><span>Un nouvel écran vous demande de caractériser votre projet :</span></li>
 </ol>
+
 <p><img src="images/image28.png" class="docx-zoomable" style="width:604px;height:185px;" alt="Image" /></p>
 <p><span>Faites &#91;terminer&#93;</span></p>
-<ol>
+<ol start="5">
 <li><span>Vérifier que l&#x27;option </span><i>Voir/projet</i><span> est cochée. Vous devriez voir la structure de votre projet dans la fenêtre de gauche.</span></li>
 </ol>
+
 <p><img src="images/image29.png" class="docx-zoomable" style="width:193px;height:101px;" alt="Image" /></p>
-<ol>
+<ol start="6">
 <li><span>Maintenant construisons une interface graphique dans ce projet. Choisissez l&#x27;option </span><i>Fichier/Nouveau/Application</i><span> :</span></li>
 </ol>
+
 <p><img src="images/image30.png" class="docx-zoomable" style="width:546px;height:240px;" alt="Image" /></p>
 <p><span>Dans le champ </span><i>classe</i><span>, on met le nom de la classe qui va être créée. Ici on a repris le même nom que le projet.</span></p>
 <p><span>Faites &#91;suivant&#93;</span></p>
-<ol>
+<ol start="7">
 <li><span>L&#x27;écran suivant apparaît :</span></li>
 </ol>
+
 <p><img src="images/image31.png" class="docx-zoomable" style="width:547px;height:324px;" alt="Image" /></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
@@ -2565,19 +2575,19 @@
 
 <p><span>Notez que ci-dessus, nous avons demandé que la fenêtre soit centrée sur l&#x27;écran au démarrage de l&#x27;application.</span></p>
 <p><span>Faites &#91;Terminer&#93;</span></p>
-<ol>
-<li>
-<p><span>C&#x27;est maintenant que Jbuilder s&#x27;avère utile.</span></p>
-</li>
-<li>
-<p><span>il génère les fichiers source .java des deux classes dont on a donné les noms : la classe de l&#x27;application et celle de l&#x27;interface graphique. On voit apparaître ces deux fichiers dans la structure du projet dans la fenêtre de gauche</span></p>
-</li>
+<ol start="8">
+<li><span>C&#x27;est maintenant que Jbuilder s&#x27;avère utile.</span></li>
 </ol>
+<ul>
+<li><span>il génère les fichiers source .java des deux classes dont on a donné les noms : la classe de l&#x27;application et celle de l&#x27;interface graphique. On voit apparaître ces deux fichiers dans la structure du projet dans la fenêtre de gauche</span></li>
+</ul>
+
 <p><img src="images/image32.png" class="docx-zoomable" style="width:177px;height:88px;" alt="Image" /></p>
 <ul>
 <li><span>pour avoir accès au code généré pour les deux classes, il suffit de double-cliquer sur le fichier .java correspondant. Nous reviendrons ultérieurement sur le code généré.</span></li>
 <li><span>Vérifiez que l&#x27;option </span><i>Voir/Structure</i><span> est cochée. Elle permet de voir la structure de la classe actuellement sélectionnée (double clic sur le .java). Voici par exemple la structure de la classe </span><i>début</i><span> :</span></li>
 </ul>
+
 <p><img src="images/image33.png" class="docx-zoomable" style="width:190px;height:124px;" alt="Image" /></p>
 <p><span>On apprend ici :</span></p>
 <p><span>- les bibliothèques importées (</span><i>imports</i><span>)</span></p>
@@ -2641,12 +2651,13 @@
 <a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="p">}</span>
 </code></pre></div>
 <p><span>Commentons le code généré :</span></p>
-<ol>
+<ol start="1">
 <li><span>la fonction </span><i>main</i><span> fixe l&#x27;aspect de la fenêtre (</span><i>setLookAndFeel</i><span>) et crée une instance de la classe </span><i>début</i><span>.</span></li>
 <li><span>le constructeur </span><i>début()</i><span> est alors exécuté. Il crée une instance </span><i>frame</i><span> de la classe de la fenêtre (</span><i>new interfaceDébut()</i><span>). Celle-ci est construite mais pas affichée.</span></li>
 <li><span> La fenêtre est alors dimensionnée selon les informations disponibles pour chacun des composants de la fenêtre (</span><i>frame.validate</i><span>). Elle commence alors son existence séparée en s&#x27;affichant et en répondant aux sollicitations de l&#x27;utilisateur.</span></li>
 <li><span>La fenêtre est centrée sur l&#x27;écran ceci parce qu&#x27;on l&#x27;avait demandé lors de la configuration de la fenêtre avec l&#x27;assistant.</span></li>
 </ol>
+
 <p><span>Voyons ce qui serait obtenu si on réduisait le code </span><i>début.java</i><span> à son strict minimum telle que nous l&#x27;avons fait en début de chapitre. Créons une nouvelle classe. Prenez l&#x27;option </span><i>Fichier/Nouvelle classe</i><span> :</span></p>
 <p><img src="images/image37.png" class="docx-zoomable" style="width:545px;height:320px;" alt="Image" /></p>
 <p><span>Nommez la nouvelle classe </span><i>début2</i><span> et faites &#91;Terminer&#93;. Un nouveau fichier apparaît dans le projet :</span></p>
@@ -2740,13 +2751,14 @@
 <a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">setTitle</span><span class="p">(</span><span class="s">&quot;Ma première interface graphique avec Jbuilder&quot;</span><span class="p">);</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div>
-<ol>
+<ol start="1">
 <li><span>Le constructeur commence par dire qu&#x27;il va gérer les événements sur la fenêtre (</span><i>enableEvents</i><span>), puis il lance la méthode </span><i>jbInit</i><span>.</span></li>
 <li><span>Le conteneur (</span><i>JPanel</i><span>) de la fenêtre (</span><i>JFrame</i><span>) est obtenu (</span><i>getContentPane</i><span>)</span></li>
 <li><span>Le gestionnaire de mise en forme est fixé (</span><i>setLayout</i><span>)</span></li>
 <li><span>La taille de la fenêtre est fixée (</span><i>setSize</i><span>)</span></li>
 <li><span>Le titre de la fenêtre est fixé (</span><i>setTitle</i><span>)</span></li>
 </ol>
+
 <p><a id="toc523135043"></a></p>
 <h5 id="52224-le-gestionnaire-devenements">5.2.2.2.4. <span>Le gestionnaire d&#x27;événements</span></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="w">  </span><span class="cm">/**Remplacé, ainsi nous pouvons sortir quand la fenêtre est fermée*/</span>
@@ -2926,14 +2938,17 @@
 <ul>
 <li><span>l&#x27;étiquette (JLabel) jLabel1</span></li>
 </ul>
+
 <p><span>Sélectionnez le composant pour avoir sa fenêtre de propriétés. Dans celle-ci, modifiez les propriétés suivantes : </span><b>name</b><span> : lblSaisie, </span><b>text</b><span> : Saisie</span></p>
 <ul>
 <li><span>le champ de saisie (JTextField) jTextfield1</span></li>
 </ul>
+
 <p><span>Sélectionnez le composant pour avoir sa fenêtre de propriétés. Dans celle-ci, modifiez les propriétés suivantes : </span><b>name</b><span> : txtSaisie, </span><b>text</b><span> : ne rien mettre</span></p>
 <ul>
 <li><span>le bouton (JButton) : </span><b>name</b><span> : cmdAfficher, </span><b>text</b><span> : Afficher</span></li>
 </ul>
+
 <p><span>Nous avons maintenant la fenêtre suivante :</span></p>
 <p><img src="images/image52.png" class="docx-zoomable" style="width:318px;height:140px;" alt="Image" /></p>
 <p><span>et la structure suivante :</span></p>
@@ -3123,13 +3138,16 @@
 <p><span>On notera deux points :</span></p>
 <ul>
 <li><span>ce code aurait pu être écrit à la main. Cela veut dire qu&#x27;on peut se passer de Jbuilder pour construire une interface graphique.</span></li>
-<li><span>la façon dont le gestionnaire d&#x27;événement du bouton </span><i>cmdAfficher</i><span> est fixé. Le gestionnaire d&#x27;événement du composant </span><i>cmdAfficher</i><span> aurait pu être déclaré par </span><i>cmdAfficher.addActionListener(new gestionnaire())</i><span> où </span><i>gestionnaire</i><span> serait une classe avec une méthode publique </span><i>actionPerformed</i><span> chargée de gérer le clic sur le bouton </span><i>Afficher</i><span>. Ici, Jbuilder utilise comme gestionnaire, une instance d&#x27;une classe anonyme :</span></li>
-</ul>
+<li><span>la façon dont le gestionnaire d&#x27;événement du bouton </span><i>cmdAfficher</i><span> est fixé. Le gestionnaire d&#x27;événement du composant </span><i>cmdAfficher</i><span> aurait pu être déclaré par </span><i>cmdAfficher.addActionListener(new gestionnaire())</i><span> où </span><i>gestionnaire</i><span> serait une classe avec une méthode publique </span><i>actionPerformed</i><span> chargée de gérer le clic sur le bouton </span><i>Afficher</i><span>. Ici, Jbuilder utilise comme gestionnaire, une instance d&#x27;une classe anonyme :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">        </span><span class="n">cmdAfficher_actionPerformed</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">      </span><span class="p">}</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Une nouvelle instance de l&#x27;interface </span><i>ActionListener</i><span> est créée avec sa méthode </span><i>actionPerformed</i><span> définie dans la foulée. Celle-ci se contente d&#x27;appeler une méthode de la classe </span><i>interface2</i><span>. Tout ceci n&#x27;est qu&#x27;un artifice pour définir dans la même classe que la fenêtre les procédures de traitement des événements des composants de cette fenêtre. On pourrait procéder autrement :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">cmdAfficher</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
 </code></pre></div>
@@ -3160,6 +3178,7 @@
 <li><span>celle de gauche où l&#x27;on dit ce qu&#x27;on cherche. Elle a trois onglets : </span><i>Sommaire</i><span>, </span><i>Index</i><span> et </span><i>Chercher</i><span>.</span></li>
 <li><span>celle de droite qui présente le résultat de la recherche</span></li>
 </ul>
+
 <p><span>On dispose d&#x27;une aide sur la façon d&#x27;utiliser l&#x27;aide de Jbuilder. Choisissez dans l&#x27;aide de Jbuilder, l&#x27;option </span><i>Aide/Utilisation de l&#x27;aide</i><span>. On vous explique alors comment utiliser l&#x27;aide. On vous indique par exemple les différentes composantes du visualisateur d&#x27;aide :</span></p>
 <p><img src="images/image61.png" class="docx-zoomable" style="width:545px;height:401px;" alt="Image" /></p>
 <p><span>Examinons d&#x27;un peu plus près, les pages </span><i>Sommaire</i><span> et </span><i>Index</i><span>.</span></p>
@@ -3560,6 +3579,7 @@
 <li><span>le contenu de la liste est géré par un objet différent de la liste elle-même. Ici nous prendrons un objet </span><i>DefaultListModel</i><span> objet qui s&#x27;utilise comme un </span><i>Vector</i><span> mais qui de plus avertit l&#x27;objet </span><i>JList</i><span> dès que son contenu change afin que l&#x27;affichage visuel de la liste change aussi.</span></li>
 <li><span>la liste n&#x27;est pas défilante par défaut. Il faut mettre la liste dans un conteneur </span><i>ScrollPane</i><span> qui lui, permet ce défilement.</span></li>
 </ul>
+
 <p><span>Dans le code source, la définition d&#x27;une liste peut se faire de la façon suivante :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="w">    </span><span class="c1">// le vecteur des valeurs de la liste </span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">DefaultlistModel</span><span class="w"> </span><span class="n">valeurs</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">DefaultListModel</span><span class="p">();</span>
@@ -3570,15 +3590,18 @@
 </code></pre></div>
 <p><span>Pour inclure la liste </span><i>jList1</i><span> dans le conteneur </span><i>jScrollPane1</i><span>, le code généré par JBuilder procéde différemment :</span></p>
 <ul>
-<li><span>déclaration du conteneur dans les attributs de la fenêtre</span></li>
-</ul>
+<li><span>déclaration du conteneur dans les attributs de la fenêtre</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>  JScrollPane jScrollPane1 = new JScrollPane();
 </code></pre></div>
-<ul>
-<li><span>puis dans le code de </span><i>jbInit</i><span>, la liste est associée au conteneur</span></li>
-</ul>
+
+</li>
+<li><span>puis dans le code de </span><i>jbInit</i><span>, la liste est associée au conteneur</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>    jScrollPane1.getViewport().add(jList1, null);
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Pour ajouter des valeurs à la liste </span><i>JList1</i><span> ci-dessus, il suffit de les ajouter à son vecteur de valeurs  </span><i>valeurs </i><span>:</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>    // init liste
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>    for(int i=0;i&lt;10;i++)
@@ -3591,6 +3614,7 @@
 <li><span>on choisit un composant </span><i>JScrollPane</i><span> dans la page &quot;Conteneurs swing&quot; des composants et on le dépose dans la fenêtre en le dimensionnant à la taille désirée</span></li>
 <li><span>on choisit un composant </span><i>JList</i><span> dans la page &quot;swing&quot; des composants et on le dépose dans le conteneur </span><i>JScrollPane</i><span> dont il occupe alors toute la place.</span></li>
 </ul>
+
 <p><span>Le code généré par Jbuilder doit être légèrement remanié pour obtenir le code suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">interfaceAppli</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JFrame</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="n">JPanel</span><span class="w"> </span><span class="n">contentPane</span><span class="p">;</span>
@@ -3948,6 +3972,7 @@
 <li><span>on place chacun des boutons radio sans se soucier de les regrouper</span></li>
 <li><span>on place dans le conteneur, un composant swing </span><i>ButtonGroup</i><span>. Ce composant est non visuel. Il n&#x27;apparaît donc pas dans le concepteur de la fenêtre. Il apparaît cependant dans sa structure :</span></li>
 </ul>
+
 <p><img src="images/image80.png" class="docx-zoomable" style="width:196px;height:228px;" alt="Image" /></p>
 <p><span>On voit ci-dessus dans la branche </span><i>Autre</i><span> les attributs non visuels de la fenêtre. Une fois un groupe de boutons radio créé, on peut lui associer chacun des boutons radio. Pour ce faire, on sélectionne les propriétés du bouton radio :</span></p>
 <p><img src="images/image81.png" class="docx-zoomable" style="width:219px;height:128px;" alt="Image" /></p>
@@ -4140,6 +4165,7 @@
 <li><span>Un clic de part et d&#x27;autre du curseur fait varier la valeur d&#x27;un incrément (positif ou négatif) selon l&#x27;extrémité cliquée appelée </span><i>blockIncrement</i><span> qui est par défaut 10.</span></li>
 <li><span>Ces cinq valeurs (min, max, valeur, unitIncrement, blockIncrement) peuvent être connues avec les méthodes </span><i>getMinimum(), getMaximum(), getValue(), getUnitIncrement(), getBlockIncrement()</i><span> qui toutes rendent un entier et peuvent être fixées par les méthodes </span><i>setMinimum(int min), setMaximum(int max), setValue(int val), setUnitIncrement(int uInc), setBlockIncrement(int bInc)</i></li>
 </ul>
+
 <p><span>Il y a quelques points à connaître dans l&#x27;utilisation des composants </span><i>JScrollBar</i><span>. Tout d&#x27;abord, on le trouve dans la barre des composants swing :</span></p>
 <p><img src="images/image84.png" class="docx-zoomable" style="width:680px;height:177px;" alt="Image" /></p>
 <p><span>Lorsqu&#x27;on le dépose sur le conteneur, il est par défaut vertical. On le rend horizontal avec la propriété </span><i>orientation</i><span> ci-dessous:</span></p>
@@ -4553,19 +4579,21 @@
 <p><span>Lorsqu&#x27;on exécute ce programme, voici ce qu&#x27;on obtient pour un clic :</span></p>
 <p><img src="images/image94.png" class="docx-zoomable" style="width:509px;height:72px;" alt="Image" /></p>
 <p><span>Les événements sont empilés par le haut dans la liste. Aussi la copie d&#x27;écran ci-dessus indique qu&#x27;un clic provoque trois événements, dans l&#x27;ordre :</span></p>
-<ol>
+<ol start="1">
 <li><i>MousePressed</i><span> lorsqu&#x27;on appuie sur le bouton</span></li>
 <li><i>MouseReleased</i><span> lorsqu&#x27;on le lâche</span></li>
 <li><i>MouseClicked</i><span> qui indique que la succession des deux événements précédents est considérée comme un clic. Ce pourrait être un double clic. Mais ci-dessus, l&#x27;information </span><i>clickCount=1</i><span> indiqe que c&#x27;est un simple clic.</span></li>
 </ol>
+
 <p><span>Maintenant si on appuie sur le bouton, déplace la souris et relâche le bouton :</span></p>
 <p><img src="images/image95.png" class="docx-zoomable" style="width:528px;height:127px;" alt="Image" /></p>
 <p><span>On voit là les trois événements :</span></p>
-<ol>
+<ol start="1">
 <li><i>MousePressed</i><span> lorsqu&#x27;on appuie initialement sur le bouton</span></li>
 <li><i>MouseDragged</i><span> lorsqu&#x27;on déplace la souris, bouton appuyé</span></li>
 <li><i>MouseReleased</i><span> lorsqu&#x27;on lâche le bouton</span></li>
 </ol>
+
 <p><span>Dans les deux exemples ci-dessus, on voit qu&#x27;un événement souris ramène avec lui diverses informations dont les coordonnées (x,y) de la souris, par exemple (408,65) dans la première ligne ci-dessus.</span></p>
 <p><span>Si on continue ainsi, on découvre que l&#x27;événement </span><i>MouseExited</i><span> est déclenché dès que la souris quitte le conteneur ou passe sur l&#x27;un des composants de celui-ci. Dans ce dernier cas, le conteneur reçoit l&#x27;événement </span><i>MouseExited</i><span> et le composant l&#x27;événement </span><i>MouseEntered</i><span>. L&#x27;inverse se produira lorsque la souris quittera le composant pour revenir sur le conteneur.</span></p>
 <p><span>Que se passe-t-il lors d&#x27;un double clic ?</span></p>
@@ -5509,6 +5537,7 @@
 <li><span>utiliser la méthode </span><i>boolean accept(File f)</i><span> pour rendre la valeur </span><i>true</i><span> si le nom du fichier f se termine par </span><i>.txt</i></li>
 <li><span>utiliser la méthode </span><i>String getDescription()</i><span> pour rendre la description </span><i>&quot;Fichiers texte (&#42;.txt)&quot;</i></li>
 </ul>
+
 <p><span>Ce filtre pourrait être défini dans notre application de la façon suivante :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="w">  </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">filechooser</span><span class="p">.</span><span class="na">FileFilter</span><span class="w"> </span><span class="n">filtreTxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">filechooser</span><span class="p">.</span><span class="na">FileFilter</span><span class="p">(){</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">accept</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="p">){</span>
@@ -5546,6 +5575,7 @@
 <li><span>la boîte de sélection de sauvegarde est affichée. Ici on perd la main, l&#x27;utilisateur utilisant la boîte de sélection pour désigner un fichier du système de fichiers.</span></li>
 <li><span>lorsqu&#x27;il quitte la boîte de sélection, on teste la valeur de retour pour voir si on doit ou non sauvegarder la boîte de texte. Si oui, elle doit l&#x27;être dans le fichier obtenu par la méthode </span><i>getSelectedFile</i><span>.</span></li>
 </ul>
+
 <p><span>Le code lié au bouton &quot;Charger&quot; est très analogue au code du bouton &quot;Sauvegarder&quot;. </span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">btnCharger_actionPerformed</span><span class="p">(</span><span class="n">ActionEvent</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="c1">// choix d&#39;un fichier à l&#39;aide d&#39;un objet JFileChooser</span>
@@ -5566,6 +5596,7 @@
 <li><span>pour afficher la boîte de sélection de fichiers, on utilise la méthode </span><i>showOpenDialog</i><span> au lieu de la méthode </span><i>showSaveDialog</i><span>. La boîte de sélection affichée est analogue à celle affichée par la méthode </span><i>showSaveDialog</i><span>.</span></li>
 <li><span>si l&#x27;utilisateur a bien sélectionné un fichier, on appelle la méthode </span><i>lireFichier</i><span> plutôt que la méthode </span><i>écrireFichier</i><span>.</span></li>
 </ul>
+
 <h4 id="5411-boites-de-selection-jcolorchooser-et-jfontchooser">5.4.1.1. <a id="toc11729544"></a><a id="toc12502392"></a><span>Boîtes de sélection JColorChooser et JFontChooser</span></h4>
 <p><span>Nous continuons l&#x27;exemple précédent en ajoutant deux nouveaux boutons :</span></p>
 <p><img src="images/image123.png" class="docx-zoomable" style="width:638px;height:379px;" alt="Image" /></p>
@@ -5730,22 +5761,28 @@
 <p><img src="images/image132.png" class="docx-zoomable" style="width:680px;height:275px;" alt="Image" /></p>
 <p><span>Le bouton </span><i>Ajouter</i><span> nous permet d&#x27;indiquer que le fichier </span><i>SwingExtras.jar</i><span> doit être exploré pour la documentation. Cette démarche validée, on peut constater qu&#x27;on a effectivement accès à la documentation de </span><i>SwingExtras.jar</i><span>. Cela se traduit par diverses facilités :</span></p>
 <ul>
-<li><span>si on commence à écrire l&#x27;instruction d&#x27;importation </span></li>
-</ul>
+<li><span>si on commence à écrire l&#x27;instruction d&#x27;importation </span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.lamatek.swingextras.</span><span class="o">*</span><span class="p">;</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>on pourra constater que JBuilder nous fournit une aide :</span></p>
 <p><img src="images/image133.png" class="docx-zoomable" style="width:439px;height:85px;" alt="Image" /></p>
 <p><span>Le paquetage </span><i>com.lamatek</i><span> est bien trouvé.</span></p>
 <ul>
-<li><span>si maintenant sur le programme suivant :</span></li>
-</ul>
+<li><span>si maintenant sur le programme suivant :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.lamatek.swingextras.*</span><span class="p">;</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">test</span><span class="p">{</span>
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="w">  </span><span class="n">JFontChooser</span><span class="w"> </span><span class="n">jFontChooser1</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span>
 <a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="p">}</span><span class="w">  </span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>on fait F1 sur le mot clé </span><i>JFontChooser</i><span>, on obtient une aide sur cette classe :</span></p>
 <p><img src="images/image134.png" class="docx-zoomable" style="width:680px;height:214px;" alt="Image" /></p>
 <p><span>On voit dans la barre d&#x27;état 1 que c&#x27;est bien un fichier html du paquetage </span><i>swingextras.jar</i><span> qui est utilisé. L&#x27;exemple présenté ci-dessus est suffisament explicite pour qu&#x27;on puisse écrire le code du bouton </span><i>Police</i><span> de notre application :</span></p>
@@ -5958,6 +5995,7 @@
 <li><span>le menu </span><i>Calculer</i><span> reste éteint tant qu&#x27;il n&#x27;y a rien dans le champ du salaire</span></li>
 <li><span>si lorsque le calcul est lancé, il s&#x27;avère que le salaire est incorrect, l&#x27;erreur est signalée :</span></li>
 </ul>
+
 <p><img src="images/image137.png" class="docx-zoomable" style="width:316px;height:267px;" alt="Image" /></p>
 <p><span>Le programme est donné ci-dessous. Il utilise la classe </span><i>impots</i><span> créée dans le chapitre sur les classes. Une partie du code produit automatiquement pas JBuilder n&#x27;a pas été ici reproduit.</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.*</span><span class="p">;</span>
@@ -6209,11 +6247,11 @@
 </table>
 
 <p><span>La valeur du composant est obtenue via sa méthode </span><i>getValue</i><span> qui rend un type </span><i>Object</i><span>. D&#x27;où quelques transtypages pour avoir l&#x27;entier dont on a besoin :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>    // nbre d&#39;enfants
-<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>    Integer InbEnfants=(Integer)spinEnfants.getValue();
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>    // calcul de l&#39;impôt
-<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>    lblImpots.setText(&quot;&quot;+objImpots.calculer(rdOui.isSelected(),
-<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>      InbEnfants.intValue(),salaire));
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">nbre</span><span class="w"> </span><span class="n">d</span><span class="s1">&#39;enfants</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="s1">    Integer InbEnfants=(Integer)spinEnfants.getValue();</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="s1">    // calcul de l&#39;</span><span class="n">impôt</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="w">    </span><span class="n">lblImpots</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="ss">&quot;&quot;</span><span class="o">+</span><span class="n">objImpots</span><span class="p">.</span><span class="n">calculer</span><span class="p">(</span><span class="n">rdOui</span><span class="p">.</span><span class="n">isSelected</span><span class="p">(),</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="w">      </span><span class="n">InbEnfants</span><span class="p">.</span><span class="n">intValue</span><span class="p">(),</span><span class="n">salaire</span><span class="p">));</span>
 </code></pre></div>
 <p><span>Une fois le composant </span><i>JSpinner</i><span> défini, il est placé dans la fenêtre :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>    spinEnfants.setBounds(new Rectangle(137,60,40,27));
@@ -6384,10 +6422,11 @@
 <h2 id="56-ecriture-dapplets">5.6. <a id="toc427139254"></a><a id="toc427837395"></a><a id="toc428596939"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="toc459263769"></a><a id="toc459264006"></a><a id="toc459349501"></a><a id="toc10974611"></a><a id="toc11729546"></a><a id="toc12502394"></a><span>Ecriture d&#x27;applets</span></h2>
 <h3 id="561-introduction">5.6.1. <a id="toc427136482"></a><a id="toc427139255"></a><a id="toc427837396"></a><a id="toc428596940"></a><a id="toc459263770"></a><a id="toc459264007"></a><a id="toc459349502"></a><a id="toc10974612"></a><a id="toc11729547"></a><a id="toc12502395"></a><span>Introduction</span></h3>
 <p><span>Lorsqu&#x27;on a écrit une application avec interface graphique il est assez aisé de la transformer en </span><i>applet</i><span>. Stockée sur une machine A, celle-ci peut être téléchargée par un navigateur Web d&#x27;une machine B de l&#x27;internet. L&#x27;application initiale est ainsi partagée entre de nombreux utilisateurs et c&#x27;est là le principal intérêt de transformer une application en applet. Néammoins, toute application ne peut être ainsi transformée : pour ne pas nuire à l&#x27;utilisateur qui utilise une applet dans son navigateur, l&#x27;environnement de l&#x27;applet est réglementé :</span></p>
-<ol>
+<ol start="48">
 <li><span>une applet ne peut lire ou écrire sur le disque de l&#x27;utilisateur</span></li>
 <li><span>elle ne peut communiquer qu&#x27;avec la machine à partir de laquelle elle a été téléchargé par le navigateur.</span></li>
 </ol>
+
 <p><span>Ce sont des restrictions fortes. Elles impliquent par exemple qu&#x27;une application ayant besoin de lire des informations dans un fichier ou une base de données devra les demander par une application relais située sur le serveur d&#x27;où elle a été téléchargée.</span></p>
 <p><span>La structure générale d&#x27;une application Web simple est la suivante :</span></p>
 <p><img src="images/image139.png" class="docx-zoomable" style="width:519px;height:217px;" alt="Image" /></p>
@@ -6395,6 +6434,7 @@
 <li><span>le client demande un document HTML au serveur Web généralement avec un navigateur. Ce document peut contenir une applet qui fonctionnera comme une application graphique autonome au sein du document HTML affiché par le navigateur du client.</span></li>
 <li><span>cette applet pourra avoir accès à des données mais seulement à celles situées sur le serveur web. Elle n&#x27;aura pas accès ni aux ressources de la machine cliente qui l&#x27;exécute ni à celles d&#x27;autres machines du réseau autres que celle à partir de laquelle elle a été téléchargée.</span></li>
 </ul>
+
 <h3 id="562-la-classe-japplet">5.6.2. <a id="toc427136483"></a><a id="toc427139256"></a><a id="toc427837397"></a><a id="toc428596941"></a><a id="toc459263771"></a><a id="toc459264008"></a><a id="toc459349503"></a><a id="toc10974613"></a><a id="toc11729548"></a><a id="toc12502396"></a><span>La classe JApplet</span></h3>
 <h4 id="5621-definition">5.6.2.1. <a id="toc427136484"></a><a id="toc427139257"></a><a id="toc427837398"></a><a id="toc428596942"></a><a id="toc459263772"></a><a id="toc459264009"></a><a id="toc459349504"></a><a id="toc10974614"></a><span>Définition</span></h4>
 <p><span>Une application peut être téléchargée par un navigateur Web si c&#x27;est une instance de la classe </span><b>java.applet.Applet </b><span>ou de la classe</span><b> javax.swing.JApplet</b><span>. Cette dernière dérive de la première qui est elle-même dérivée de la classe </span><i>Panel</i><span> elle-même dérivée de la classe </span><i>Container</i><span>. Une instance </span><i>Applet</i><span> ou </span><i>JApplet</i><span> étant de type </span><i>container</i><span> pourra donc contenir des composants (</span><i>Component</i><span>) tels que boutons, cases à cocher, listes, … Donnons quelques indications sur le rôle des différentes méthodes :</span></p>
@@ -6624,10 +6664,11 @@
 <a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="p">}</span><span class="c1">// fin classe</span>
 </code></pre></div>
 <p><span>On notera les points suivants :</span></p>
-<ol>
+<ol start="1">
 <li><span>la classe </span><i>application</i><span> dérive maintenant de la classe </span><i>J</i><i>Applet</i></li>
 <li><span>la méthode </span><i>main</i><span> est remplacée par la méthode </span><i>init</i><span>.</span></li>
 </ol>
+
 <p><a id="toc427136490"></a></p>
 <p><span>A titre d&#x27;exemple, nous revenons sur une application étudiée : la gestion de listes.</span></p>
 <p><a id="toc427139265"></a><a id="toc459263780"></a><a id="toc459264017"></a><a id="toc459349512"></a><a id="toc10974622"></a></p>
@@ -6817,19 +6858,20 @@
 <a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a><span class="w">  </span><span class="p">}</span><span class="c1">///cmd Raz2</span>
 </code></pre></div>
 <p><span>Pour transformer la classe </span><i>appli</i><span> en </span><i>applet</i><span>, il faut procéder comme suit :</span></p>
-<ol>
-<li><span>modifier la classe </span><i>interfaceAppli</i><span> précédente pour qu&#x27;elle dérive non plus de </span><i>JFrame</i><span> mais de </span><i>JApplet</i><span> :</span></li>
-</ol>
+<ol start="50">
+<li><span>modifier la classe </span><i>interfaceAppli</i><span> précédente pour qu&#x27;elle dérive non plus de </span><i>JFrame</i><span> mais de </span><i>JApplet</i><span> :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">interfaceAppli</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JApplet</span><span class="w"> </span><span class="p">{</span>
 </code></pre></div>
+
+</li>
+</ol>
 <ul>
-<li><span>supprimer l&#x27;instruction qui fixe le titre de la fenêtre </span><i>JFrame</i><span>. Une applet </span><i>JApplet</i><span> n&#x27;a pas de barre de titre</span></li>
-</ul>
+<li><span>supprimer l&#x27;instruction qui fixe le titre de la fenêtre </span><i>JFrame</i><span>. Une applet </span><i>JApplet</i><span> n&#x27;a pas de barre de titre</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>    // this.setTitle(&quot;JList&quot;);
 </code></pre></div>
-<ul>
-<li><span>changer le constructeur en méthode </span><i>init</i><span>  et dans cette méthode supprimer la gestion des événements fenêtre (WindowListener, ...). Une applet est un conteneur qui ne peut être redimensionné ou fermé.</span></li>
-</ul>
+
+</li>
+<li><span>changer le constructeur en méthode </span><i>init</i><span>  et dans cette méthode supprimer la gestion des événements fenêtre (WindowListener, ...). Une applet est un conteneur qui ne peut être redimensionné ou fermé.</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="w">  </span><span class="cm">/**Construire le cadre*/</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="w">    </span><span class="c1">// enableEvents(AWTEvent.WINDOW_EVENT_MASK);</span>
@@ -6841,9 +6883,9 @@
 <a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="w">  </span><span class="p">}</span><span class="c1">//interfaceAppli</span>
 </code></pre></div>
-<ul>
-<li><span>La méthode </span><i>processWindowEvent</i><span> doit être supprimée ou mise en commentaires</span></li>
-</ul>
+
+</li>
+<li><span>La méthode </span><i>processWindowEvent</i><span> doit être supprimée ou mise en commentaires</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="w">  </span><span class="cm">/**Remplacé, ainsi nous pouvons sortir quand la fenêtre est fermée*/</span>
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a><span class="w">  </span><span class="c1">//protected void processWindowEvent(WindowEvent e) {</span>
 <a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a><span class="w">  </span><span class="c1">//  super.processWindowEvent(e);</span>
@@ -6852,6 +6894,10 @@
 <a id="__codelineno-69-6" name="__codelineno-69-6" href="#__codelineno-69-6"></a><span class="w">  </span><span class="c1">//  }</span>
 <a id="__codelineno-69-7" name="__codelineno-69-7" href="#__codelineno-69-7"></a><span class="w">  </span><span class="c1">// }</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>On donne à titre d&#x27;exemple le code complet de l&#x27;applet sauf la partie générée automatiquement par JBuilder</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.*</span><span class="p">;</span>
 <a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.event.*</span><span class="p">;</span>
@@ -7323,10 +7369,11 @@
 </table>
 
 <p><span>Il y a ici deux méthodes qui nous intéressent :</span></p>
-<ol>
+<ol start="51">
 <li><b>public URL(String  spec) </b><span>pour spécifier le fichier à exploiter</span></li>
 <li><b>public final InputStream openStream()</b><span> pour l&#x27;exploiter</span></li>
 </ol>
+
 <h4 id="5652-un-exemple-console">5.6.5.2. <a id="toc427136497"></a><a id="toc427139273"></a><a id="toc427837409"></a><a id="toc428596952"></a><a id="toc459263788"></a><a id="toc459264025"></a><a id="toc459349520"></a><a id="toc10974630"></a><span>Un exemple</span><span> console</span></h4>
 <p><span>On va écrire un programme Java, sans interface graphique, chargé d&#x27;afficher à l&#x27;écran le contenu d&#x27;une URL qu&#x27;on lui passe en paramètre. Un exemple d&#x27;appel pourrait être le suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>    DOS&gt; java urlcontenu http://istia.univ-angers.fr/index.html
@@ -7751,6 +7798,7 @@
 <li><span>les composants swing les plus courants</span></li>
 <li><span>la construction d&#x27;applets</span></li>
 </ul>
+
 <p><span>Nous retiendrons que</span></p>
 <ul>
 <li><span>le code généré par JBuilder peut être écrit à la main. Une fois ce code obtenu d&#x27;une manière ou d&#x27;une autre, un simple JDK suffit pour l&#x27;exécuter et JBuilder n&#x27;est alors plus indispensable.</span></li>
@@ -7761,6 +7809,7 @@
 </ul>
 </li>
 </ul>
+
 <h2 id="59-jbuilder-sous-linux">5.9. <a id="toc523135067"></a><a id="toc11729554"></a><a id="toc12502402"></a><span>Jbuilder sous Linux</span></h2>
 <p><span>Tous les exemples précédents ont été testés sous Windows 98. On peut se demander si les programmes écrits sont portables tels quels sous Linux. Moyennant que la machine Linux en question ait les classes utilisées par les différents programmes, ils le sont. Si vous avez par exemple installé JBuilder sous Linux les classes nécessaires sont déjà sur votre machine. Voici par exemple ce que donne l&#x27;exécution d&#x27;un de nos programmes sur le composant JList avec JBuilder 4 sous Linux :</span></p>
 <p><span>Nous présentons ci-dessous l&#x27;installation de JBuilder 4 Foundation sur une machine Linux. Son installation sur une machine Win9x ne pose aucun problème et est analogue au processus qui va maintenant être décrit. L&#x27;installation des version sultérieures est sans doute différente mais ce document peut néanmoins quelques informations utiles.</span></p>

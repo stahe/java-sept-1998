@@ -1074,7 +1074,7 @@
 <h2 id="102-processus-de-developpement-dune-application-corba">10.2. <a id="toc459349658"></a><a id="toc10974768"></a><a id="toc12362991"></a><a id="toc12502479"></a><span>Processus de développement d’une application CORBA</span></h2>
 <h3 id="1021-introduction">10.2.1. <a id="toc459349659"></a><a id="toc10974769"></a><a id="toc12362992"></a><a id="toc12502480"></a><span>Introduction</span></h3>
 <p><span>Pour développer une application client-serveur CORBA, nous suivrons les étapes suivantes :</span></p>
-<ol>
+<ol start="1">
 <li><span>écriture de l’interface du serveur avec IDL </span><i>(Interface Definition Language)</i></li>
 <li><span>génération des classes « squelette » et « stub » du serveur</span></li>
 <li><span>écriture du serveur</span></li>
@@ -1084,6 +1084,7 @@
 <li><span>lancement du serveur</span></li>
 <li><span>lancement du client</span></li>
 </ol>
+
 <p><span>Nous prenons comme premier exemple, celui du serveur d’écho déjà utilisé dans le contexte RMI. Le lecteur pourra ainsi voir les différences entre les deux méthodes.</span></p>
 <p><span>L’application a été testée avec le jdk1.2.</span></p>
 <h3 id="1022-ecriture-de-linterface-du-serveur">10.2.2. <a id="toc459349660"></a><a id="toc10974770"></a><a id="toc12362993"></a><a id="toc12502481"></a><span>Écriture de l’interface du serveur</span></h3>
@@ -1303,20 +1304,23 @@
 <li><span style="color:#000000">une composante initiale </span><span style="color:#000000"><i>objRef</i></span><span style="color:#000000">, objet générique qui doit être ramené à un type </span><span style="color:#000000"><i>NamingContext</i></span><span style="color:#000000">, ici </span><span style="color:#000000"><i>ncRef</i></span><span style="color:#000000">.</span></li>
 <li><span style="color:#000000">le nom du service, ici </span><span style="color:#000000"><i>nomService</i></span><span style="color:#000000"> qui a été passé en paramètre au serveur</span></li>
 </ul>
+
 <p><span style="color:#000000">Ces composantes du nom (</span><span style="color:#000000"><i>NameComponent</i></span><span style="color:#000000">) sont rassemblées dans un tableau, ici </span><span style="color:#000000"><i>path</i></span><span style="color:#000000">. C’est ce tableau qui « nomme » de façon précise le service créé. Une fois le nom créé, il reste </span></p>
 <ul>
-<li><span style="color:#000000">à l’associer à un exemplaire du serveur (la classe srvEcho construite précédemment)</span></li>
-</ul>
+<li><span style="color:#000000">à l’associer à un exemplaire du serveur (la classe srvEcho construite précédemment)</span>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
 <span class="docx-code-line">srvEcho serveurEcho=<span style="font-weight:bold">new</span> srvEcho();</span>
 </code></pre></div>
 
-<ul>
-<li><span style="color:#000000">à l’enregistrer dans l’annuaire</span></li>
-</ul>
+</li>
+<li><span style="color:#000000">à l’enregistrer dans l’annuaire</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>    ncRef.rebind(path,serveurEcho);
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    orb.connect(serveurEcho);
 </code></pre></div>
+
+</li>
+</ul>
+
 <h4 id="10253-compilation-de-la-classe-de-lancement-serveur">10.2.5.3. <a id="toc459349666"></a><a id="toc10974776"></a><span>Compilation de la classe de lancement serveur</span></h4>
 <p><span style="color:#000000">On compile la classe précédente :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>E:\data\java\corba\ECHO&gt;j:\jdk12\bin\javac serveurEcho.java
@@ -1441,22 +1445,23 @@
 </code></pre></div>
 <p><span style="color:#000000">On retrouve les mêmes séquences de code que dans le serveur :</span></p>
 <ul>
-<li><span style="color:#000000">on crée un objet ORB qui nous permettra de contacter l’annuaire des services CORBA</span></li>
-</ul>
+<li><span style="color:#000000">on crée un objet ORB qui nous permettra de contacter l’annuaire des services CORBA</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>String[] initORB={&quot;-ORBInitialHost&quot;,machine,&quot;-ORBInitialPort&quot;,port};    
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>      ORB orb=ORB.init(initORB,null);
 </code></pre></div>
-<ul>
-<li><span style="color:#000000">on définit les différentes composantes du nom du service d’écho</span></li>
-</ul>
+
+</li>
+<li><span style="color:#000000">on définit les différentes composantes du nom du service d’écho</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="w">        </span><span class="n">org</span><span class="p">.</span><span class="na">omg</span><span class="p">.</span><span class="na">CORBA</span><span class="p">.</span><span class="na">Object</span><span class="w"> </span><span class="n">objRef</span><span class="o">=</span><span class="n">orb</span><span class="p">.</span><span class="na">resolve_initial_references</span><span class="p">(</span><span class="s">&quot;NameService&quot;</span><span class="p">);</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">      </span><span class="n">NamingContext</span><span class="w"> </span><span class="n">ncRef</span><span class="o">=</span><span class="n">NamingContextHelper</span><span class="p">.</span><span class="na">narrow</span><span class="p">(</span><span class="n">objRef</span><span class="p">);</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">      </span><span class="n">NameComponent</span><span class="w"> </span><span class="n">nc</span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NameComponent</span><span class="p">(</span><span class="n">nomService</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">);</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">      </span><span class="n">NameComponent</span><span class="w"> </span><span class="n">path</span><span class="o">[]=</span><span class="p">{</span><span class="n">nc</span><span class="p">};</span>
 </code></pre></div>
-<ul>
+
+</li>
 <li><span style="color:#000000">on demande au service d’annuaire une référence du service d’écho (c’est là qu’on diffère du serveur)</span></li>
 </ul>
+
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>serveurEcho=iSrvEchoHelper.narrow(ncRef.resolve(path));
 </code></pre></div>
 <h4 id="10263-compilation">10.2.6.3. <a id="toc459349670"></a><a id="toc10974780"></a><span>Compilation</span></h4>
@@ -1526,6 +1531,7 @@
 <li><span>émettre des requêtes SQL</span></li>
 <li><span>fermer la connexion</span></li>
 </ul>
+
 <p><span>Le serveur exécute les requêtes SQL du client et lui envoie les résultats. C’est son travail essentiel et c’est pourquoi nous l’appellons un serveur SQL. Nous appliquons les différentes étapes vues précédemment avec le serveur d’écho.</span></p>
 <h3 id="1032-ecriture-de-linterface-idl-du-serveur">10.3.2. <a id="toc459349678"></a><a id="toc10974788"></a><a id="toc12363001"></a><a id="toc12502489"></a><span>Écriture de l’interface IDL du serveur</span></h3>
 <p><span>Rappelons pour mémoire l’interface RMI que nous avions utilisée pour le serveur :</span></p>
@@ -1579,16 +1585,22 @@
 </code></pre></div>
 <p><span>La seule nouveauté par rapport à ce qu’on a vu avec l’interface IDL du serveur d’écho est l’utilisation du mot clé </span><b>sequence</b><span>. Ce mot clé permet de définir un tableau à une dimension. La définition se fait en deux étapes :</span></p>
 <ul>
-<li><span>définition d’un type pour désigner le tableau, ici </span><b>resultats</b><span> : </span></li>
-</ul>
+<li><span>définition d’un type pour désigner le tableau, ici </span><b>resultats</b><span> : </span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">typedef</span> <span class="n">sequence</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">resultats</span><span class="p">;</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span style="color:#000000">Le mot clé </span><span style="color:#000000"><i>typedef</i></span><span style="color:#000000">  est bien connu des programmeurs C/C++ : il permet de définir un nouveau type. Ici, le type </span><span style="color:#000000"><i>resultats</i></span><span style="color:#000000"> est défini comme équivalent au type </span><span style="color:#000000"><b>sequence&lt;string&gt;</b></span><span style="color:#000000">, c.a.d. un tableau dynamique (non dimensionné) de chaînes de caractères.</span></p>
 <ul>
-<li><span>utilisation du nouveau type là où on en a besoin</span></li>
-</ul>
+<li><span>utilisation du nouveau type là où on en a besoin</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>resultats executeSQL(in string requete, in string separateur);
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>La méthode </span><i>executeSQL</i><span> rend donc un tableau de chaînes de caractères.</span></p>
 <h3 id="1033-compilation-de-linterface-idl-du-serveur">10.3.3. <a id="toc459349679"></a><a id="toc10974789"></a><a id="toc12363002"></a><a id="toc12502490"></a><span>Compilation de l’interface IDL du serveur</span></h3>
 <p><span>L’interface IDL précédente est mise dans le fichier </span><i>srvSQL.idl</i><span>. On compile ce fichier :</span></p>
@@ -1864,30 +1876,31 @@
 <p><span>Une fois lancé avec les paramètres précédents, le client suit les étapes suivantes :</span></p>
 <ul>
 <li><span>il se connecte à la machine </span><b>machine</b><span> sur le port </span><b>port</b><span> pour demander le service CORBA  </span><b>srvSQL</b></li>
-<li><span>il demande la connexion à la base de données articles</span></li>
-</ul>
+<li><span>il demande la connexion à la base de données articles</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>connect(‘’sun.jdbc.odbc.JdbcOdbcDriver’’, ‘‘jdbc:odbc:articles’’, ’’’’, ’’’’)
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>il demande à l’utilisateur de taper une requête SQL au clavier</span></li>
-<li><span>il l’envoie au serveur SQL</span></li>
-</ul>
+<li><span>il l’envoie au serveur SQL</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>executeSQL(requete, ’’,’’);
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>il affiche à l’écran les résultats renvoyés par le serveur</span></li>
 <li><span>il redemande à l’utilisateur de taper une requête SQL au clavier. Il s’arrêtera lorsque la requête est </span><b>fin</b><span>.</span></li>
 </ul>
+
 <p><span>Le texte Java du client suit. Les commentaires devraient suffire à sa compréhension. On constatera que :</span></p>
 <ul>
 <li><span>le code est identique à celui du client RMI déjà étudié. Il en diffère par le processus de demande du service à l’annuaire, processus isolé dans la méthode </span><i>getServeurSQL</i><span>.</span></li>
 <li><span>la méthode </span><i>getServeurSQL</i><span> est identique à celle écrite pour le client d’écho</span></li>
 </ul>
+
 <p><span>On voit donc que :</span></p>
 <ul>
 <li><span>un client CORBA ne diffère d’un client RMI que par sa façon de contacter le serveur</span></li>
-<li><span>cette façon est identique pour tous les clients CORBA</span></li>
-</ul>
+<li><span>cette façon est identique pour tous les clients CORBA</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">srvSQL.*</span><span class="p">;</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.omg.CosNaming.*</span><span class="p">;</span>
 <a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.omg.CORBA.*</span><span class="p">;</span>
@@ -2031,6 +2044,10 @@
 <a id="__codelineno-52-141" name="__codelineno-52-141" href="#__codelineno-52-141"></a>
 <a id="__codelineno-52-142" name="__codelineno-52-142" href="#__codelineno-52-142"></a><span class="p">}</span><span class="c1">// classe</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Compilons la classe du client :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>E:\data\java\corba\sql&gt;j:\jdk12\bin\javac clientSQL.java
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
@@ -2117,53 +2134,53 @@
 </code></pre></div>
 <h4 id="10374-lancement-dun-client-sur-la-meme-machine-que-le-serveur">10.3.7.4. <a id="toc459349687"></a><a id="toc10974797"></a><span>Lancement d’un client sur la même machine que le serveur</span></h4>
 <p><span>Voici les résultats obtenus avec un client sur la même machine que le serveur :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="n">E</span><span class="p">:</span>\<span class="n">data</span>\<span class="n">java</span>\<span class="n">corba</span>\<span class="n">sql</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span>\<span class="n">jdk12</span>\<span class="nb">bin</span>\<span class="n">java</span> <span class="n">clientSQL</span> <span class="n">localhost</span> <span class="mi">1000</span> <span class="n">srvSQL</span> <span class="n">sun</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">odbc</span><span class="o">.</span><span class="n">JdbcOdbcDriver</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span> <span class="n">null</span> <span class="n">null</span> <span class="p">,</span>
-<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">au</span> <span class="n">serveur</span> <span class="n">CORBA</span> <span class="n">en</span> <span class="n">cours</span><span class="o">...</span>
-<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">en</span> <span class="n">cours</span>
-<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Connexion</span> <span class="n">réussie</span>
-<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span> <span class="n">stock_actu</span><span class="p">,</span> <span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">cachalot</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span>
-<a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">delete</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">where</span> <span class="n">stock_mini</span><span class="o">&lt;</span><span class="mi">7</span>
-<a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a><span class="o">&lt;--</span> <span class="mi">100</span> <span class="mi">1</span>
-<a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span> <span class="n">stock_actu</span><span class="p">,</span> <span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">fin</span>
-<a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a><span class="o">--&gt;</span> <span class="n">Fermeture</span> <span class="n">de</span> <span class="n">la</span> <span class="n">connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">distante</span>
-<a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Base</span> <span class="n">fermée</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="n">E</span><span class="p">:</span><span class="err">\</span><span class="k">data</span><span class="err">\</span><span class="n">java</span><span class="err">\</span><span class="n">corba</span><span class="err">\</span><span class="k">sql</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span><span class="err">\</span><span class="n">jdk12</span><span class="err">\</span><span class="n">bin</span><span class="err">\</span><span class="n">java</span><span class="w"> </span><span class="n">clientSQL</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">srvSQL</span><span class="w"> </span><span class="n">sun</span><span class="p">.</span><span class="n">jdbc</span><span class="p">.</span><span class="n">odbc</span><span class="p">.</span><span class="n">JdbcOdbcDriver</span><span class="w"> </span><span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">,</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="c1">--&gt; Connexion au serveur CORBA en cours...</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="c1">--&gt; Connexion à la base de données en cours</span>
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a><span class="o">&lt;</span><span class="c1">-- 200 Connexion réussie</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="c1">--&gt; Requête : select nom, stock_actu, stock_mini from articles</span>
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31,8</span>
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,9,8</span>
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,7,7</span>
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,9,8</span>
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13,8</span>
+<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13,9</span>
+<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a><span class="o">&lt;</span><span class="c1">-- 101 cachalot,6,6</span>
+<a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,7,7</span>
+<a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,7,7</span>
+<a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a><span class="c1">--&gt; Requête : delete from articles where stock_mini&lt;7</span>
+<a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a><span class="o">&lt;</span><span class="c1">-- 100 1</span>
+<a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a><span class="c1">--&gt; Requête : select nom, stock_actu, stock_mini from articles</span>
+<a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31,8</span>
+<a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,9,8</span>
+<a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,7,7</span>
+<a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,9,8</span>
+<a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13,8</span>
+<a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13,9</span>
+<a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,7,7</span>
+<a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,7,7</span>
+<a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a><span class="c1">--&gt; Requête : fin</span>
+<a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a><span class="c1">--&gt; Fermeture de la connexion à la base de données distante</span>
+<a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a><span class="o">&lt;</span><span class="c1">-- 200 Base fermée</span>
 </code></pre></div>
 <h4 id="10375-lancement-dun-client-sur-une-autre-machine-que-celle-du-serveur">10.3.7.5. <a id="toc459349688"></a><a id="toc10974798"></a><span>Lancement d’un client sur une autre machine que celle du serveur</span></h4>
 <p><span>Voici les résultats obtenus avec un client sur une autre machine que celle du serveur :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="n">E</span><span class="p">:</span>\<span class="n">data</span>\<span class="n">java</span>\<span class="n">corba</span>\<span class="n">sql</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span>\<span class="n">jdk12</span>\<span class="nb">bin</span>\<span class="n">java</span> <span class="n">clientSQL</span> <span class="n">tahe</span><span class="o">.</span><span class="n">istia</span><span class="o">.</span><span class="n">univ</span><span class="o">-</span><span class="n">angers</span><span class="o">.</span><span class="n">fr</span> <span class="mi">1000</span> <span class="n">srvSQL</span> <span class="n">sun</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">odbc</span><span class="o">.</span><span class="n">JdbcOdbcDriver</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span> <span class="n">null</span> <span class="n">null</span> <span class="p">,</span>
-<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">au</span> <span class="n">serveur</span> <span class="n">CORBA</span> <span class="n">en</span> <span class="n">cours</span><span class="o">...</span>
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">en</span> <span class="n">cours</span>
-<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Connexion</span> <span class="n">réussie</span>
-<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">a300</span><span class="p">,</span><span class="n">v_lo</span><span class="p">,</span><span class="mi">1202</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">d600</span><span class="p">,</span><span class="n">arc</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">d800</span><span class="p">,</span><span class="n">canoé</span><span class="p">,</span><span class="mi">1502</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">x123</span><span class="p">,</span><span class="n">fusil</span><span class="p">,</span><span class="mi">3000</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">s345</span><span class="p">,</span><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">f450</span><span class="p">,</span><span class="n">essai3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">z400</span><span class="p">,</span><span class="n">léopard</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">g457</span><span class="p">,</span><span class="n">panthère</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">fin</span>
-<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="o">--&gt;</span> <span class="n">Fermeture</span> <span class="n">de</span> <span class="n">la</span> <span class="n">connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">distante</span>
-<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Base</span> <span class="n">fermée</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="n">E</span><span class="p">:</span><span class="err">\</span><span class="k">data</span><span class="err">\</span><span class="n">java</span><span class="err">\</span><span class="n">corba</span><span class="err">\</span><span class="k">sql</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span><span class="err">\</span><span class="n">jdk12</span><span class="err">\</span><span class="n">bin</span><span class="err">\</span><span class="n">java</span><span class="w"> </span><span class="n">clientSQL</span><span class="w"> </span><span class="n">tahe</span><span class="p">.</span><span class="n">istia</span><span class="p">.</span><span class="n">univ</span><span class="o">-</span><span class="n">angers</span><span class="p">.</span><span class="n">fr</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">srvSQL</span><span class="w"> </span><span class="n">sun</span><span class="p">.</span><span class="n">jdbc</span><span class="p">.</span><span class="n">odbc</span><span class="p">.</span><span class="n">JdbcOdbcDriver</span><span class="w"> </span><span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">,</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="c1">--&gt; Connexion au serveur CORBA en cours...</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="c1">--&gt; Connexion à la base de données en cours</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="o">&lt;</span><span class="c1">-- 200 Connexion réussie</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="c1">--&gt; Requête : select * from articles</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="o">&lt;</span><span class="c1">-- 101 a300,v_lo,1202,31,8</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="o">&lt;</span><span class="c1">-- 101 d600,arc,5000,9,8</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="o">&lt;</span><span class="c1">-- 101 d800,canoé,1502,7,7</span>
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="o">&lt;</span><span class="c1">-- 101 x123,fusil,3000,9,8</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="o">&lt;</span><span class="c1">-- 101 s345,skis nautiques,1800,13,8</span>
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="o">&lt;</span><span class="c1">-- 101 f450,essai3,3,13,9</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="o">&lt;</span><span class="c1">-- 101 z400,léopard,500000,7,7</span>
+<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="o">&lt;</span><span class="c1">-- 101 g457,panthère,800000,7,7</span>
+<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="c1">--&gt; Requête : fin</span>
+<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="c1">--&gt; Fermeture de la connexion à la base de données distante</span>
+<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a><span class="o">&lt;</span><span class="c1">-- 200 Base fermée</span>
 </code></pre></div>
 <h2 id="104-correspondances-idl-java">10.4. <a id="toc459349689"></a><a id="toc10974799"></a><a id="toc12363007"></a><a id="toc12502495"></a><span>Correspondances IDL - JAVA</span></h2>
 <p><span>Nous donnons ici, les correspondances entre types simples IDL et JAVA :</span></p>

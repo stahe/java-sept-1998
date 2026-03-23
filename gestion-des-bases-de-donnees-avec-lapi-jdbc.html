@@ -890,12 +890,13 @@
 <h2 id="62-les-etapes-importantes-dans-lexploitation-des-bases-de-donnees">6.2. <a id="toc459349612"></a><a id="toc10974722"></a><a id="toc12019307"></a><a id="toc12157542"></a><a id="toc12361089"></a><a id="toc12362917"></a><a id="toc12502405"></a><span>Les étapes importantes dans l’exploitation des bases de données</span></h2>
 <h3 id="621-introduction">6.2.1. <a id="toc459349613"></a><a id="toc10974723"></a><a id="toc12019308"></a><a id="toc12157543"></a><a id="toc12361090"></a><a id="toc12362918"></a><a id="toc12502406"></a><span>Introduction</span></h3>
 <p><span>Dans une application JAVA utilisant une base de données avec l’interface JDBC, on trouvera généralement les étapes suivantes :</span></p>
-<ol>
+<ol start="1">
 <li><span>Connexion à la base de données</span></li>
 <li><span>Émission de requêtes SQL vers la base</span></li>
 <li><span>Réception et traitement des résultats de ces requêtes</span></li>
 <li><span>Fermeture de la connexion</span></li>
 </ol>
+
 <p><span>Les étapes 2 et 3 sont réalisées de façon répétée, la fermeture de connexion n’ayant lieu qu’à la fin de l’exploitation de la base. C’est un schéma relativement classique dont vous avez peut-être l’habitude si vous avez exploité une base de données de façon interactive. Nous allons détailler chacune de ces étapes sur un exemple. Nous considérons une base de données ACCESS appelée ARTICLES et ayant la structure suivante : </span></p>
 <table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
 <tr>
@@ -968,10 +969,11 @@
 <p><i>id</i><span> : </span><span>Identité de l’utilisateur (login)</span></p>
 <p><i>mdp</i><i> </i><span>: </span><span>mot de passe de l’utilisateur (password)</span></p>
 <p><span>Pour résumer, le programme se connecte à une base de données :</span></p>
-<ol>
+<ol start="1">
 <li><span>identifiée par un nom (URL)</span></li>
 <li><span>sous l’identité d’un utilisateur (id, mdp)</span></li>
 </ol>
+
 <p><span>Si ces trois paramètres sont corrects, et si le pilote capable d’assurer la connexion de l’application Java à la base de données précisée existe, alors une connexion est réalisée entre l’application Java et la base de données. Celle-ci est matérialisée pour le programme par l’objet de type </span><i>Connection</i><span> rendu par la classe </span><i>DriverManager</i><span>. Comme cette connexion peut échouer pour diverses raisons, elle est susceptible de lancer une exception. On écrira donc :</span></p>
 <div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
 <span class="docx-code-line">   Connection connexion=<span style="font-weight:bold;color:#0000FF">null</span>;</span>
@@ -1046,11 +1048,12 @@
 </code></pre></div>
 <h3 id="623-emission-de-requetes-vers-la-base-de-donnees">6.2.3. <a id="toc459349615"></a><a id="toc10974725"></a><a id="toc12019310"></a><a id="toc12157545"></a><a id="toc12361092"></a><a id="toc12362920"></a><a id="toc12502408"></a><span>Émission de requêtes vers la base de données</span></h3>
 <p><span>L’interface JDBC permet l’émission de requêtes SQL vers la base de données connectée à l’application Java ainsi que le traitement des résultats de ces requêtes. Le langage SQL (</span><i>Structured Query Language</i><span>) est un langage de requêtes standardisé pour les bases de données relationnelles. On y distingue plusieurs types de requêtes :</span></p>
-<ol>
+<ol start="3">
 <li><span>les requêtes d’interrogation de la base (SELECT)</span></li>
 <li><span>les requêtes de mise à jour de la base (INSERT, DELETE, UPDATE)</span></li>
 <li><span>les requêtes de création/destruction de tables (CREATE, DELETE)</span></li>
 </ol>
+
 <p><span>On suppose ici que le lecteur connaît les bases du langage SQL.</span></p>
 <h4 id="6231-la-classe-statement">6.2.3.1. <a id="toc459349616"></a><a id="toc10974726"></a><span>La classe Statement</span></h4>
 <p><span>Pour émettre une requête SQL, quelle qu’elle soit, vers une base de données, l’application Java doit disposer d’un objet de type </span><b>Statement</b><span>. Cet objet stockera, entre autres choses, le texte de la requête. Cet objet est nécessairement lié à la connexion en cours. C’est donc une méthode de la connexion établie qui permet de créer les objets </span><i>Statement</i><span> nécessaires à l’émission des requêtes SQL. Si </span><i>connexion</i><span> est l’objet symbolisant la connexion avec la base de données, un objet </span><i>Statement</i><span> est obtenu de la façon suivante :</span></p>
@@ -1059,29 +1062,31 @@
 <p><span>Une fois obtenu un objet </span><i>Statement</i><span>, on peut émettre des requêtes SQL. Cela se fera différemment selon que la requête est une requête d’interrogation ou de mise à jour de la base.</span></p>
 <h4 id="6232-emettre-une-requete-dinterrogation-de-la-base">6.2.3.2. <a id="toc459349617"></a><a id="toc10974727"></a><span>Émettre une requête d’interrogation de la base</span></h4>
 <p><span>Une requête d’interrogation est classiquement une requête du type :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    <span class="n">select</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span><span class="o">...</span> <span class="kn">from</span><span class="w"> </span><span class="nn">table1</span><span class="p">,</span> <span class="n">table2</span><span class="p">,</span><span class="o">...</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">where</span> <span class="n">condition</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">order</span> <span class="n">by</span> <span class="n">expression</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">col2</span><span class="p">,...</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">table1</span><span class="p">,</span><span class="w"> </span><span class="n">table2</span><span class="p">,...</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">condition</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">expression</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="p">...</span>
 </code></pre></div>
 <p><span>Seuls les mots clés de la première ligne sont obligatoires, les autres sont facultatifs. Il existe d’autres mots clés non présentés ici.</span></p>
-<ol>
+<ol start="1">
 <li><span>Une jointure est faite avec toutes les tables qui sont derrière le mot clé </span><b>from</b></li>
 <li><span>Seules les colonnes qui sont derrière le mot clé </span><b>select</b><span> sont conservées</span></li>
 <li><span>Seules les lignes vérifiant la condition du mot clé </span><b>where</b><span> sont conservées</span></li>
 <li><span>Les lignes résultantes ordonnées selon l’expression du mot clé </span><b>order by</b><span> forment le résultat de la requête.</span></li>
 </ol>
+
 <p><span> Le résultat d’un </span><i>select</i><span> est une table. Si on considère la table ARTICLES précédente et qu’on veuille les noms des articles dont le stock actuel est au-dessous du seuil minimal, on écrira : </span><i>select nom from articles where stock&#95;actu&lt;stock&#95;mini</i><span>. </span><span>Si on les veut par ordre alphabétique des noms, on écrira : </span><i>select nom from articles where stock&#95;actu&lt;stock&#95;mini order by nom</i></p>
 <p><span>Pour exécuter ce type de requête, la classe </span><i>Statement</i><span> offre la méthode </span><b>executeQuery</b><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>    ResultSet executeQuery(String requête)
 </code></pre></div>
 <p><span>où </span><i>requête</i><span> est le texte de la requête SELECT à émettre.</span></p>
 <p><span>Ainsi, si </span></p>
-<ol>
+<ol start="6">
 <li><i>connexion</i><span> est l’objet symbolisant la connexion avec la base de données</span></li>
 <li><b>Statement s=connexion.createStatement()</b><span> crée l’objet </span><i>Statement</i><span> nécessaire pour l’émission des requêtes SQL</span></li>
 <li><b>ResultSet rs=s.executeQuery(« </b><b><i>select nom from articles where stock&#95;actu&lt;stock&#95;mini »)</i></b><i> </i><span>exécute une requête </span><i>select</i><span> et affecte les lignes résultats de la requête à un objet de type </span><i>ResultSet</i><span>.</span></li>
 </ol>
+
 <h4 id="6233-la-classe-resultset-resultat-dune-requete-select">6.2.3.3. <a id="toc459349618"></a><a id="toc10974728"></a><span>La classe ResultSet : résultat d’une requête select</span></h4>
 <p><span>Un objet de type </span><i>ResultSet</i><span> représente une table, c’est à dire un ensemble de lignes et de colonnes. A un moment donné, on n’a accès qu’à une ligne de la table appelée </span><b>ligne courante</b><span>. Lors de la création initiale du </span><i>ResultSet</i><span>, la ligne courante est la ligne n° 1 si le </span><i>ResultSet</i><span> n’est pas vide. Pour passer à la ligne suivante, la classe </span><i>ResultSet</i><span> dispose de la méthode </span><i>next</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>    boolean next()
@@ -1162,10 +1167,11 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>    RS.getMetaData()
 </code></pre></div>
 <p><span>On notera deux méthodes utiles dans la classe </span><i>ResultSetMetaData </i><span>:</span></p>
-<ol>
+<ol start="1">
 <li><b>int getColumnCount()</b><span> qui donne le nombre de colonnes du </span><i>ResultSet</i></li>
 <li><b>String getColumnLabel(int i)</b><span> qui donne le nom de la colonne i du </span><i>ResultSet </i><span>(i&gt;=1)</span></li>
 </ol>
+
 <h4 id="6236-un-deuxieme-exemple">6.2.3.6. <a id="toc459349621"></a><a id="toc10974731"></a><span>Un deuxième exemple</span></h4>
 <p><span>Le programme précédent affichait le contenu de la base ARTICLES.  On écrit ici, un programme qui exécute sur la base ARTICLES toute requête SQL </span><i>Select</i><span> que l’utilisateur tape au clavier.</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.*</span><span class="p">;</span>
@@ -1237,9 +1243,9 @@
 <a id="__codelineno-15-67" name="__codelineno-15-67" href="#__codelineno-15-67"></a><span class="p">}</span><span class="c1">// classe  </span>
 </code></pre></div>
 <p><span style="color:#000000">Voici quelques résultats obtenus : </span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">Connexion</span> <span class="n">avec</span> <span class="n">la</span> <span class="n">base</span> <span class="n">ARTICLES</span> <span class="n">établie</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">order</span> <span class="n">by</span> <span class="n">prix</span> <span class="n">desc</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">Connexion</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">ARTICLES</span><span class="w"> </span><span class="err">é</span><span class="n">tablie</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">prix</span><span class="w"> </span><span class="k">desc</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
 <a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">g457</span><span class="p">,</span><span class="n">panthère</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
@@ -1247,13 +1253,13 @@
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">f807</span><span class="p">,</span><span class="n">cachalot</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">d600</span><span class="p">,</span><span class="n">arc</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="n">x123</span><span class="p">,</span><span class="n">fusil</span><span class="p">,</span><span class="mi">3000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span><span class="w"> </span><span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span>
 <a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="n">d800</span><span class="p">,</span><span class="n">canoé</span><span class="p">,</span><span class="mi">1502</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="n">a300</span><span class="p">,</span><span class="n">vélo</span><span class="p">,</span><span class="mi">1202</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">2</span>
 <a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="n">f450</span><span class="p">,</span><span class="n">essai3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span>
 <a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
-<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span> <span class="n">prix</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">where</span> <span class="n">prix</span> <span class="o">&gt;</span><span class="mi">10000</span> <span class="n">order</span> <span class="n">by</span> <span class="n">prix</span> <span class="n">desc</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prix</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">prix</span><span class="w"> </span><span class="o">&gt;</span><span class="mi">10000</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">prix</span><span class="w"> </span><span class="k">desc</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
 <a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
 <a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>
 <a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="n">panthère</span><span class="p">,</span><span class="mi">800000</span>
@@ -1262,7 +1268,7 @@
 </code></pre></div>
 <h4 id="6237-emettre-une-requete-de-mise-a-jour-de-la-base-de-donnees">6.2.3.7. <a id="toc459349622"></a><a id="toc10974732"></a><span>Émettre une requête de mise à jour de la base de données</span></h4>
 <p><span>Un objet de type </span><i>Statement</i><span> permet de stocker les requêtes SQL. La méthode que cet objet utilise pour émettre des requêtes SQL de mise à jour (INSERT, UPDATE, DELETE) n’est plus la méthode </span><i>executeQuery</i><span> étudiée précédemment mais la méthode </span><i>executeUpdate</i><span> :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>    int executeUpdate(String requête)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="w">    </span><span class="nb">int</span><span class="w"> </span><span class="n">executeUpdate</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requête</span><span class="p">)</span>
 </code></pre></div>
 <p><span>La différence est dans le résultat : alors que </span><i>executeQuery</i><span> renvoyait la table des résultats (</span><i>ResultSet</i><span>), </span><i>executeUpdate</i><span> renvoie le nombre de lignes affectées par l’opération de mise à jour.</span></p>
 <h4 id="6238-un-troisieme-exemple">6.2.3.8. <a id="toc459349623"></a><a id="toc10974733"></a><span>Un troisième exemple</span></h4>
@@ -1333,7 +1339,7 @@
 </code></pre></div>
 <p><span style="color:#000000">Voici le résultat de diverses exécutions des programmes </span><span style="color:#000000"><i>sql1</i></span><span style="color:#000000"> et </span><span style="color:#000000"><i>sql2</i></span><span style="color:#000000"> :</span></p>
 <p><b>Liste des lignes de la base ARTICLES :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql1</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="background-color:#fff59d">select nom,stock_actu from articles</span></span>
@@ -1352,7 +1358,7 @@
 </code></pre></div>
 
 <p><b>On modifie certaines lignes :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql2</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="font-weight:bold;background-color:#fff59d">update articles set stock_actu=stock_actu+1 where stock_actu&gt;10</span></span>
@@ -1360,7 +1366,7 @@
 </code></pre></div>
 
 <p><b>Vérification :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql1</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="background-color:#fff59d">select nom,stock_actu from articles</span></span>
@@ -1378,7 +1384,7 @@
 </code></pre></div>
 
 <p><b>On ajoute une ligne :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql2</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="font-weight:bold;background-color:#fff59d">insert into articles (code,nom,prix,stock_actu,stock_mini) values (&#x27;x400&#x27;,&#x27;nouveau&#x27;,200,20,10)</span></span>
@@ -1386,7 +1392,7 @@
 </code></pre></div>
 
 <p><b>Vérification :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql1</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requ_te : <span style="font-weight:bold;background-color:#fff59d">select nom,stock_actu from articles</span></span>
@@ -1405,7 +1411,7 @@
 </code></pre></div>
 
 <p><b>On détruit une ligne :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql2</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="font-weight:bold;background-color:#fff59d">delete from articles where code=&#x27;x400&#x27;</span></span>
@@ -1414,7 +1420,7 @@
 </code></pre></div>
 
 <p><b>Vérification :</b></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">E:\data\java\jdbc\0&gt;java sql1</span>
 <span class="docx-code-line">Connexion avec la base ARTICLES établie</span>
 <span class="docx-code-line">Requête : <span style="font-weight:bold;background-color:#fff59d">select nom,stock_actu from articles</span></span>
@@ -1437,7 +1443,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>    boolean execute(String requête)
 </code></pre></div>
 <p><span>Le résultat rendu est le booléen </span><i>true</i><span> si la requête a rendu un </span><i>ResultSet</i><span> (</span><i>executeQuery</i><span>), </span><i>false</i><span> si elle a rendu un nombre (</span><i>executeUpdate</i><span>). Le </span><i>ResultSet</i><span> obtenu peut être récupéré avec la méthode </span><b>getResultSet</b><span> et le nombre de lignes mises à jour, par la méthode </span><b>getUpdateCount</b><span>. Ainsi on écrira :</span></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-text">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">Statement S=...;</span>
 <span class="docx-code-line">ResultSet RS=...;</span>
 <span class="docx-code-line"><span style="font-weight:bold;color:#FF0000">int</span> nbLignes;</span>
@@ -1558,89 +1564,89 @@
 <a id="__codelineno-20-99" name="__codelineno-20-99" href="#__codelineno-20-99"></a><span class="p">}</span><span class="c1">// classe  </span>
 </code></pre></div>
 <p><span>On établit le fichier de requêtes suivant :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">update</span> <span class="n">articles</span> <span class="nb">set</span> <span class="n">stock_mini</span><span class="o">=</span><span class="n">stock_mini</span><span class="o">+</span><span class="mi">5</span> <span class="n">where</span> <span class="n">stock_mini</span><span class="o">&lt;</span><span class="mi">5</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">select</span> <span class="n">nom</span><span class="p">,</span><span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">insert</span> <span class="n">into</span> <span class="n">articles</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">prix</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="s1">&#39;x400&#39;</span><span class="p">,</span><span class="s1">&#39;nouveau&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">delete</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">where</span> <span class="n">code</span><span class="o">=</span><span class="s1">&#39;x400&#39;</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">update</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">stock_mini</span><span class="o">=</span><span class="n">stock_mini</span><span class="o">+</span><span class="mi">5</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">stock_mini</span><span class="o">&lt;</span><span class="mi">5</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="n">stock_mini</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">prix</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;x400&#39;</span><span class="p">,</span><span class="s1">&#39;nouveau&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">code</span><span class="o">=</span><span class="s1">&#39;x400&#39;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span>
 <a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="n">fin</span>
 </code></pre></div>
 <p><span>Le programme est lancé de la façon suivante :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>E:\data\java\jdbc\0&gt;java sql3 sun.jdbc.odbc.JdbcOdbcDriver jdbc:odbc:articles &lt;requetes &gt;results
 </code></pre></div>
 <p><span>Le programme prend donc ses entrées dans le fichier </span><i>requetes</i><span> et met ses sorties dans le fichier </span><i>results</i><span>. Les résultats obtenus sont les suivants :</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">Connexion</span> <span class="n">avec</span> <span class="n">la</span> <span class="n">base</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span> <span class="n">établie</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">Connexion</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span><span class="w"> </span><span class="err">é</span><span class="n">tablie</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">1</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requetes</span> <span class="p">:</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span><span class="p">)</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="o">-----------------</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requetes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="p">)</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1">-----------------</span>
 <a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">a300</span><span class="p">,</span><span class="n">vélo</span><span class="p">,</span><span class="mi">1202</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">3</span>
 <a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="n">d600</span><span class="p">,</span><span class="n">arc</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span>
 <a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="n">d800</span><span class="p">,</span><span class="n">canoé</span><span class="p">,</span><span class="mi">1502</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="n">x123</span><span class="p">,</span><span class="n">fusil</span><span class="p">,</span><span class="mi">3000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span><span class="w"> </span><span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span>
 <a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="n">f450</span><span class="p">,</span><span class="n">essai3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
 <a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="n">f807</span><span class="p">,</span><span class="n">cachalot</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="n">z400</span><span class="p">,</span><span class="n">léopard</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="n">g457</span><span class="p">,</span><span class="n">panthère</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
 <a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">2</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requetes</span> <span class="p">:</span> <span class="n">update</span> <span class="n">articles</span> <span class="nb">set</span> <span class="n">stock_mini</span><span class="o">=</span><span class="n">stock_mini</span><span class="o">+</span><span class="mi">5</span> <span class="n">where</span> <span class="n">stock_mini</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requetes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">stock_mini</span><span class="o">=</span><span class="n">stock_mini</span><span class="o">+</span><span class="mi">5</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">stock_mini</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">)</span>
 <a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>
-<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="mi">8</span> <span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">ont</span> <span class="n">été</span> <span class="n">mises</span> <span class="n">à</span> <span class="n">jour</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="mi">8</span><span class="w"> </span><span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">ont</span><span class="w"> </span><span class="err">é</span><span class="n">té</span><span class="w"> </span><span class="n">mises</span><span class="w"> </span><span class="err">à</span><span class="w"> </span><span class="n">jour</span>
 <a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>
-<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">3</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requetes</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span><span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span><span class="p">)</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requetes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="n">stock_mini</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="p">)</span>
 <a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a>
-<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
-<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="o">-----------------</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="c1">-----------------</span>
 <a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>
 <a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a><span class="n">vélo</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a><span class="n">arc</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a><span class="n">canoé</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a><span class="n">fusil</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-23-30" name="__codelineno-23-30" href="#__codelineno-23-30"></a><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">8</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30" href="#__codelineno-23-30"></a><span class="n">skis</span><span class="w"> </span><span class="n">nautiques</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-31" name="__codelineno-23-31" href="#__codelineno-23-31"></a><span class="n">essai3</span><span class="p">,</span><span class="mi">9</span>
 <a id="__codelineno-23-32" name="__codelineno-23-32" href="#__codelineno-23-32"></a><span class="n">cachalot</span><span class="p">,</span><span class="mi">6</span>
 <a id="__codelineno-23-33" name="__codelineno-23-33" href="#__codelineno-23-33"></a><span class="n">léopard</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-34" name="__codelineno-23-34" href="#__codelineno-23-34"></a><span class="n">panthère</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-35" name="__codelineno-23-35" href="#__codelineno-23-35"></a>
-<a id="__codelineno-23-36" name="__codelineno-23-36" href="#__codelineno-23-36"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">4</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requetes</span> <span class="p">:</span> <span class="n">insert</span> <span class="n">into</span> <span class="n">articles</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">prix</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="s1">&#39;x400&#39;</span><span class="p">,</span><span class="s1">&#39;nouveau&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<a id="__codelineno-23-36" name="__codelineno-23-36" href="#__codelineno-23-36"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requetes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">prix</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;x400&#39;</span><span class="p">,</span><span class="s1">&#39;nouveau&#39;</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <a id="__codelineno-23-37" name="__codelineno-23-37" href="#__codelineno-23-37"></a>
-<a id="__codelineno-23-38" name="__codelineno-23-38" href="#__codelineno-23-38"></a><span class="mi">1</span> <span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">ont</span> <span class="n">été</span> <span class="n">mises</span> <span class="n">à</span> <span class="n">jour</span>
+<a id="__codelineno-23-38" name="__codelineno-23-38" href="#__codelineno-23-38"></a><span class="mi">1</span><span class="w"> </span><span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">ont</span><span class="w"> </span><span class="err">é</span><span class="n">té</span><span class="w"> </span><span class="n">mises</span><span class="w"> </span><span class="err">à</span><span class="w"> </span><span class="n">jour</span>
 <a id="__codelineno-23-39" name="__codelineno-23-39" href="#__codelineno-23-39"></a>
-<a id="__codelineno-23-40" name="__codelineno-23-40" href="#__codelineno-23-40"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">5</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requetes</span> <span class="p">:</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span><span class="p">)</span>
+<a id="__codelineno-23-40" name="__codelineno-23-40" href="#__codelineno-23-40"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requetes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="p">)</span>
 <a id="__codelineno-23-41" name="__codelineno-23-41" href="#__codelineno-23-41"></a>
-<a id="__codelineno-23-42" name="__codelineno-23-42" href="#__codelineno-23-42"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
-<a id="__codelineno-23-43" name="__codelineno-23-43" href="#__codelineno-23-43"></a><span class="o">-----------------</span>
+<a id="__codelineno-23-42" name="__codelineno-23-42" href="#__codelineno-23-42"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
+<a id="__codelineno-23-43" name="__codelineno-23-43" href="#__codelineno-23-43"></a><span class="c1">-----------------</span>
 <a id="__codelineno-23-44" name="__codelineno-23-44" href="#__codelineno-23-44"></a>
 <a id="__codelineno-23-45" name="__codelineno-23-45" href="#__codelineno-23-45"></a><span class="n">a300</span><span class="p">,</span><span class="n">vélo</span><span class="p">,</span><span class="mi">1202</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-46" name="__codelineno-23-46" href="#__codelineno-23-46"></a><span class="n">d600</span><span class="p">,</span><span class="n">arc</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-47" name="__codelineno-23-47" href="#__codelineno-23-47"></a><span class="n">d800</span><span class="p">,</span><span class="n">canoé</span><span class="p">,</span><span class="mi">1502</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-48" name="__codelineno-23-48" href="#__codelineno-23-48"></a><span class="n">x123</span><span class="p">,</span><span class="n">fusil</span><span class="p">,</span><span class="mi">3000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-23-49" name="__codelineno-23-49" href="#__codelineno-23-49"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span>
+<a id="__codelineno-23-49" name="__codelineno-23-49" href="#__codelineno-23-49"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span><span class="w"> </span><span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-50" name="__codelineno-23-50" href="#__codelineno-23-50"></a><span class="n">f450</span><span class="p">,</span><span class="n">essai3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span>
 <a id="__codelineno-23-51" name="__codelineno-23-51" href="#__codelineno-23-51"></a><span class="n">f807</span><span class="p">,</span><span class="n">cachalot</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span>
 <a id="__codelineno-23-52" name="__codelineno-23-52" href="#__codelineno-23-52"></a><span class="n">z400</span><span class="p">,</span><span class="n">léopard</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-53" name="__codelineno-23-53" href="#__codelineno-23-53"></a><span class="n">g457</span><span class="p">,</span><span class="n">panthère</span><span class="p">,</span><span class="mi">800000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-54" name="__codelineno-23-54" href="#__codelineno-23-54"></a><span class="n">x400</span><span class="p">,</span><span class="n">nouveau</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span>
 <a id="__codelineno-23-55" name="__codelineno-23-55" href="#__codelineno-23-55"></a>
-<a id="__codelineno-23-56" name="__codelineno-23-56" href="#__codelineno-23-56"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">6</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requêtes</span> <span class="p">:</span> <span class="n">delete</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">where</span> <span class="n">code</span><span class="o">=</span><span class="s1">&#39;x400&#39;</span><span class="p">)</span>
+<a id="__codelineno-23-56" name="__codelineno-23-56" href="#__codelineno-23-56"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requêtes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">code</span><span class="o">=</span><span class="s1">&#39;x400&#39;</span><span class="p">)</span>
 <a id="__codelineno-23-57" name="__codelineno-23-57" href="#__codelineno-23-57"></a>
 <a id="__codelineno-23-58" name="__codelineno-23-58" href="#__codelineno-23-58"></a>
-<a id="__codelineno-23-59" name="__codelineno-23-59" href="#__codelineno-23-59"></a><span class="mi">1</span> <span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">ont</span> <span class="n">été</span> <span class="n">mises</span> <span class="n">à</span> <span class="n">jour</span>
+<a id="__codelineno-23-59" name="__codelineno-23-59" href="#__codelineno-23-59"></a><span class="mi">1</span><span class="w"> </span><span class="n">ligne</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">ont</span><span class="w"> </span><span class="err">é</span><span class="n">té</span><span class="w"> </span><span class="n">mises</span><span class="w"> </span><span class="err">à</span><span class="w"> </span><span class="n">jour</span>
 <a id="__codelineno-23-60" name="__codelineno-23-60" href="#__codelineno-23-60"></a>
-<a id="__codelineno-23-61" name="__codelineno-23-61" href="#__codelineno-23-61"></a><span class="n">Nouvelle</span> <span class="n">Requête</span> <span class="p">:</span> <span class="p">(</span><span class="n">requete</span> <span class="mi">7</span> <span class="n">du</span> <span class="n">fichier</span> <span class="n">des</span> <span class="n">requêtes</span> <span class="p">:</span> <span class="n">select</span> <span class="o">*</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span><span class="p">)</span>
+<a id="__codelineno-23-61" name="__codelineno-23-61" href="#__codelineno-23-61"></a><span class="n">Nouvelle</span><span class="w"> </span><span class="n">Requête</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">requete</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="n">fichier</span><span class="w"> </span><span class="n">des</span><span class="w"> </span><span class="n">requêtes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">articles</span><span class="p">)</span>
 <a id="__codelineno-23-62" name="__codelineno-23-62" href="#__codelineno-23-62"></a>
-<a id="__codelineno-23-63" name="__codelineno-23-63" href="#__codelineno-23-63"></a><span class="n">Résultats</span> <span class="n">obtenus</span>
-<a id="__codelineno-23-64" name="__codelineno-23-64" href="#__codelineno-23-64"></a><span class="o">-----------------</span>
+<a id="__codelineno-23-63" name="__codelineno-23-63" href="#__codelineno-23-63"></a><span class="n">Résultats</span><span class="w"> </span><span class="n">obtenus</span>
+<a id="__codelineno-23-64" name="__codelineno-23-64" href="#__codelineno-23-64"></a><span class="c1">-----------------</span>
 <a id="__codelineno-23-65" name="__codelineno-23-65" href="#__codelineno-23-65"></a>
 <a id="__codelineno-23-66" name="__codelineno-23-66" href="#__codelineno-23-66"></a><span class="n">a300</span><span class="p">,</span><span class="n">vélo</span><span class="p">,</span><span class="mi">1202</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-67" name="__codelineno-23-67" href="#__codelineno-23-67"></a><span class="n">d600</span><span class="p">,</span><span class="n">arc</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-68" name="__codelineno-23-68" href="#__codelineno-23-68"></a><span class="n">d800</span><span class="p">,</span><span class="n">canoé</span><span class="p">,</span><span class="mi">1502</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">7</span>
 <a id="__codelineno-23-69" name="__codelineno-23-69" href="#__codelineno-23-69"></a><span class="n">x123</span><span class="p">,</span><span class="n">fusil</span><span class="p">,</span><span class="mi">3000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-23-70" name="__codelineno-23-70" href="#__codelineno-23-70"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span>
+<a id="__codelineno-23-70" name="__codelineno-23-70" href="#__codelineno-23-70"></a><span class="n">s345</span><span class="p">,</span><span class="n">skis</span><span class="w"> </span><span class="n">nautiques</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span>
 <a id="__codelineno-23-71" name="__codelineno-23-71" href="#__codelineno-23-71"></a><span class="n">f450</span><span class="p">,</span><span class="n">essai3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span>
 <a id="__codelineno-23-72" name="__codelineno-23-72" href="#__codelineno-23-72"></a><span class="n">f807</span><span class="p">,</span><span class="n">cachalot</span><span class="p">,</span><span class="mi">200000</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span>
 <a id="__codelineno-23-73" name="__codelineno-23-73" href="#__codelineno-23-73"></a><span class="n">z400</span><span class="p">,</span><span class="n">léopard</span><span class="p">,</span><span class="mi">500000</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span>
@@ -1648,7 +1654,7 @@
 </code></pre></div>
 <h2 id="63-impots-avec-une-base-de-donnees">6.3. <a id="toc12157546"></a><a id="toc12361093"></a><a id="toc12362921"></a><a id="toc12502409"></a><span>IMPOTS avec une base de données</span></h2>
 <p><span>La dernière fois que nous avons traité le problème de calcul d&#x27;impôts, c&#x27;était avec une interface graphique et les données étaient stockées dans un fichier. Nous reprenons cette version en supposant maintenant que les données sont dans une base de données ODBC-MySQL. MySQL est un SGBD du domaine public utilisable sur différentes plate-formes dont Windows et Linux. Avec ce SGBD, une base de données </span><b>dbimpots</b><span> a été créée avec dedans une unique table appelée </span><b>impots</b><span>. L&#x27;accès à la base est contrôlé par un login/motdepasse ici </span><b>admimpots/mdpimpots</b><span>. La copie d&#x27;écran montre comment utiliser la base </span><b>dbimpots</b><span> avec MySQL :</span></p>
-<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-python">
+<div class="docx-code-rich" data-linenums="false" style="counter-reset: docxline 0;"><pre><code class="language-sql">
 <span class="docx-code-line">C:\Program Files\EasyPHP\mysql\bin&gt;<span style="font-weight:bold;background-color:#fff59d">mysql -u admimpots -p</span></span>
 <span class="docx-code-line"><span style="font-weight:bold;background-color:#fff59d">Enter password: *********</span></span>
 <span class="docx-code-line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span>
@@ -1801,14 +1807,17 @@
 <ul>
 <li><span>on lance le gestionnaire des sources de données ODBC 32 bits</span></li>
 </ul>
+
 <p><img src="images/image182.png" class="docx-zoomable" style="width:458px;height:167px;" alt="Image" /></p>
 <ul>
 <li><span>on utilise le bouton &#91;Add&#93; pour ajouter une nouvelle source de données ODBC</span></li>
 </ul>
+
 <p><img src="images/image183.png" class="docx-zoomable" style="width:468px;height:342px;" alt="Image" /></p>
 <ul>
 <li><span>on désigne le pilote MySQL et on fait &#91;Terminer&#93;</span></li>
 </ul>
+
 <p><img src="images/image184.png" class="docx-zoomable" style="width:623px;height:356px;" alt="Image" /></p>
 <ul>
 <li><span>le pilote MySQL demande un certain nombre de renseignements :</span></li>
@@ -2059,23 +2068,75 @@
 <p><span>Écrire en Java l’application serveur suivante :</span></p>
 <ul>
 <li><span>l’application serveur travaille sur un port qui lui est passé en paramètre</span></li>
-<li><span>lorsqu’un client se connecte, l’application serveur envoie le message</span></li>
 </ul>
+<ol start="9">
+<li><span>lorsqu’un client se connecte, l’application serveur envoie le message</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>200 - Bienvenue - Envoyez votre requête
 </code></pre></div>
+
+</li>
+</ol>
 <ul>
-<li><span>le client envoie alors les paramètres nécessaires à la connexion à une base de données et la requête qu’il veut exécuter sous la forme :</span></li>
-</ul>
+<li><span>le client envoie alors les paramètres nécessaires à la connexion à une base de données et la requête qu’il veut exécuter sous la forme :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Pilote Java/URL base/UID/MDP/requête SQL
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>                                            - &lt;span&gt;Les paramètres sont séparés par la barre oblique. Les quatre premiers paramètres sont ceux du programme &lt;/span&gt;&lt;i&gt;sql3&lt;/i&gt;&lt;span&gt; décrit dans ce chapitre.&lt;/span&gt;
-</code></pre></div>
+
 <ul>
-<li><span>L’application serveur crée alors une connexion avec la base de données précisée qui doit se trouver sur la même machine qu’elle et exécute la requête SQL dessus. Les résultats sont renvoyés au client sous la forme :</span></li>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><span>Les paramètres sont séparés par la barre oblique. Les quatre premiers paramètres sont ceux du programme </span><i>sql3</i><span> décrit dans ce chapitre.</span></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span>L’application serveur crée alors une connexion avec la base de données précisée qui doit se trouver sur la même machine qu’elle et exécute la requête SQL dessus. Les résultats sont renvoyés au client sous la forme :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>100 - ligne1
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>100 - ligne2
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>...</span></p>
 <p><span>s’il s’agit du résultat d’une requête </span><b>Select</b><span> ou</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>101 - nbLignes
@@ -2086,6 +2147,7 @@
 <ul>
 <li><span>une fois, la requête exécutée, l’application serveur ferme la connexion.</span></li>
 </ul>
+
 <p><b><u>Problème 2</u></b></p>
 <p><span>Créez une applet Java permettant d’interroger le serveur précédent. On pourra s’inspirer de l’interface graphique de l’exercice 1 précédent. Comme le port du serveur peut varier, celui-ci fera l’objet d’une saisie dans l’interface de l’applet. Il en sera de même pour tous les paramètres nécessaires à l’envoi de la ligne :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>Pilote Java/URL base/UID/MDP/requête SQL
@@ -2599,22 +2661,27 @@
 <li><span>l’autorisation/inhibition de certaines options du menu :  par exemple, l’option </span><b>Suivant</b><span> doit être inhibée si on est positionné sur le dernier enregistrement de la table</span></li>
 <li><span>la gestion du scroller horizontal</span></li>
 </ul>
+
 <p><b>menu Parcourir/Suivant</b></p>
 <ul>
 <li><span>fait passer à l’enregistrement suivant (data1.RecordSet.MoveNext) si on n’est pas en fin de fichier (data1.RecordSet.EOF). Met à jour le textbox fiche (data1.recordset.absoluteposition/ data1.recordset.recordcount).</span></li>
 </ul>
+
 <p><b>menu Parcourir/Précédent</b></p>
 <ul>
 <li><span>fait passer à l’enregistrement précédent (data1.RecordSet.MovePrevious) si on n’est pas en début de fichier (data1.RecordSet.BOF). Met à jour le textbox fiche.</span></li>
 </ul>
+
 <p><b>menu Parcourir/Premier</b></p>
 <ul>
 <li><span>fait passer au premier enregistrement (data1.RecordSet.MoveFirst) si le fichier n’est pas vide (data1.recordset.recordcount=0). Met à jour le textbox fiche.</span></li>
 </ul>
+
 <p><b>menu Parcourir/Dernier</b></p>
 <ul>
 <li><span>fait passer au dernier enregistrement (data1.RecordSet.MoveLast) si le fichier n’est pas vide (data1.recordset.recordcount=0). Met à jour le textbox fiche.</span></li>
 </ul>
+
 <p><b>menu Edition/Ajouter</b></p>
 <ul>
 <li><span>permet d’ajouter un enregistrement à la table</span></li>
@@ -2623,6 +2690,7 @@
 <li><span>inhibe les menus Edition, Parcourir, Quitter (enabled=false)</span></li>
 <li><span>affiche les boutons OK et Annuler (visible=true)</span></li>
 </ul>
+
 <p><b>bouton OK</b></p>
 <ul>
 <li><span>valide une modification d’enregistrement (data1.recordset.Update)</span></li>
@@ -2630,6 +2698,7 @@
 <li><span>autorise les options Edition, Parcourir, Quitter (enabled=true)</span></li>
 <li><span>met à jour le textbox fiche</span></li>
 </ul>
+
 <p><b>bouton Annuler</b></p>
 <ul>
 <li><span>invalide une modification d’enregistrement (data1.recordset.CancelUpdate)</span></li>
@@ -2637,6 +2706,7 @@
 <li><span>autorise les options Edition, Parcourir, Quitter (enabled=true)</span></li>
 <li><span>met à jour le textbox fiche</span></li>
 </ul>
+
 <p><b>menu Edition/Modifier</b></p>
 <ul>
 <li><span>permet de modifier l’enregistrement visualisé sur le formulaire</span></li>
@@ -2645,15 +2715,18 @@
 <li><span>inhibe les menus Edition, Parcourir, Quitter (enabled=false)</span></li>
 <li><span>affiche les boutons OK et Annuler (visible=true)</span></li>
 </ul>
+
 <p><b>menu Edition/Supprimer</b></p>
 <ul>
 <li><span>permet de supprimer (data1.recordset.delete) l’enregistrement visualisé de la table </span></li>
 <li><span>passe à la fiche suivante (data1.recordset.movenext)</span></li>
 </ul>
+
 <p><b>menu Quitter</b></p>
 <ul>
 <li><span>décharge la feuille (unload me)</span></li>
 </ul>
+
 <p><b>événement form&#95;unload (cancel as integer)</b></p>
 <ul>
 <li><span>activé par l’opération </span><b>unload me</b><span> ou la fermeture du formulaire par Alt-F4 ou un double-clic sur la case système, donc pas forcément par  l’option </span><b>quitter</b><span>.</span></li>
@@ -2661,6 +2734,7 @@
 <li><span>si la réponse est Non (=vbno) on met cancel à -1 et on quitte la procédure form&#95;unload. cancel à -1 indique que la fermeture de la fenêtre est refusée.</span></li>
 <li><span>si la réponse est oui (=vbyes), la base est fermée (data1.recordset.close, data1.database.close).</span></li>
 </ul>
+
 <div style="border-top:0.75pt solid #000000 ; border-bottom:0.75pt solid #000000 ; padding:0.35em 0 ; margin:0.75em 0"><b>Partie 2 - Gestion des menus</b></div>
 
 <p><span>Ici, on s’intéresse à l’autorisation/inhibition des menus. Après chaque opération changeant la fiche courante on appellera une procédure qu’on pourra appeler </span><b>Oueston</b><span>. Celle-ci vérifiera les conditions suivantes :</span></p>
@@ -2669,16 +2743,19 @@
 <li><span>inhibera les menus Parcourir, Edition/Supprimer, </span></li>
 <li><span>autorisera les autres</span></li>
 </ul>
+
 <p><span>. </span><span>si la fiche courante est la première fiche, on </span></p>
 <ul>
 <li><span>inhibera Parcourir/Précédent</span></li>
 <li><span>autorisera le reste</span></li>
 </ul>
+
 <p><span>.</span><span>si la fiche courante est la dernière, on</span></p>
 <ul>
 <li><span>inhibera Parcourir/Suivant</span></li>
 <li><span>autorisera le reste</span></li>
 </ul>
+
 <div style="border-top:0.75pt solid #000000 ; border-bottom:0.75pt solid #000000 ; padding:0.35em 0 ; margin:0.75em 0"><b>Partie 3 - Gestion du variateur horizontal</b></div>
 
 <p><span>Un variateur horizontal a trois champs importants :</span></p>
@@ -2687,6 +2764,7 @@
 <li><span>max : sa valeur maximale</span></li>
 <li><span>value : sa valeur actuelle</span></li>
 </ul>
+
 <p><b>Initialisation du variateur</b></p>
 <p><span>Au chargement (form&#95;load), le variateur sera initialisé ainsi :</span></p>
 <ul>
@@ -2694,6 +2772,7 @@
 <li><span>max=data1.recordset.recordcount-1</span></li>
 <li><span>value=1</span></li>
 </ul>
+
 <p><span>On notera que juste après l’ouverture de la base (data1.refresh), le nombre d’enregistrements de la table représenté par data1.recordset.recordcount est faux. Il faut aller en fin de table (MoveLast), puis revenir en début de table (MoveFirst) pour qu’il soit correct.</span></p>
 <p><b>Action directe sur le variateur</b></p>
 <p><span>La position du curseur du variateur représente la position dans la table.</span></p>
@@ -2728,6 +2807,7 @@
 </ul>
 </li>
 </ul>
+
 <div style="border-top:0.75pt solid #000000 ; border-bottom:0.75pt solid #000000 ; padding:0.35em 0 ; margin:0.75em 0"><b>Partie 5 - Gestion du code</b></div>
 
 <p><span>Un article doit être repéré de façon unique par son code. Faites en sorte que dans l’option Parcourir/Ajouter, l’ajout soit refusé si l’enregistrement à ajouter a un code article qui existe déjà dans la table.</span></p>
@@ -2744,6 +2824,7 @@
 <li><span>il peut retirer des articles de cette liste, en sélectionnant un article et en usant du bouton </span><i>Retirer</i></li>
 <li><span>lorsqu’il actionne le bouton </span><i>Bilan</i><span>, il obtient le bilan suivant :</span></li>
 </ul>
+
 <p><img src="images/image190.png" class="docx-zoomable" style="width:601px;height:384px;" alt="Image" /></p>
 <p><span>Le bilan permet à l’utilisateur de connaître le détail de sa facture. L’utilisateur a accès à des détails concernant un article sélectionné dans la liste déroulante avec le bouton </span><i>Informations</i><span> :</span></p>
 <p><img src="images/image191.png" class="docx-zoomable" style="width:596px;height:329px;" alt="Image" /></p>

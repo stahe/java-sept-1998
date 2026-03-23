@@ -922,17 +922,19 @@
 <h2 id="91-introduction">9.1. <a id="toc459349632"></a><a id="toc10974742"></a><a id="toc12362974"></a><a id="toc12502462"></a><span>Introduction</span></h2>
 <p><span>Nous avons vu comment créer des applications réseau à l’aide des outils de communication appelés </span><i>sockets</i><span>. Dans une application client/serveur bâtie sur ces outils, le lien entre le client et le serveur est le protocole de communication qu’ils ont adopté pour converser. Les deux applications peuvent être écrites avec des langages différents : Java par exemple pour le client, Perl pour le serveur ou toute autre combinaison. On a bien deux applications distinctes reliées par un protocole de communication connu des deux. Par ailleurs, l’accès au réseau via les sockets n’est pas transparent pour une application Java : elle doit utiliser la classe </span><i>Socket</i><span>, classe créée spécialement pour gérer ces outils de communication que sont les </span><i>sockets</i><span>.</span></p>
 <p><b>JAVA RMI</b><span> (Remote Method Invocation) permet de créer des applications réseau aux caractéristiques suivantes :</span></p>
-<ol>
+<ol start="1">
 <li><span>Les applications client/serveur sont des applications Java aux deux extrémités de la communication</span></li>
 <li><span>Le client peut utiliser des objets situés sur le serveur comme s’ils étaient locaux</span></li>
 <li><span>La couche réseau devient transparente : les applications n’ont pas à se soucier de la façon dont sont transportées les informations d’un point à un autre.</span></li>
 </ol>
+
 <p><span>Le dernier point est un facteur de portabilité : si la couche réseau d’une application RMI venait à changer, l’application elle-même n’aurait pas à être ré-écrite. Ce sont les classes RMI du langage Java qui devront être adaptées à la nouvelle couche réseau.</span></p>
 <p><span>Le principe d’une communication RMI est le suivant :</span></p>
-<ol>
+<ol start="1">
 <li><span>Une application Java classique est écrite sur une machine A. Elle va jouer le rôle de serveur. Pour ce faire certains de ses objets vont faire l’objet d’une « publication » sur la machine A sur laquelle l’application s’exécute et deviennent alors des services.</span></li>
 <li><span>Une application Java classique est écrite sur une machine B. Elle va jouer le rôle de client. Elle aura accès aux objets/services publiés sur la machine A, c’est à dire que via une référence distante, elle va pouvoir les manipuler comme s’ils étaient locaux. Pour cela, elle aura besoin de connaître la structure de l’objet distant auquel elle veut accéder (méthodes &amp; propriétés).</span></li>
 </ol>
+
 <h2 id="92-apprenons-par-lexemple">9.2. <a id="toc459349633"></a><a id="toc10974743"></a><a id="toc12362975"></a><a id="toc12502463"></a><span>Apprenons par l’exemple</span></h2>
 <p><span>La théorie qui sous-entend l’interface RMI n’est pas simple. Pour y voir plus clair, nous allons suivre pas à pas l’écriture d’une application client/serveur utilisant le package RMI de Java. Nous prenons une application que l’on trouve dans de nombreux ouvrages sur RMI : le client invoque une unique méthode d’un objet distant qui lui renvoie alors une chaîne de caractères. Nous présentons ici, une légère variante : le serveur fait l’écho de ce que lui envoie le client. Nous avons déjà présenté dans cet ouvrage, une telle application s’appuyant elle, sur les sockets.</span></p>
 <h3 id="921-lapplication-serveur">9.2.1. <a id="toc459349634"></a><a id="toc10974744"></a><a id="toc12362976"></a><a id="toc12502464"></a><span>L’application serveur</span></h3>
@@ -967,15 +969,17 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">}</span><span class="c1">// fin classe</span>
 </code></pre></div>
 <p><span>Dans la classe précédente, nous trouvons :</span></p>
-<ol>
+<ol start="1">
 <li><span>la méthode qui fait l’écho</span></li>
 <li><span>un constructeur qui ne fait rien si ce n’est appeler le constructeur de la classe mère. Il est là pour déclarer qu’il peut générer une exception de type </span><i>RemoteException</i><span>.</span></li>
 </ol>
+
 <p><span>Nous allons créer une instance de cette classe avec une méthode </span><i>main</i><span>. Pour qu’un objet/service soit accessible de l’extérieur, il doit être créé et enregistré dans l’annuaire des objets accessibles de l’extérieur. Un client désirant accéder à un objet distant procède en effet de la façon suivante :</span></p>
-<ol>
+<ol start="1">
 <li><span>il s’adresse au service d’annuaire de la machine sur laquelle se trouve l’objet qu’il désire. Ce service d’annuaire opère sur un port que le client doit connaître (1099 par défaut). Le client demande à l’annuaire, une référence d’un objet/service dont il donne le nom. Si ce nom est celui d’un objet/service de l’annuaire, celui-ci renvoie au client une référence via laquelle le client va pouvoir dialoguer avec l’objet/service distant.</span></li>
 <li><span>à partir de ce moment, le client peut utiliser cet objet distant comme s’il était local</span></li>
 </ol>
+
 <p><span>Pour en revenir à notre serveur, nous devons créer un objet de type </span><i>srvEcho</i><span> et l’enregistrer dans l’annuaire des objets accessibles de l’extérieur. Cet enregistrement se fait avec la méthode de classe </span><i>rebind</i><span> de la classe </span><i>Naming</i><span> :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Naming.rebind(String nom, Remote obj)
 </code></pre></div>
@@ -1017,12 +1021,13 @@
 <p><span>Au point où on en est, on peut compiler notre serveur. Nous compilons le fichier </span><i>interEcho.java</i><span> de l’interface </span><i>interEcho</i><span> ainsi que le fichier </span><i>srvEcho.java</i><span> de la classe </span><i>srvEcho</i><span>. Nous obtenons les fichiers </span><i>.class</i><span> correspondant : </span><i>interEcho.class</i><span> et </span><i>srvEcho.class</i><span>.</span></p>
 <h4 id="9214-etape-4-ecriture-du-client">9.2.1.4. <a id="toc459349638"></a><a id="toc10974748"></a><span>Étape 4 : écriture du client</span></h4>
 <p><span>On écrit un client à qui on passe en paramètre l’URL du serveur d’écho et qui </span></p>
-<ol>
+<ol start="1">
 <li><span>lit une ligne tapée au clavier</span></li>
 <li><span>l’envoie au serveur d’écho</span></li>
 <li><span>affiche la réponse que celui-ci envoie</span></li>
 <li><span>reboucle en 1 et s’arrête lorsque la ligne tapée est « fin ».</span></li>
 </ol>
+
 <p><span>Cela donne le client suivant :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.rmi.*</span><span class="p">;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.*</span><span class="p">;</span>
@@ -1168,6 +1173,7 @@
 <li><span>crée le service</span></li>
 <li><span>l’enregistre dans l’annuaire des services de la machine sur laquelle opère le serveur d’écho</span></li>
 </ul>
+
 <p><span>Ce dernier point nécessite la présence d’un service d’annuaire. Celui-ci est lancé par la commande :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>start j:\jdk12\bin\rmiregistry
 </code></pre></div>
@@ -1191,6 +1197,7 @@
 <li><span>le serveur sur une machine windows</span></li>
 <li><span>le client sur une machine linux</span></li>
 </ul>
+
 <p><span>Le serveur est lancé commé précédemment sur la machine Windows. Sur la machine linux, on a transféré les fichiers .class du client :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>shiva[serge]:/home/admin/serge/java/rmi/client#
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>$ dir
@@ -1302,17 +1309,21 @@
 <li><span>lancement du service d’annuaire : </span><mark style="background-color:#fff59d">start j:\jdk12\bin\rmiregistry</mark></li>
 <li><span>lancement du serveur : </span>&nbsp;&nbsp;&nbsp;&nbsp;<mark style="background-color:#fff59d">start j:\jdk12\bin\java -Djava.security.policy=mypolicy srvEcho</mark></li>
 </ul>
+
 <p><span>Et cette fois, le serveur d’écho (le client pas encore) se lance correctement. Maintenant vous pouvez faire l’expérience suivante :</span></p>
 <ul>
 <li><span>arrêtez le serveur d’écho puis le service d’annuaire</span></li>
 <li><span>relancez le service d’annuaire en étant dans un autre répertoire que celui du serveur</span></li>
-<li><span>revenez sur le répertoire du serveur lancez le serveur d’écho - vous obtenez l’erreur suivante :</span></li>
-</ul>
+<li><span>revenez sur le répertoire du serveur lancez le serveur d’écho - vous obtenez l’erreur suivante :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Erreur java.rmi.ServerException: RemoteException occurred in server thread; nes
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>ted exception is:
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>java.rmi.UnmarshalException: error unmarshalling arguments; nested exception is:
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>java.lang.ClassNotFoundException: srvEcho_Stub  lors du lancement du serveur d’écho
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>On en déduit que le répertoire à partir duquel le service d’annuaire est lancé a de l’importance. Ici, Java n’a pas trouvé la classe </span><i>srvEcho&#95;stub.class</i><span> parce que le service d’annuaire n’a pas été lancé du répertoire du serveur. Lors du lancement du serveur, on peut préciser dans quel répertoire se trouvent les classes nécessaires au serveur :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>start j:\jdk12\bin\java 
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>-Djava.security.policy=mypolicy 
@@ -1323,13 +1334,16 @@
 <ul>
 <li><span>arrêt du service d’annuaire</span></li>
 <li><span>relancer le service d’annuaire à partir d’un autre répertoire que celui du serveur</span></li>
-<li><span>dans le répertoire du serveur, lancer celui-ci avec la commande  (une seule ligne) :</span></li>
-</ul>
+<li><span>dans le répertoire du serveur, lancer celui-ci avec la commande  (une seule ligne) :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a> start j:\jdk12\bin\java 
 <a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>-Djava.security.policy=mypolicy 
 <a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>-Djava.rmi.server.codebase=file:/e:/data/java/rmi/echo/serveur/ 
 <a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>srvEcho
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Le serveur est alors lancé correctement. On peut donc passer au client. On le teste :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>shiva[serge]:/home/admin/serge/java/rmi/client#
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>$ dir *.class
@@ -1384,16 +1398,15 @@
 <p><span style="color:#000000">On procède ensuite comme suit :</span></p>
 <ul>
 <li><span>on recompile </span><i>cltEcho.java</i></li>
-<li><span>on transfère les fichiers .class sur la machine linux</span></li>
-</ul>
+<li><span>on transfère les fichiers .class sur la machine linux</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>shiva[serge]:/home/admin/serge/java/rmi/client#
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>$ dir *.class
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>-rw-r--r--   1 serge    admin        1506 Mar 10 14:28 cltEcho.class
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>-rw-r--r--   1 serge    admin         256 Mar 10 10:02 interEcho.class
 </code></pre></div>
-<ul>
-<li><span>on lance le client</span></li>
-</ul>
+
+</li>
+<li><span>on lance le client</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nx">$</span><span class="w"> </span><span class="nx">java</span><span class="w"> </span><span class="nx">cltEcho</span><span class="w"> </span><span class="nx">rmi</span><span class="o">:</span><span class="c1">//tahe.istia.univ-angers.fr/srvEcho</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">FileNotFoundException</span><span class="o">:</span><span class="w"> </span><span class="err">/e:/data/java/rmi/echo/serveur/srvEcho_Stub.class</span>
@@ -1416,6 +1429,10 @@
 <a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="nx">Erreur</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">java</span><span class="p">.</span><span class="nx">rmi</span><span class="p">.</span><span class="nx">UnmarshalException</span><span class="o">:</span><span class="w"> </span><span class="nx">Return</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">found</span><span class="p">;</span><span class="w"> </span><span class="nx">nested</span><span class="w"> </span><span class="nx">exception</span><span class="w"> </span><span class="nx">is</span><span class="o">:</span><span class="w"> </span>
 <a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a><span class="w">        </span><span class="nx">java</span><span class="p">.</span><span class="nx">lang</span><span class="p">.</span><span class="nx">ClassNotFoundException</span><span class="o">:</span><span class="w"> </span><span class="nx">srvEcho_Stub</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Malgré les apparences, on progresse : l’erreur n’est plus la même. On constate que le client a pu demander au serveur la classe </span><i>srvEcho&#95;Stub.class</i><span>, mais que celui-ci ne l’a pas trouvé. Donc, le client doit avoir un gestionnaire de sécurité s’il veut pouvoir demander des classes au serveur.</span></p>
 <p><span>Si on regarde l’erreur précédente, on voit que le fichier </span><i>srvEcho&#95;Stub.class</i><span> a été cherché dans le répertoire </span><span>e:/data/java/rmi/echo/serveur/</span><span> et qu’il n’a pas été trouvé. C’est pourtant bien là qu’il est. Si on regarde plus précisément, la liste des méthodes impliquées dans l’erreur, on trouve celle-ci : </span><span>sun.net.www.protocol.file.FileURLConnection.getInputStream.</span><span> Le client semble avoir ouvert un flux avec un objet de type </span><i>FileURLConnection</i><span>. On se dit que tout ça a un rapport avec la façon dont on a lancé notre serveur :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>start j:\jdk12\bin\java 
@@ -1433,14 +1450,13 @@
 <li><span>on y place les fichiers </span><i>.class</i><span> du serveur ainsi que le fichier </span><i>mypolicy</i></li>
 <li><span>on lance le serveur Web si ce n’est déjà fait</span></li>
 <li><span>on relance le service d’annuaire (rmiregistry)</span></li>
-<li><span>on relance le serveur avec la commande </span></li>
-</ul>
+<li><span>on relance le serveur avec la commande </span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>start j:\jdk12\bin\java -Djava.security.policy=mypolicy
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>-Djava.rmi.server.codebase=http://tahe.istia.univ-angers.fr/rmi/echo/ srvEcho
 </code></pre></div>
-<ul>
-<li><span>sur la machine linux, on lance le client :</span></li>
-</ul>
+
+</li>
+<li><span>sur la machine linux, on lance le client :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>shiva[serge]:/home/admin/serge/java/rmi/client#
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>$ dir *.class
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>-rw-r--r--   1 serge    admin        1622 Mar 10 14:37 cltEcho.class
@@ -1454,6 +1470,10 @@
 <a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a>Réponse serveur : [msg2]
 <a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a>Message : fin
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>Ouf ! Ca marche. Le client a bien réussi à récupérer le fameux fichier </span><i>srvEcho&#95;Stub.class</i><span>.</span></p>
 <p><span>Tout ça nous a donné des idées, et on se demande si le client qui se trouve sur la machine Windows du serveur, fonctionnerait lui aussi sans le fichier </span><i>srvEcho&#95;Stub.class.</i><span> On passe dans le répertoire du client, on supprime le fichier </span><i>srvEcho&#95;Stub.class</i><span> s’il s’y trouve et on lance le client de la même façon que sous Linux :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>E:\data\java\RMI\echo\client&gt;dir *.class
@@ -1473,6 +1493,7 @@
 <li><span>le serveur a un gestionnaire de sécurité</span></li>
 <li><span>il a été lancé avec des options : </span><mark style="background-color:#fff59d">start j:\jdk12\bin\java -Djava.security.policy=mypolicy</mark></li>
 </ul>
+
 <p><mark style="background-color:#fff59d">-Djava.rmi.server.codebase=http://tahe.istia.univ-angers.fr/rmi/echo/ srvEcho</mark></p>
 <p><span>Côté client Linux ou Windows</span></p>
 <ul>
@@ -1480,11 +1501,11 @@
 <li><span>sur linux, il a été lancé par </span><span> </span><mark style="background-color:#fff59d">java cltEcho rmi://tahe.istia.univ-angers.fr/srvEcho</mark></li>
 <li><span>sur windows, il a été lancé par </span><mark style="background-color:#fff59d">j:\jdk12\bin\java -Djava.security.policy=mypolicy cltEcho rmi://tahe.istia.univ-angers.fr/srvEcho</mark></li>
 </ul>
+
 <h4 id="9219-serveur-decho-sur-linux-clients-sur-windows-et-linux">9.2.1.9. <a id="toc459349643"></a><a id="toc10974753"></a><span>Serveur d’écho sur linux, clients sur Windows et Linux</span></h4>
 <p><span>On passe maintenant le serveur sur une machine Linux et on teste des clients linux et windows. La démarche à suivre est la suivante :</span></p>
 <ul>
-<li><span>on passe les fichiers </span><i>.class</i><span> du serveur sur la machine linux </span></li>
-</ul>
+<li><span>on passe les fichiers </span><i>.class</i><span> du serveur sur la machine linux </span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>shiva[serge]:/home/admin/serge/WWW/rmi/echo/serveur#
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>$ dir
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>total 11
@@ -1495,23 +1516,28 @@
 <a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>-rw-r--r--   1 serge    admin        1736 Mar 10 16:09 srvEcho_Skel.class
 <a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>-rw-r--r--   1 serge    admin        3264 Mar 10 16:09 srvEcho_Stub.class
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>parce que la classe </span><i>srvEcho&#95;Stub.class</i><span> va être demandée par les clients, le répertoire choisi pour les classes du serveur est un répertoire accessible au serveur http de la machine Linux. Ici l’URL de ce répertoire est </span><i>http://shiva.istia.univ-angers.fr/~serge/rmi/echo/serveur</i></li>
 <li><span>le service d’annuaire est lancé en tâche de fond : </span><i>/usr/local/bin/jdk/rmiregistry &amp;</i></li>
 <li><span>le serveur est lancé en tâche de fond : </span><mark style="background-color:#fff59d"><i>/usr/local/bin/jdk/bin/java</i></mark></li>
 </ul>
+
 <p><mark style="background-color:#fff59d"><i> -Djava.rmi.server.codebase=http://shiva.istia.univ-angers.fr/~serge/rmi/echo/serveur/ </i></mark></p>
 <p><mark style="background-color:#fff59d"><i>srvEcho &amp;</i></mark></p>
 <p><span>On peut tester les clients. Le client Windows d’abord. </span></p>
 <ul>
 <li><span>on passe dans le répertoire du client sur la machine windows</span></li>
-<li><span>on lance le client par la commande : </span></li>
-</ul>
+<li><span>on lance le client par la commande : </span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>E:\data\java\RMI\echo\client&gt;j:\jdk12\bin\java -Djava.security.policy=mypolicy cltEcho rmi://shiva.istia.univ-angers.fr/srvEcho
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>Message : msg1
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>Réponse serveur : [msg1]
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>Message : fin
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>On teste le client Linux :</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>shiva[serge]:/home/admin/serge/java/rmi/echo/client#
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>$ java cltEcho srvEcho
@@ -1532,6 +1558,7 @@
 <li><span>émettre des requêtes SQL</span></li>
 <li><span>fermer la connexion</span></li>
 </ul>
+
 <p><span>Le serveur exécute les requêtes SQL du client et lui envoie les résultats. C’est son travail essentiel et c’est pourquoi nous l’appellerons un serveur SQL.</span></p>
 <p><span>Nous appliquons les différentes étapes vues précédemment avec le serveur d’écho.</span></p>
 <h3 id="932-etape-1-linterface-distante">9.3.2. <a id="toc459349646"></a><a id="toc10974756"></a><a id="toc12362979"></a><a id="toc12502467"></a><span>Étape 1 : l’interface distante</span></h3>
@@ -1749,20 +1776,21 @@
 <p><span>Une fois lancé avec les paramètres précédents, le client suit les étapes suivantes :</span></p>
 <ul>
 <li><span>il se connecte au serveur RMI </span><b>srvSQL</b><span>, donc un serveur RMI sur la même machine que le client</span></li>
-<li><span>il demande la connexion à la base de données articles</span></li>
-</ul>
+<li><span>il demande la connexion à la base de données articles</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>connect(‘’sun.jdbc.odbc.JdbcOdbcDriver’’, ‘‘jdbc:odbc:articles’’, ’’’’, ’’’’)
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>il demande à l’utilisateur de taper une requête SQL au clavier</span></li>
-<li><span>il l’envoie au serveur SQL</span></li>
-</ul>
+<li><span>il l’envoie au serveur SQL</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>executeSQL(requete, ’’,’’);
 </code></pre></div>
-<ul>
+
+</li>
 <li><span>il affiche à l’écran les résultats renvoyés par le serveur</span></li>
 <li><span>il redemande à l’utilisateur de taper une requête SQL au clavier. Il s’arrêtera lorsque la requête est </span><b>fin</b><span>.</span></li>
 </ul>
+
 <p><span>Le texte Java du client suit. Les commentaires devraient suffire à sa compréhension.</span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.rmi.*</span><span class="p">;</span>
 <a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.*</span><span class="p">;</span>
@@ -1872,8 +1900,7 @@
 </code></pre></div>
 <h3 id="935-etape-3-creation-des-fichiers-class">9.3.5. <a id="toc459349649"></a><a id="toc10974759"></a><a id="toc12362982"></a><a id="toc12502470"></a><span>Étape 3 : création des fichiers .class</span></h3>
 <ul>
-<li><span>le serveur est compilé</span></li>
-</ul>
+<li><span>le serveur est compilé</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>E:\data\java\RMI\sql\serveur&gt;j:\jdk12\bin\javac interSQL.java
 <a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>
 <a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a>E:\data\java\RMI\sql\serveur&gt;j:\jdk12\bin\javac srvSQL.java
@@ -1883,9 +1910,9 @@
 <a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a>INTERS~1 CLA           451  12/03/99  17:54 interSQL.class
 <a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a>SRVSQL~1 CLA         3 238  12/03/99  17:54 srvSQL.class
 </code></pre></div>
-<ul>
-<li><span>les fichiers Stub et Skel sont créés</span></li>
-</ul>
+
+</li>
+<li><span>les fichiers Stub et Skel sont créés</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>E:\data\java\RMI\sql\serveur&gt;j:\jdk12\bin\rmic srvSQL
 <a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
 <a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a>E:\data\java\RMI\sql\serveur&gt;dir *.class
@@ -1896,9 +1923,9 @@
 <a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a>SRVSQL~2 CLA         4 491  12/03/99  17:56 srvSQL_Stub.class
 <a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a>SRVSQL~3 CLA         2 414  12/03/99  17:56 srvSQL_Skel.class
 </code></pre></div>
-<ul>
-<li><span>on transfére les fichiers interSQL.class, srvSQL&#95;Stub.class, srvSQL&#95;Skel.class dans le répertoire du client</span></li>
-</ul>
+
+</li>
+<li><span>on transfére les fichiers interSQL.class, srvSQL&#95;Stub.class, srvSQL&#95;Skel.class dans le répertoire du client</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>E:\data\java\RMI\sql\client&gt;dir
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a>CLTSQL~1 JAV         3 486  11/03/99  11:39 cltSQL.java
@@ -1906,9 +1933,9 @@
 <a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a>SRVSQL~1 CLA         4 491  11/03/99  13:19 srvSQL_Stub.class
 <a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a>SRVSQL~2 CLA         2 414  11/03/99  13:19 srvSQL_Skel.class
 </code></pre></div>
-<ul>
-<li><span>on compile le client</span></li>
-</ul>
+
+</li>
+<li><span>on compile le client</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>E:\data\java\RMI\sql\client&gt;j:\jdk12\bin\javac cltSQL.java
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>
 <a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>E:\data\java\RMI\sql\client&gt;dir *.class
@@ -1918,74 +1945,80 @@
 <a id="__codelineno-69-7" name="__codelineno-69-7" href="#__codelineno-69-7"></a>SRVSQL~1 CLA         4 491  11/03/99  13:19 srvSQL_Stub.class
 <a id="__codelineno-69-8" name="__codelineno-69-8" href="#__codelineno-69-8"></a>SRVSQL~2 CLA         2 414  11/03/99  13:19 srvSQL_Skel.class
 </code></pre></div>
+
+</li>
+</ul>
+
 <h3 id="936-etape-4-tests-avec-serveur-client-sur-meme-machine-windows">9.3.6. <a id="toc459349650"></a><a id="toc10974760"></a><a id="toc12362983"></a><a id="toc12502471"></a><span>Étape 4 : Tests avec serveur &amp; client sur même machine windows</span></h3>
 <ul>
-<li><span>le service d’annuaire est lancé dans un répertoire autre que celui du serveur et du client</span></li>
-</ul>
+<li><span>le service d’annuaire est lancé dans un répertoire autre que celui du serveur et du client</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>F:\&gt;start j:\jdk12\bin\rmiregistry
 </code></pre></div>
-<ul>
-<li><span>on place le fichier </span><b>mypolicy</b><span> suivant dans les répertoires du client et du serveur</span></li>
-</ul>
+
+</li>
+<li><span>on place le fichier </span><b>mypolicy</b><span> suivant dans les répertoires du client et du serveur</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>grant {
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>    // Allow everything for now
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>    permission java.security.AllPermission;
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>};
 </code></pre></div>
-<ul>
-<li><span>on lance le serveur</span></li>
-</ul>
+
+</li>
+<li><span>on lance le serveur</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>E:\data\java\RMI\sql\serveur&gt;start j:\jdk12\bin\java -Djava.security.policy=mypolicy
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>-Djava.rmi.server.codebase=file:/e:/data/java/rmi/sql/serveur/ srvSQL
 </code></pre></div>
-<ul>
-<li><span>on lance le client</span></li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="n">E</span><span class="p">:</span>\<span class="n">data</span>\<span class="n">java</span>\<span class="n">RMI</span>\<span class="n">sql</span>\<span class="n">client</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span>\<span class="n">jdk12</span>\<span class="nb">bin</span>\<span class="n">java</span> <span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">mypolicy</span> <span class="n">cltSQL</span> <span class="n">srvSQL</span> 
-<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a><span class="n">sun</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">odbc</span><span class="o">.</span><span class="n">JdbcOdbcDriver</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span> <span class="n">null</span> <span class="n">null</span> <span class="p">,</span>
+
+</li>
+<li><span>on lance le client</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="n">E</span><span class="p">:</span><span class="err">\</span><span class="k">data</span><span class="err">\</span><span class="n">java</span><span class="err">\</span><span class="n">RMI</span><span class="err">\</span><span class="k">sql</span><span class="err">\</span><span class="n">client</span><span class="o">&gt;</span><span class="n">j</span><span class="p">:</span><span class="err">\</span><span class="n">jdk12</span><span class="err">\</span><span class="n">bin</span><span class="err">\</span><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">Djava</span><span class="p">.</span><span class="k">security</span><span class="p">.</span><span class="n">policy</span><span class="o">=</span><span class="n">mypolicy</span><span class="w"> </span><span class="n">cltSQL</span><span class="w"> </span><span class="n">srvSQL</span><span class="w"> </span>
+<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a><span class="n">sun</span><span class="p">.</span><span class="n">jdbc</span><span class="p">.</span><span class="n">odbc</span><span class="p">.</span><span class="n">JdbcOdbcDriver</span><span class="w"> </span><span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">,</span>
 <a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a>
-<a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">au</span> <span class="n">serveur</span> <span class="n">RMI</span> <span class="n">en</span> <span class="n">cours</span><span class="o">...</span>
-<a id="__codelineno-73-5" name="__codelineno-73-5" href="#__codelineno-73-5"></a><span class="o">--&gt;</span> <span class="n">Connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">en</span> <span class="n">cours</span>
-<a id="__codelineno-73-6" name="__codelineno-73-6" href="#__codelineno-73-6"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Connexion</span> <span class="n">réussie</span>
-<a id="__codelineno-73-7" name="__codelineno-73-7" href="#__codelineno-73-7"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span> <span class="n">stock_actu</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">order</span> <span class="n">by</span> <span class="n">stock_actu</span> <span class="n">desc</span>
-<a id="__codelineno-73-8" name="__codelineno-73-8" href="#__codelineno-73-8"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span>
-<a id="__codelineno-73-9" name="__codelineno-73-9" href="#__codelineno-73-9"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-10" name="__codelineno-73-10" href="#__codelineno-73-10"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-11" name="__codelineno-73-11" href="#__codelineno-73-11"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-12" name="__codelineno-73-12" href="#__codelineno-73-12"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">11</span>
-<a id="__codelineno-73-13" name="__codelineno-73-13" href="#__codelineno-73-13"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">11</span>
-<a id="__codelineno-73-14" name="__codelineno-73-14" href="#__codelineno-73-14"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">cachalot</span><span class="p">,</span><span class="mi">10</span>
-<a id="__codelineno-73-15" name="__codelineno-73-15" href="#__codelineno-73-15"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">10</span>
-<a id="__codelineno-73-16" name="__codelineno-73-16" href="#__codelineno-73-16"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">10</span>
-<a id="__codelineno-73-17" name="__codelineno-73-17" href="#__codelineno-73-17"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">update</span> <span class="n">articles</span> <span class="nb">set</span> <span class="n">stock_actu</span><span class="o">=</span><span class="n">stock_actu</span><span class="o">-</span><span class="mi">1</span> <span class="n">where</span> <span class="n">stock_actu</span><span class="o">&lt;=</span><span class="mi">11</span>
-<a id="__codelineno-73-18" name="__codelineno-73-18" href="#__codelineno-73-18"></a><span class="o">&lt;--</span> <span class="mi">100</span> <span class="mi">5</span>
-<a id="__codelineno-73-19" name="__codelineno-73-19" href="#__codelineno-73-19"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span><span class="n">stock_actu</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">order</span> <span class="n">by</span> <span class="n">stock_actu</span> <span class="n">asc</span>
-<a id="__codelineno-73-20" name="__codelineno-73-20" href="#__codelineno-73-20"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">cachalot</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-73-21" name="__codelineno-73-21" href="#__codelineno-73-21"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-73-22" name="__codelineno-73-22" href="#__codelineno-73-22"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-73-23" name="__codelineno-73-23" href="#__codelineno-73-23"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">10</span>
-<a id="__codelineno-73-24" name="__codelineno-73-24" href="#__codelineno-73-24"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">10</span>
-<a id="__codelineno-73-25" name="__codelineno-73-25" href="#__codelineno-73-25"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-26" name="__codelineno-73-26" href="#__codelineno-73-26"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-27" name="__codelineno-73-27" href="#__codelineno-73-27"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">13</span>
-<a id="__codelineno-73-28" name="__codelineno-73-28" href="#__codelineno-73-28"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span>
-<a id="__codelineno-73-29" name="__codelineno-73-29" href="#__codelineno-73-29"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">fin</span>
-<a id="__codelineno-73-30" name="__codelineno-73-30" href="#__codelineno-73-30"></a><span class="o">--&gt;</span> <span class="n">Fermeture</span> <span class="n">de</span> <span class="n">la</span> <span class="n">connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">distante</span>
-<a id="__codelineno-73-31" name="__codelineno-73-31" href="#__codelineno-73-31"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Base</span> <span class="n">fermée</span>
+<a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a><span class="c1">--&gt; Connexion au serveur RMI en cours...</span>
+<a id="__codelineno-73-5" name="__codelineno-73-5" href="#__codelineno-73-5"></a><span class="c1">--&gt; Connexion à la base de données en cours</span>
+<a id="__codelineno-73-6" name="__codelineno-73-6" href="#__codelineno-73-6"></a><span class="o">&lt;</span><span class="c1">-- 200 Connexion réussie</span>
+<a id="__codelineno-73-7" name="__codelineno-73-7" href="#__codelineno-73-7"></a><span class="c1">--&gt; Requête : select nom, stock_actu from articles order by stock_actu desc</span>
+<a id="__codelineno-73-8" name="__codelineno-73-8" href="#__codelineno-73-8"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31</span>
+<a id="__codelineno-73-9" name="__codelineno-73-9" href="#__codelineno-73-9"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13</span>
+<a id="__codelineno-73-10" name="__codelineno-73-10" href="#__codelineno-73-10"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13</span>
+<a id="__codelineno-73-11" name="__codelineno-73-11" href="#__codelineno-73-11"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,13</span>
+<a id="__codelineno-73-12" name="__codelineno-73-12" href="#__codelineno-73-12"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,11</span>
+<a id="__codelineno-73-13" name="__codelineno-73-13" href="#__codelineno-73-13"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,11</span>
+<a id="__codelineno-73-14" name="__codelineno-73-14" href="#__codelineno-73-14"></a><span class="o">&lt;</span><span class="c1">-- 101 cachalot,10</span>
+<a id="__codelineno-73-15" name="__codelineno-73-15" href="#__codelineno-73-15"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,10</span>
+<a id="__codelineno-73-16" name="__codelineno-73-16" href="#__codelineno-73-16"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,10</span>
+<a id="__codelineno-73-17" name="__codelineno-73-17" href="#__codelineno-73-17"></a><span class="c1">--&gt; Requête : update articles set stock_actu=stock_actu-1 where stock_actu&lt;=11</span>
+<a id="__codelineno-73-18" name="__codelineno-73-18" href="#__codelineno-73-18"></a><span class="o">&lt;</span><span class="c1">-- 100 5</span>
+<a id="__codelineno-73-19" name="__codelineno-73-19" href="#__codelineno-73-19"></a><span class="c1">--&gt; Requête : select nom,stock_actu from articles order by stock_actu asc</span>
+<a id="__codelineno-73-20" name="__codelineno-73-20" href="#__codelineno-73-20"></a><span class="o">&lt;</span><span class="c1">-- 101 cachalot,9</span>
+<a id="__codelineno-73-21" name="__codelineno-73-21" href="#__codelineno-73-21"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,9</span>
+<a id="__codelineno-73-22" name="__codelineno-73-22" href="#__codelineno-73-22"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,9</span>
+<a id="__codelineno-73-23" name="__codelineno-73-23" href="#__codelineno-73-23"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,10</span>
+<a id="__codelineno-73-24" name="__codelineno-73-24" href="#__codelineno-73-24"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,10</span>
+<a id="__codelineno-73-25" name="__codelineno-73-25" href="#__codelineno-73-25"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13</span>
+<a id="__codelineno-73-26" name="__codelineno-73-26" href="#__codelineno-73-26"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13</span>
+<a id="__codelineno-73-27" name="__codelineno-73-27" href="#__codelineno-73-27"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,13</span>
+<a id="__codelineno-73-28" name="__codelineno-73-28" href="#__codelineno-73-28"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31</span>
+<a id="__codelineno-73-29" name="__codelineno-73-29" href="#__codelineno-73-29"></a><span class="c1">--&gt; Requête : fin</span>
+<a id="__codelineno-73-30" name="__codelineno-73-30" href="#__codelineno-73-30"></a><span class="c1">--&gt; Fermeture de la connexion à la base de données distante</span>
+<a id="__codelineno-73-31" name="__codelineno-73-31" href="#__codelineno-73-31"></a><span class="o">&lt;</span><span class="c1">-- 200 Base fermée</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <h3 id="937-etape-5-tests-avec-serveur-sur-machine-windows-et-client-sur-machine-linux">9.3.7. <a id="toc459349651"></a><a id="toc10974761"></a><a id="toc12362984"></a><a id="toc12502472"></a><span>Étape 5 : Tests avec serveur sur machine windows et client sur machine linux</span></h3>
 <ul>
 <li><span>on arrête éventuellement le serveur et le service d’annuaire</span></li>
-<li><span>on transfère les fichiers .class du client sur une machine linux</span></li>
-</ul>
+<li><span>on transfère les fichiers .class du client sur une machine linux</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>shiva[serge]:/home/admin/serge/java/rmi/sql/client#
 <a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>$ dir *.class
 <a id="__codelineno-74-3" name="__codelineno-74-3" href="#__codelineno-74-3"></a>-rw-r--r--   1 serge    admin        2839 Mar 11 14:37 cltSQL.class
 <a id="__codelineno-74-4" name="__codelineno-74-4" href="#__codelineno-74-4"></a>-rw-r--r--   1 serge    admin         451 Mar 11 14:37 interSQL.class
 </code></pre></div>
-<ul>
-<li><span>les fichiers du serveur sont mis dans un répertoire accessible au serveur http de la machine windows</span></li>
-</ul>
+
+</li>
+<li><span>les fichiers du serveur sont mis dans un répertoire accessible au serveur http de la machine windows</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>D:\Inetpub\wwwroot\rmi\sql&gt;dir
 <a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>
 <a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a>INTERS~1 CLA           451  11/03/99  10:55 interSQL.class
@@ -1994,56 +2027,63 @@
 <a id="__codelineno-75-6" name="__codelineno-75-6" href="#__codelineno-75-6"></a>SRVSQL~3 CLA         2 414  11/03/99  13:19 srvSQL_Skel.class
 <a id="__codelineno-75-7" name="__codelineno-75-7" href="#__codelineno-75-7"></a>MYPOLICY                81  08/06/98  15:01 mypolicy
 </code></pre></div>
-<ul>
-<li><span>on relance le service d’annuaire</span></li>
-</ul>
+
+</li>
+<li><span>on relance le service d’annuaire</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>F:\&gt;start j:\jdk12\bin\rmiregistry
 </code></pre></div>
-<ul>
-<li><span>on relance le serveur avec des paramètres différents que ceux utilisés dans le test précédent</span></li>
-</ul>
+
+</li>
+<li><span>on relance le serveur avec des paramètres différents que ceux utilisés dans le test précédent</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>D:\Inetpub\wwwroot\rmi\sql&gt;start j:\jdk12\bin\java -Djava.security.policy=mypolicy
 <a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>-Djava.rmi.server.codebase=http://tahe.istia.univ-angers.fr/rmi/sql/ srvSQL
 </code></pre></div>
-<ul>
-<li><span>on lance le client sur la machine linux</span></li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">jdk</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">java</span> <span class="n">cltSQL</span> <span class="n">rmi</span><span class="p">:</span><span class="o">//</span><span class="n">tahe</span><span class="o">.</span><span class="n">istia</span><span class="o">.</span><span class="n">univ</span><span class="o">-</span><span class="n">angers</span><span class="o">.</span><span class="n">fr</span><span class="o">/</span><span class="n">srvSQL</span> <span class="n">sun</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">odbc</span><span class="o">.</span><span class="n">JdbcOdbcDriver</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span> <span class="n">null</span> <span class="n">null</span> <span class="p">,</span>
+
+</li>
+<li><span>on lance le client sur la machine linux</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">jdk</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">java</span><span class="w"> </span><span class="n">cltSQL</span><span class="w"> </span><span class="n">rmi</span><span class="p">:</span><span class="o">//</span><span class="n">tahe</span><span class="p">.</span><span class="n">istia</span><span class="p">.</span><span class="n">univ</span><span class="o">-</span><span class="n">angers</span><span class="p">.</span><span class="n">fr</span><span class="o">/</span><span class="n">srvSQL</span><span class="w"> </span><span class="n">sun</span><span class="p">.</span><span class="n">jdbc</span><span class="p">.</span><span class="n">odbc</span><span class="p">.</span><span class="n">JdbcOdbcDriver</span><span class="w"> </span><span class="n">jdbc</span><span class="p">:</span><span class="n">odbc</span><span class="p">:</span><span class="n">articles</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">,</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>
-<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">order</span> <span class="n">by</span> <span class="n">nom</span>
-<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">cachalot</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span>
-<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-78-8" name="__codelineno-78-8" href="#__codelineno-78-8"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-9" name="__codelineno-78-9" href="#__codelineno-78-9"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-10" name="__codelineno-78-10" href="#__codelineno-78-10"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-11" name="__codelineno-78-11" href="#__codelineno-78-11"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-12" name="__codelineno-78-12" href="#__codelineno-78-12"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-13" name="__codelineno-78-13" href="#__codelineno-78-13"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">update</span> <span class="n">articles</span> <span class="nb">set</span> <span class="n">stock_actu</span><span class="o">=</span><span class="n">stock_mini</span> <span class="n">where</span> <span class="n">stock_mini</span><span class="o">&lt;=</span><span class="mi">7</span>
-<a id="__codelineno-78-14" name="__codelineno-78-14" href="#__codelineno-78-14"></a><span class="o">&lt;--</span> <span class="mi">100</span> <span class="mi">4</span>
-<a id="__codelineno-78-15" name="__codelineno-78-15" href="#__codelineno-78-15"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">select</span> <span class="n">nom</span><span class="p">,</span><span class="n">stock_actu</span><span class="p">,</span><span class="n">stock_mini</span> <span class="kn">from</span><span class="w"> </span><span class="nn">articles</span> <span class="n">order</span> <span class="n">by</span> <span class="n">nom</span>
-<a id="__codelineno-78-16" name="__codelineno-78-16" href="#__codelineno-78-16"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">arc</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-17" name="__codelineno-78-17" href="#__codelineno-78-17"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">cachalot</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span>
-<a id="__codelineno-78-18" name="__codelineno-78-18" href="#__codelineno-78-18"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">canoé</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-19" name="__codelineno-78-19" href="#__codelineno-78-19"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">essai3</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">9</span>
-<a id="__codelineno-78-20" name="__codelineno-78-20" href="#__codelineno-78-20"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">fusil</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-21" name="__codelineno-78-21" href="#__codelineno-78-21"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">léopard</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-22" name="__codelineno-78-22" href="#__codelineno-78-22"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">panthère</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
-<a id="__codelineno-78-23" name="__codelineno-78-23" href="#__codelineno-78-23"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">skis</span> <span class="n">nautiques</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-24" name="__codelineno-78-24" href="#__codelineno-78-24"></a><span class="o">&lt;--</span> <span class="mi">101</span> <span class="n">vélo</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">8</span>
-<a id="__codelineno-78-25" name="__codelineno-78-25" href="#__codelineno-78-25"></a><span class="o">--&gt;</span> <span class="n">Requête</span> <span class="p">:</span> <span class="n">fin</span>
-<a id="__codelineno-78-26" name="__codelineno-78-26" href="#__codelineno-78-26"></a><span class="o">--&gt;</span> <span class="n">Fermeture</span> <span class="n">de</span> <span class="n">la</span> <span class="n">connexion</span> <span class="n">à</span> <span class="n">la</span> <span class="n">base</span> <span class="n">de</span> <span class="n">données</span> <span class="n">distante</span>
-<a id="__codelineno-78-27" name="__codelineno-78-27" href="#__codelineno-78-27"></a><span class="o">&lt;--</span> <span class="mi">200</span> <span class="n">Base</span> <span class="n">fermée</span>
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="c1">--&gt; Requête : select nom,stock_actu,stock_mini from articles order by nom</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,9,8</span>
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a><span class="o">&lt;</span><span class="c1">-- 101 cachalot,9,6</span>
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,13,7</span>
+<a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13,9</span>
+<a id="__codelineno-78-8" name="__codelineno-78-8" href="#__codelineno-78-8"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,9,8</span>
+<a id="__codelineno-78-9" name="__codelineno-78-9" href="#__codelineno-78-9"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,10,7</span>
+<a id="__codelineno-78-10" name="__codelineno-78-10" href="#__codelineno-78-10"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,10,7</span>
+<a id="__codelineno-78-11" name="__codelineno-78-11" href="#__codelineno-78-11"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13,8</span>
+<a id="__codelineno-78-12" name="__codelineno-78-12" href="#__codelineno-78-12"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31,8</span>
+<a id="__codelineno-78-13" name="__codelineno-78-13" href="#__codelineno-78-13"></a><span class="c1">--&gt; Requête : update articles set stock_actu=stock_mini where stock_mini&lt;=7</span>
+<a id="__codelineno-78-14" name="__codelineno-78-14" href="#__codelineno-78-14"></a><span class="o">&lt;</span><span class="c1">-- 100 4</span>
+<a id="__codelineno-78-15" name="__codelineno-78-15" href="#__codelineno-78-15"></a><span class="c1">--&gt; Requête : select nom,stock_actu,stock_mini from articles order by nom</span>
+<a id="__codelineno-78-16" name="__codelineno-78-16" href="#__codelineno-78-16"></a><span class="o">&lt;</span><span class="c1">-- 101 arc,9,8</span>
+<a id="__codelineno-78-17" name="__codelineno-78-17" href="#__codelineno-78-17"></a><span class="o">&lt;</span><span class="c1">-- 101 cachalot,6,6</span>
+<a id="__codelineno-78-18" name="__codelineno-78-18" href="#__codelineno-78-18"></a><span class="o">&lt;</span><span class="c1">-- 101 canoé,7,7</span>
+<a id="__codelineno-78-19" name="__codelineno-78-19" href="#__codelineno-78-19"></a><span class="o">&lt;</span><span class="c1">-- 101 essai3,13,9</span>
+<a id="__codelineno-78-20" name="__codelineno-78-20" href="#__codelineno-78-20"></a><span class="o">&lt;</span><span class="c1">-- 101 fusil,9,8</span>
+<a id="__codelineno-78-21" name="__codelineno-78-21" href="#__codelineno-78-21"></a><span class="o">&lt;</span><span class="c1">-- 101 léopard,7,7</span>
+<a id="__codelineno-78-22" name="__codelineno-78-22" href="#__codelineno-78-22"></a><span class="o">&lt;</span><span class="c1">-- 101 panthère,7,7</span>
+<a id="__codelineno-78-23" name="__codelineno-78-23" href="#__codelineno-78-23"></a><span class="o">&lt;</span><span class="c1">-- 101 skis nautiques,13,8</span>
+<a id="__codelineno-78-24" name="__codelineno-78-24" href="#__codelineno-78-24"></a><span class="o">&lt;</span><span class="c1">-- 101 vélo,31,8</span>
+<a id="__codelineno-78-25" name="__codelineno-78-25" href="#__codelineno-78-25"></a><span class="c1">--&gt; Requête : fin</span>
+<a id="__codelineno-78-26" name="__codelineno-78-26" href="#__codelineno-78-26"></a><span class="c1">--&gt; Fermeture de la connexion à la base de données distante</span>
+<a id="__codelineno-78-27" name="__codelineno-78-27" href="#__codelineno-78-27"></a><span class="o">&lt;</span><span class="c1">-- 200 Base fermée</span>
 </code></pre></div>
+
+</li>
+</ul>
+
 <h3 id="938-conclusion">9.3.8. <a id="toc459349652"></a><a id="toc10974762"></a><a id="toc12362985"></a><a id="toc12502473"></a><span>Conclusion</span></h3>
 <p><span>On a là une application intéressante en ce qu’elle permet l’accès à une base de données à partir d’un poste quelconque du réseau. On aurait très bien pu l’écrire de façon traditionnelle avec des sockets et ce qui est d’ailleurs demandé dans un exercice du chapitre sur les bases de données. Si on écrivait cette application de façon traditionnelle :</span></p>
 <ul>
 <li><span>on aurait un client et un serveur qui pourraient être écrits avec des langages différents</span></li>
-<li><span>le client et le serveur communiqueraient par échange de lignes de texte et auraient un dialogue qui pourrait être du genre :</span></li>
-</ul>
+<li><span>le client et le serveur communiqueraient par échange de lignes de texte et auraient un dialogue qui pourrait être du genre :</span>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>client : connect machine port pilote urlBase id mdp
 </code></pre></div>
+
+</li>
+</ul>
+
 <p><span>où les deux premiers paramètres spécifient où trouver le serveur, les quatre suivants indiquant les paramètres de connexion à la base de données à exploiter</span></p>
 <p><span>Le serveur pourrait répondre par quelque chose du genre : </span></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>200 - Connexion réussie
